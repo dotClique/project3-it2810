@@ -1,0 +1,14 @@
+FROM node:14-alpine
+WORKDIR /app
+# Installing with only package.json to make it faster
+COPY ./package.json .
+RUN npm install 
+COPY ./project3-backend/package.json ./project3-backend/
+WORKDIR /app/project3-backend
+RUN npm install
+WORKDIR /app
+COPY ./index.ts .
+COPY ./.env .
+COPY ./project3-common ./project3-common/
+COPY ./project3-backend ./project3-backend/
+EXPOSE 4000 

@@ -1,0 +1,62 @@
+# This docker-compose is only used when developing locally
+# As this website deploys to vercel, there is no docker-compose for production.
+version: "3.4"
+
+services:
+  # Create the posgres database
+  database:
+    image: "postgres"
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: project3-it2810
+    volumes:
+      - database-data:/var/lib/postgresql/data/ # persist data even if container shuts down
+
+  # Start the frontend web server
+  frontend:
+    depends_on:
+      - database
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.frontend
+    restart: always
+    volumes:
+      # Share the src code folder with docker to allow hot-reload
+      - ./project3-frontend/src:/app/project3-frontend/src:ro
+      - /project3-frontend/node_modules
+    environment:
+      NODE_ENV: development
+      CHOKIDAR_USEPOLLING: "true"
+    ports:
+      - "3000:3000"
+      # - "35729:35729" # exposing Websockets port to allow hot reloading
+    entrypoint:
+      ["/bin/sh", "-c", "npm run prepare && cd project3-frontend && npm start"]
+
+  # Start the backend web server
+  backend:
+    depends_on:
+      - database
+    restart: always
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.backend
+    volumes:
+      # Share the src code folder with docker to allow hot-reload
+      - ./project3-backend/src:/app/project3-backend/src:ro
+      - /project3-backend/node_modules
+    environment:
+      NODE_ENV: development
+    ports:
+      - "4000:4000"
+    entrypoint:
+      [
+        "/bin/sh",
+        "-c",
+        "npm run prepareuse && cd project3-backend && npm run start:dev",
+      ]
+    # named volumes can be managed easier using docker-compose
+volumes:
+  database-data:
