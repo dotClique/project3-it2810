@@ -26,7 +26,10 @@ export const NewGroupButton = styled(Button)(({ theme }) => ({
   marginTop: theme.spacing(2),
 }));
 
-export const MovieGroupPagination = styled(Pagination)(({ theme }) => ({
+export const MovieGroupFooter = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  gap: theme.spacing(3),
   marginTop: "auto",
   marginBottom: theme.spacing(2),
 }));
@@ -39,4 +42,13 @@ export const GroupGrid = styled("div")(({ theme }) => ({
   display: "grid",
   width: "100%",
   gridTemplateColumns: "1fr 1fr",
+  [theme.breakpoints.down("md")]: {
+    gridTemplateColumns: "1fr",
+  },
+  overflow: "auto",
+  gap: theme.spacing(1),
+  padding: theme.spacing(1),
+  "& > *": {
+    minHeight: "80px",
+  },
 }));

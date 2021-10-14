@@ -1,11 +1,11 @@
 import PageContainer from "../../components/PageContainer";
-import { Pagination } from "@mui/material";
+import { Pagination, Typography } from "@mui/material";
 import {
   MovieGroupsContainer,
   NewGroupButton,
-  MovieGroupPagination,
+  MovieGroupFooter,
   HorizontalLine,
-    GroupGrid
+  GroupGrid,
 } from "./styledComponents";
 import MovieGroup from "../../components/MovieGroup";
 
@@ -13,12 +13,29 @@ export default function MovieGroups() {
   return (
     <PageContainer>
       <MovieGroupsContainer>
-        <NewGroupButton>Add movie group</NewGroupButton>
-        <HorizontalLine />
+        <Typography gutterBottom variant={"h3"}> Movie Groups </Typography>
+        <Typography variant={"h6"}> Favorites </Typography>
         <GroupGrid>
-          <MovieGroup />
+          <MovieGroup title={"Marvel"} />
         </GroupGrid>
-        <MovieGroupPagination count={100} color="primary" />
+        <HorizontalLine />
+        <Typography variant={"h6"}> All </Typography>
+        <GroupGrid>
+          <MovieGroup title={"Marvel"} />
+          <MovieGroup title={"Sitcoms"} />
+          <MovieGroup title={"Action"} />
+          <MovieGroup title={"Another"} />
+          <MovieGroup title={"Marvel"} />
+          <MovieGroup title={"Sitcoms"} />
+          <MovieGroup title={"Action"} />
+          <MovieGroup title={"Another"} />
+          <MovieGroup title={"Marvel"} />
+        </GroupGrid>
+
+        <MovieGroupFooter>
+          <NewGroupButton>Add new movie group</NewGroupButton>
+          <Pagination count={100} color="primary" />
+        </MovieGroupFooter>
       </MovieGroupsContainer>
     </PageContainer>
   );
