@@ -13,10 +13,13 @@ export default function MovieGroups() {
   return (
     <PageContainer>
       <MovieGroupsContainer>
-        <Typography gutterBottom variant={"h3"}> Movie Groups </Typography>
+        <Typography gutterBottom variant={"h3"}>
+          {" "}
+          Movie Groups{" "}
+        </Typography>
         <Typography variant={"h6"}> Favorites </Typography>
         <GroupGrid>
-          <MovieGroup title={"Marvel"} />
+          <MovieGroup title={"Marvel"} favorite />
         </GroupGrid>
         <HorizontalLine />
         <Typography variant={"h6"}> All </Typography>

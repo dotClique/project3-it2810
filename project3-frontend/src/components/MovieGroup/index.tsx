@@ -4,11 +4,12 @@ import {
   MovieGroupCardContent,
   MovieGroupTitle,
 } from "./styledComponents";
-import { CardContent, Typography } from "@mui/material";
+import { FavoriteIcon } from "../FavoriteIcon";
 
 type Props = {
   title: string;
   id?: string;
+  favorite?: boolean;
 };
 export default function MovieGroup(props: Props) {
   return (
@@ -20,6 +21,7 @@ export default function MovieGroup(props: Props) {
           </MovieGroupTitle>
         </MovieGroupCardContent>
       </MovieGroupLink>
+      <FavoriteIcon width={30} isFilled={props.favorite || false} />
     </MovieGroupContainer>
   );
 }

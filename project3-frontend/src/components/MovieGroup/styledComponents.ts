@@ -1,13 +1,13 @@
 import { styled } from "@mui/system";
 import { Card, CardContent, Link, Typography } from "@mui/material";
 
-export const MovieGroupContainer = styled(Card)(({ theme }) => ({
+export const MovieGroupContainer = styled(Card)(() => ({
   width: "100%",
   height: "100%",
-
+  position: "relative",
 }));
 
-export const MovieGroupLink = styled(Link)(({ theme }) => ({
+export const MovieGroupLink = styled(Link)(() => ({
   width: "100%",
   height: "100%",
 }));
@@ -21,6 +21,7 @@ export const MovieGroupCardContent = styled(CardContent)(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
 }));
-export const MovieGroupTitle = styled(Typography)(({ theme }) => ({
+
+export const MovieGroupTitle = styled(Typography)(() => ({
   width: "100%",
 }));

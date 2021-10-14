@@ -1,5 +1,5 @@
 import { styled } from "@mui/system";
-import { Button, Pagination, Paper } from "@mui/material";
+import { Button, Paper } from "@mui/material";
 
 export const MovieGroupsContainer = styled(Paper)(({ theme }) => ({
   marginTop: `max(calc((100vh - ${theme.breakpoints.values.md}px) / 2), 0px)`,
@@ -34,7 +34,7 @@ export const MovieGroupFooter = styled("div")(({ theme }) => ({
   marginBottom: theme.spacing(2),
 }));
 
-export const HorizontalLine = styled("hr")(({ theme }) => ({
+export const HorizontalLine = styled("hr")(() => ({
   width: "100%",
 }));
 
