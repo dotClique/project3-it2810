@@ -13,7 +13,7 @@ export const LoginPageContainer = styled(Paper)(({ theme }) => ({
   maxWidth: "100vw",
   width: theme.breakpoints.values.md,
   justifyContent: "space-evenly",
-  padding: "0 200px 0",
+  padding: "0 10vw 0",
 }));
 
 export const LoginForm = styled("form")(({ theme }) => ({

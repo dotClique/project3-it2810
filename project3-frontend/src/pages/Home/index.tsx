@@ -10,12 +10,14 @@ export default function Home() {
           FilmFlokk
         </Typography>
         <Typography component="h5" variant={"h5"}>
-          Velcome to FilmFlokk, a website for sharing the unique joy of movies. Please enter an
-          alias before continuing.
+          Welcome to FilmFlokk, a website for sharing the unique joy of watching movies together.
+          Please enter an alias before continuing.
         </Typography>
         <LoginForm>
           <TextField label="alias" id="outlined-basic" variant="outlined" />
-          <LoginButton>Enter</LoginButton>
+          <a href={"/groups"}>
+            <LoginButton>Enter</LoginButton>
+          </a>
         </LoginForm>
       </LoginPageContainer>
     </PageContainer>

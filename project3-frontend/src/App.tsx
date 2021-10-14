@@ -4,6 +4,7 @@ import "./App.css";
 import theme from "./helpers/themes";
 import Home from "./pages/Home";
 import { CssBaseline } from "@mui/material";
+import MovieGroups from "./pages/MovieGroups";
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
           <Switch>
             <Route exact path="/">
               <Home />
+            </Route>
+            <Route exact path="/groups">
+              <MovieGroups />
             </Route>
           </Switch>
         </BrowserRouter>
