@@ -1,5 +1,5 @@
 import PageContainer from "../../components/PageContainer";
-import { Pagination, Typography } from "@mui/material";
+import { InputAdornment, Pagination, TextField, Typography } from "@mui/material";
 import {
   MovieGroupsContainer,
   NewGroupButton,
@@ -8,6 +8,7 @@ import {
   GroupGrid,
 } from "./styledComponents";
 import MovieGroup from "../../components/MovieGroup";
+import { SearchIcon } from "@heroicons/react/solid";
 
 export default function MovieGroups() {
   return (
@@ -22,7 +23,17 @@ export default function MovieGroups() {
           <MovieGroup title={"Marvel"} favorite />
         </GroupGrid>
         <HorizontalLine />
-        <Typography variant={"h6"}> All </Typography>
+        <TextField
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <SearchIcon width={20} />
+              </InputAdornment>
+            ),
+          }}
+          placeholder={"search for groups"}
+          sx={{ width: "90%", marginBottom: 1 }}
+        ></TextField>
         <GroupGrid>
           <MovieGroup title={"Marvel"} />
           <MovieGroup title={"Sitcoms"} />

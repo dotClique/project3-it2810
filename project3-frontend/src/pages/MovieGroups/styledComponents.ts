@@ -1,5 +1,5 @@
 import { styled } from "@mui/system";
-import { Button, Paper } from "@mui/material";
+import { Button, Paper, TextField } from "@mui/material";
 
 export const MovieGroupsContainer = styled(Paper)(({ theme }) => ({
   marginTop: `max(calc((100vh - ${theme.breakpoints.values.md}px) / 2), 0px)`,
@@ -12,7 +12,11 @@ export const MovieGroupsContainer = styled(Paper)(({ theme }) => ({
   maxHeight: theme.breakpoints.values.md,
   maxWidth: "100vw",
   width: theme.breakpoints.values.md,
-  padding: "0 10vw 0",
+  [theme.breakpoints.down("md")]: {
+    maxHeight: "none",
+    height: "inherit",
+  },
+  padding: "0 5vw 0",
 }));
 
 export const NewGroupButton = styled(Button)(({ theme }) => ({
