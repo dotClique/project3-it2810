@@ -1,22 +1,21 @@
 import { styled } from "@mui/system";
-import { Button, Paper, TextField } from "@mui/material";
+import { Button, Paper, Accordion } from "@mui/material";
 
 export const MovieGroupsContainer = styled(Paper)(({ theme }) => ({
-  marginTop: `max(calc((100vh - ${theme.breakpoints.values.md}px) / 2), 0px)`,
-  paddingTop: theme.spacing(8),
+  marginTop: theme.spacing(8),
   borderRadius: theme.shape.borderRadius,
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  height: "100vh",
-  maxHeight: theme.breakpoints.values.md,
   maxWidth: "100vw",
   width: theme.breakpoints.values.md,
   [theme.breakpoints.down("md")]: {
     maxHeight: "none",
     height: "inherit",
+    marginTop: theme.spacing(0),
+    padding: "20px 4px 0",
   },
-  padding: "0 5vw 0",
+  padding: "20px 5vw 0",
 }));
 
 export const NewGroupButton = styled(Button)(({ theme }) => ({
@@ -38,10 +37,6 @@ export const MovieGroupFooter = styled("div")(({ theme }) => ({
   marginBottom: theme.spacing(2),
 }));
 
-export const HorizontalLine = styled("hr")(() => ({
-  width: "100%",
-}));
-
 export const GroupGrid = styled("div")(({ theme }) => ({
   display: "grid",
   width: "100%",
@@ -54,5 +49,17 @@ export const GroupGrid = styled("div")(({ theme }) => ({
   padding: theme.spacing(1),
   "& > *": {
     minHeight: "80px",
+  },
+}));
+
+export const GroupAccordion = styled(Accordion)(({ theme }) => ({
+  width: "100%",
+  border: `1px solid ${theme.palette.divider}`,
+  boxShadow: "none",
+  "&:hover": {
+    filter: "brightness(90%)",
+  },
+  "&.Mui-expanded": {
+    filter: "brightness(100%)!important",
   },
 }));
