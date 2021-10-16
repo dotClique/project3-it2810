@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot tests Snapshotting MovieGroups 1`] = `
+<Styled(ForwardRef(Card))>
+  <Styled(ForwardRef(Link))
+    color="inherit"
+    href="/group/undefined"
+    underline="none"
+  >
+    <Styled(ForwardRef(CardContent))>
+      <Styled(ForwardRef(Typography))
+        noWrap={true}
+        variant="h5"
+      />
+    </Styled(ForwardRef(CardContent))>
+  </Styled(ForwardRef(Link))>
+  <FavoriteIcon
+    isFilled={false}
+    width={30}
+  />
+</Styled(ForwardRef(Card))>
+`;
