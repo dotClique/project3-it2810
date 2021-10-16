@@ -15,9 +15,7 @@ export default function Home() {
         </Typography>
         <LoginForm>
           <TextField label="alias" id="outlined-basic" variant="outlined" />
-          <a href={"/groups"}>
-            <LoginButton>Enter</LoginButton>
-          </a>
+          <LoginButton href={"/groups"}>Enter</LoginButton>
         </LoginForm>
       </LoginPageContainer>
     </PageContainer>

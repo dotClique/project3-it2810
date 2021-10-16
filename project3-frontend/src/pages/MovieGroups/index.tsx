@@ -13,6 +13,7 @@ import {
   MovieGroupFooter,
   GroupGrid,
   GroupAccordion,
+  LogOutButton,
 } from "./styledComponents";
 import MovieGroup from "../../components/MovieGroup";
 import { SearchIcon } from "@heroicons/react/solid";
@@ -78,6 +79,9 @@ export default function MovieGroups() {
         </GroupAccordion>
         <MovieGroupFooter>
           <NewGroupButton>Add new movie group</NewGroupButton>
+          <LogOutButton color={"secondary"} href={"/"}>
+            Change Alias
+          </LogOutButton>
           <Pagination count={100} color="primary" />
         </MovieGroupFooter>
       </MovieGroupsContainer>

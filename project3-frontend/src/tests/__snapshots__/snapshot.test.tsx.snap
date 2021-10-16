@@ -2,7 +2,9 @@
 
 exports[`Snapshot tests Snapshotting FavoriteIcon 1`] = `
 <Styled(div)>
-  <HeartIcon />
+  <HeartIcon
+    width={20}
+  />
 </Styled(div)>
 `;
 
@@ -17,7 +19,9 @@ exports[`Snapshot tests Snapshotting MovieGroup 1`] = `
       <Styled(ForwardRef(Typography))
         noWrap={true}
         variant="h5"
-      />
+      >
+        test
+      </Styled(ForwardRef(Typography))>
     </Styled(ForwardRef(CardContent))>
   </Styled(ForwardRef(Link))>
   <FavoriteIcon
