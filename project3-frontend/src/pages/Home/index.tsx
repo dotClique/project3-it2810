@@ -1,8 +1,10 @@
 import { TextField, Typography } from "@mui/material";
+import { useHistory } from "react-router";
 import PageContainer from "../../components/PageContainer";
 import { LoginButton, LoginForm, LoginPageContainer } from "./styledComponents";
 
 export default function Home() {
+  const history = useHistory();
   return (
     <PageContainer>
       <LoginPageContainer>
@@ -15,7 +17,7 @@ export default function Home() {
         </Typography>
         <LoginForm>
           <TextField label="alias" id="outlined-basic" variant="outlined" />
-          <LoginButton href={"/groups"}>Enter</LoginButton>
+          <LoginButton onClick={() => history.push("/groups")}>Enter</LoginButton>
         </LoginForm>
       </LoginPageContainer>
     </PageContainer>

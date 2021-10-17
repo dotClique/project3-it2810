@@ -22,4 +22,15 @@ export class AppController {
       throw new HttpException("User already exists", HttpStatus.BAD_REQUEST);
     }
   }
+
+  @Get("user")
+  async getUser(): AsyncAPIRes<User> {
+    try {
+      const result = await this.appService.getUser();
+      if (result == null) throw new HttpException("User not found", HttpStatus.NOT_FOUND);
+      return result;
+    } catch {
+      throw new HttpException("Error in getting user", HttpStatus.BAD_REQUEST);
+    }
+  }
 }
