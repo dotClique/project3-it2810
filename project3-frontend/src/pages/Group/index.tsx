@@ -11,14 +11,14 @@ export default function Group(){
                 <h1>Groupname</h1>
                 <br/>
                 <FilterGrid>
-                    <TextField label={"Søk på tittel"} variant={"outlined"}/>
-                    <Card variant={"outlined"}><FormControlLabel control={<Checkbox/>} label={"Viste filmer"}/></Card>
-                    <Select label={"Sorter på"}>
+                    <TextField label={"Søk på tittel"} variant={"outlined"} sx={{gridArea: "search"}}/>
+                    <Card variant={"outlined"} sx={{gridArea: "checkbox"}}><FormControlLabel control={<Checkbox/>} label={"Viste filmer"}/></Card>
+                    <Select label={"Sorter på"} sx={{gridArea: "filterSort"}}>
                         <MenuItem>dato</MenuItem>
                         <MenuItem>tittel</MenuItem>
                         <MenuItem>lokasjon</MenuItem>
                     </Select>
-                    <Select label={"Tidsrom"}>
+                    <Select label={"Tidsrom"} sx={{gridArea: "filterTime"}}>
                         <MenuItem>innen en uke</MenuItem>
                         <MenuItem>denne måneden</MenuItem>
                         <MenuItem>i år</MenuItem>

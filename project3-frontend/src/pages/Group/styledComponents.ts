@@ -33,15 +33,18 @@ export const FilterGrid = styled("div")(({theme})=>({
     display: "grid",
     gridTemplateColumns: " 2fr 1fr  1fr 1fr  ",
     gridTemplateRows: " 1fr ",
+    gridTemplateAreas: `"search checkbox filterTime filterSort"`,
+        [theme.breakpoints.down("md")]: {
+        gridTemplateColumns: " 1fr 1fr 1fr ",
+        gridTemplateRows: " 1fr 1fr",
+        gridTemplateAreas: `"search search search" "checkbox filterTime filterSort"`
+    },
 }));
 
 export const GroupGrid = styled("div")(({ theme }) => ({
     display: "grid",
     width: "100%",
     gridTemplateColumns: "1fr",
-    [theme.breakpoints.down("md")]: {
-        gridTemplateColumns: "1fr",
-    },
     overflow: "auto",
     gap: theme.spacing(1),
     padding: theme.spacing(1),
