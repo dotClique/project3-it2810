@@ -55,3 +55,7 @@ $ \dt
 # Delete specific table with <tablename> (remeber to do it with "" if the name contains special chars)
 $ DROP TABLE <tablename>;
 ```
+
+# Produciton
+
+The stuff is in /usr/local/share/project3-it2810 on the VM.
