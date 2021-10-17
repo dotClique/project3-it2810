@@ -22,7 +22,7 @@ export class AppService {
   async getUser(): AsyncAPIRes<User> {
     const res = await prisma.user.findUnique({
       where: {
-        name: "Ola Nordmann",
+        alias: "Ola Nordmann",
       },
     });
     return res;

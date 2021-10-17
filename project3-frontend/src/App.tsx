@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <CssBaseline />
       <ThemeProvider theme={theme}>
-        <BrowserRouter basename="/app">
+        <BrowserRouter basename="/project3">
           <Switch>
             <Route exact path="/">
               <Home />
