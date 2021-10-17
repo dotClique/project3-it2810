@@ -5,6 +5,7 @@ import theme from "./helpers/themes";
 import Home from "./pages/Home";
 import { CssBaseline } from "@mui/material";
 import MovieGroups from "./pages/MovieGroups";
+import Group from "./pages/Group";
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
             </Route>
             <Route exact path="/groups">
               <MovieGroups />
+            </Route>
+            <Route exact path="/group">
+              <Group />
             </Route>
           </Switch>
         </BrowserRouter>

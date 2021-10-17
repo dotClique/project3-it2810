@@ -1,0 +1,42 @@
+import PageContainer from "../../components/PageContainer";
+import {MovieGroupsContainer, GroupGrid, FilterGrid} from "./styledComponents";
+import {MenuItem, Pagination, Select, TextField, Checkbox, FormControlLabel, Card, Button} from "@mui/material";
+import MovieEvent from "../../components/MovieEvent"
+
+export default function Group(){
+    return(
+        <PageContainer>
+            <MovieGroupsContainer>
+                <Button variant={"contained"}>Back</Button>
+                <h1>Groupname</h1>
+                <br/>
+                <FilterGrid>
+                    <TextField label={"Søk på tittel"} variant={"outlined"}/>
+                    <Card variant={"outlined"}><FormControlLabel control={<Checkbox/>} label={"Viste filmer"}/></Card>
+                    <Select label={"Sorter på"}>
+                        <MenuItem>dato</MenuItem>
+                        <MenuItem>tittel</MenuItem>
+                        <MenuItem>lokasjon</MenuItem>
+                    </Select>
+                    <Select label={"Tidsrom"}>
+                        <MenuItem>innen en uke</MenuItem>
+                        <MenuItem>denne måneden</MenuItem>
+                        <MenuItem>i år</MenuItem>
+                        <MenuItem>Allerede vist</MenuItem>
+                    </Select>
+                </FilterGrid>
+                <GroupGrid>
+                    <MovieEvent image={"http://www.femalefirst.co.uk/image-library/land/500/n/nicolas-cage-in-justice.jpg"} title={"tuturuu"} location={"gløshaugen"} datetime={"04.10.1999"}/>
+                    <MovieEvent image={"http://www.femalefirst.co.uk/image-library/land/500/n/nicolas-cage-in-justice.jpg"} title={"tuturuu"} location={"gløshaugen"} datetime={"04.10.1999"}/>
+                    <MovieEvent image={"http://www.femalefirst.co.uk/image-library/land/500/n/nicolas-cage-in-justice.jpg"} title={"tuturuu"} location={"gløshaugen"} datetime={"04.10.1999"}/>
+                    <MovieEvent image={"http://www.femalefirst.co.uk/image-library/land/500/n/nicolas-cage-in-justice.jpg"} title={"tuturuu"} location={"gløshaugen"} datetime={"04.10.1999"}/>
+                    <MovieEvent image={"http://www.femalefirst.co.uk/image-library/land/500/n/nicolas-cage-in-justice.jpg"} title={"tuturuu"} location={"gløshaugen"} datetime={"04.10.1999"}/>
+                    <MovieEvent image={"http://www.femalefirst.co.uk/image-library/land/500/n/nicolas-cage-in-justice.jpg"} title={"tuturuu"} location={"gløshaugen"} datetime={"04.10.1999"}/>
+                    <MovieEvent image={"http://www.femalefirst.co.uk/image-library/land/500/n/nicolas-cage-in-justice.jpg"} title={"tuturuu"} location={"gløshaugen"} datetime={"04.10.1999"}/>
+                </GroupGrid>
+                <Pagination count={100} color="primary"/>
+                <Button variant={"contained"}>Add New movieevent</Button>
+            </MovieGroupsContainer>
+        </PageContainer>
+    )
+}
