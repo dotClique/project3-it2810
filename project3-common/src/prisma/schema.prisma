@@ -11,5 +11,27 @@ generator client {
 }
 
 model User {
-  name String @id
+  alias        String       @id
+  favorites    MovieGroup[]
+  participates MovieEvent[]
+}
+
+model MovieGroup {
+  movieGroupId  String       @id @default(cuid())
+  name          String
+  description   String       @default("")
+  movieEvents   MovieEvent[]
+  userFavorites User[]
+}
+
+model MovieEvent {
+  movieEventId String     @id @default(cuid())
+  title        String
+  description  String     @default("")
+  date         DateTime
+  imageUrl     String?
+  location     String
+  movieGroupId String
+  movieGroup   MovieGroup @relation(fields: [movieGroupId], references: [movieGroupId], onDelete: Cascade)
+  participants User[]
 }

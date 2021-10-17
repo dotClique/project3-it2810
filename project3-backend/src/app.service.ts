@@ -13,7 +13,7 @@ export class AppService {
   async createUser(): AsyncAPIRes<User> {
     const res = await prisma.user.create({
       data: {
-        name: "Ola Nordmann",
+        alias: "Ola Nordmann",
       },
     });
     return res;

@@ -1,5 +1,5 @@
+import { Accordion, Button, Paper } from "@mui/material";
 import { styled } from "@mui/system";
-import { Button, Paper, Accordion } from "@mui/material";
 
 export const MovieGroupsContainer = styled(Paper)(({ theme }) => ({
   marginTop: theme.spacing(8),

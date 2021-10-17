@@ -1,6 +1,6 @@
-import PageContainer from "../../components/PageContainer";
 import { TextField, Typography } from "@mui/material";
-import { LoginPageContainer, LoginButton, LoginForm } from "./styledComponents";
+import PageContainer from "../../components/PageContainer";
+import { LoginButton, LoginForm, LoginPageContainer } from "./styledComponents";
 
 export default function Home() {
   return (
