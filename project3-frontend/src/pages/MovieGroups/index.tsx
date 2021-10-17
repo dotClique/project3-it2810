@@ -1,4 +1,4 @@
-import PageContainer from "../../components/PageContainer";
+import { SearchIcon } from "@heroicons/react/solid";
 import {
   AccordionDetails,
   AccordionSummary,
@@ -7,17 +7,17 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useState } from "react";
+import MovieGroup from "../../components/MovieGroup";
+import PageContainer from "../../components/PageContainer";
 import {
+  GroupAccordion,
+  GroupGrid,
+  LogOutButton,
+  MovieGroupFooter,
   MovieGroupsContainer,
   NewGroupButton,
-  MovieGroupFooter,
-  GroupGrid,
-  GroupAccordion,
-  LogOutButton,
 } from "./styledComponents";
-import MovieGroup from "../../components/MovieGroup";
-import { SearchIcon } from "@heroicons/react/solid";
-import { useState } from "react";
 
 export default function MovieGroups() {
   const [expanded, setExpanded] = useState("allMovies");
