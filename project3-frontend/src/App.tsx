@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import { CssBaseline } from "@mui/material";
 import MovieGroups from "./pages/MovieGroups";
 import Movie from "./pages/Movie";
+import AddMovie from "./pages/AddMovie";
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
             </Route>
             <Route exact path="/movie">
               <Movie />
+            </Route>
+            <Route exact path="/addmovie">
+              <AddMovie />
             </Route>
           </Switch>
         </BrowserRouter>

@@ -5,7 +5,8 @@ export const MovieGrid = styled("div")(({ theme }) => ({
     display: "grid",
     width: "100%",
     gridTemplateColumns: "1fr",
-    gridTemplateRows: "10vh 35vh 30vh 25vh",
+    gridTemplateRows: "10fr 20fr 5fr 30fr 20fr",
+
     justifyItems: 'center'
 }));
 
@@ -14,7 +15,7 @@ export const MovieImage= styled("img")(({ theme }) => ({
     display: 'flex',
     height: '100%',
     width: '100%',
-    objectFit: 'contain',
+    objectFit: 'fill',
     backgroundColor: theme.palette.secondary,
     paddingBottom: '2%',
 }));
