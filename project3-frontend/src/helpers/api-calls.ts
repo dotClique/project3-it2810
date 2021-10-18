@@ -43,3 +43,7 @@ export const getHelloFromAPI = () => {
 export const createUserFromAPI = () => {
   return fromAPI("/user", "POST") as Promise<FetchResponse<User>>;
 };
+
+export const getUserFromAPI = () => {
+  return fromAPI("/user", "GET") as Promise<FetchResponse<User>>;
+};

@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { useHistory } from "react-router";
 import MovieGroup from "../../components/MovieGroup";
 import PageContainer from "../../components/PageContainer";
 import {
@@ -21,6 +22,7 @@ import {
 
 export default function MovieGroups() {
   const [expanded, setExpanded] = useState("allMovies");
+  const history = useHistory();
 
   const handleChange = (panel: string) => () => {
     setExpanded(panel);
@@ -79,7 +81,7 @@ export default function MovieGroups() {
         </GroupAccordion>
         <MovieGroupFooter>
           <NewGroupButton>Add new movie group</NewGroupButton>
-          <LogOutButton color={"secondary"} href={"/"}>
+          <LogOutButton color={"secondary"} onClick={() => history.push("/")}>
             Change Alias
           </LogOutButton>
           <Pagination count={100} color="primary" />

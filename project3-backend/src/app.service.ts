@@ -18,4 +18,13 @@ export class AppService {
     });
     return res;
   }
+
+  async getUser(): AsyncAPIRes<User> {
+    const res = await prisma.user.findUnique({
+      where: {
+        alias: "Ola Nordmann",
+      },
+    });
+    return res;
+  }
 }

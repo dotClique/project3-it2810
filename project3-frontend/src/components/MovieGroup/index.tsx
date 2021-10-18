@@ -1,10 +1,11 @@
+import { useHistory } from "react-router";
+import { FavoriteIcon } from "../FavoriteIcon";
 import {
+  MovieGroupCardContent,
   MovieGroupContainer,
   MovieGroupLink,
-  MovieGroupCardContent,
   MovieGroupTitle,
 } from "./styledComponents";
-import { FavoriteIcon } from "../FavoriteIcon";
 
 type Props = {
   title: string;
@@ -12,9 +13,14 @@ type Props = {
   favorite?: boolean;
 };
 export default function MovieGroup(props: Props) {
+  const history = useHistory();
   return (
     <MovieGroupContainer>
-      <MovieGroupLink href={`/group/${props.id}`} color={"inherit"} underline={"none"}>
+      <MovieGroupLink
+        onClick={() => history.push(`/group/${props.id}`)}
+        color={"inherit"}
+        underline={"none"}
+      >
         <MovieGroupCardContent>
           <MovieGroupTitle variant="h5" noWrap>
             {props.title}
