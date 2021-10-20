@@ -1,6 +1,6 @@
 import { HeartIcon as SolidHeart } from "@heroicons/react/solid";
 import { HeartIcon as OutlinedHeart } from "@heroicons/react/outline";
-import { IconContainer } from "./styledComponents";
+import { IconContainer } from "./styled";
 type Props = {
   width: number;
   isFilled: boolean;

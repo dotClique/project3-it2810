@@ -5,7 +5,7 @@ import {
   MovieGroupContainer,
   MovieGroupLink,
   MovieGroupTitle,
-} from "./styledComponents";
+} from "./styled";
 
 type Props = {
   title: string;
