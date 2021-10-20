@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useHistory } from "react-router";
-import MovieGroup from "../../components/MovieGroup";
+import MovieGroupItem from "../../components/MovieGroupItem";
 import PageContainer from "../../components/PageContainer";
 import {
   GroupAccordion,
@@ -18,9 +18,9 @@ import {
   MovieGroupFooter,
   MovieGroupsContainer,
   NewGroupButton,
-} from "./styledComponents";
+} from "./styled";
 
-export default function MovieGroups() {
+export default function MovieGroupsPage() {
   const [expanded, setExpanded] = useState("allMovies");
   const history = useHistory();
 
@@ -41,7 +41,7 @@ export default function MovieGroups() {
           </AccordionSummary>
           <AccordionDetails>
             <GroupGrid>
-              <MovieGroup title={"Marvel"} favorite />
+              <MovieGroupItem title={"Marvel"} favorite />
             </GroupGrid>
           </AccordionDetails>
         </GroupAccordion>
@@ -62,20 +62,20 @@ export default function MovieGroups() {
               sx={{ width: "90%", marginBottom: 1 }}
             />
             <GroupGrid>
-              <MovieGroup title={"Marvel"} />
-              <MovieGroup title={"Sitcoms"} />
-              <MovieGroup title={"Action"} />
-              <MovieGroup title={"Another"} />
-              <MovieGroup title={"Marvel"} />
-              <MovieGroup title={"Sitcoms"} />
-              <MovieGroup title={"Action"} />
-              <MovieGroup title={"Another"} />
-              <MovieGroup title={"Marvel"} />
-              <MovieGroup title={"Marvel"} />
-              <MovieGroup title={"Marvel"} />
-              <MovieGroup title={"Marvel"} />
-              <MovieGroup title={"Marvel"} />
-              <MovieGroup title={"Marvel"} />
+              <MovieGroupItem title={"Marvel"} />
+              <MovieGroupItem title={"Sitcoms"} />
+              <MovieGroupItem title={"Action"} />
+              <MovieGroupItem title={"Another"} />
+              <MovieGroupItem title={"Marvel"} />
+              <MovieGroupItem title={"Sitcoms"} />
+              <MovieGroupItem title={"Action"} />
+              <MovieGroupItem title={"Another"} />
+              <MovieGroupItem title={"Marvel"} />
+              <MovieGroupItem title={"Marvel"} />
+              <MovieGroupItem title={"Marvel"} />
+              <MovieGroupItem title={"Marvel"} />
+              <MovieGroupItem title={"Marvel"} />
+              <MovieGroupItem title={"Marvel"} />
             </GroupGrid>
           </AccordionDetails>
         </GroupAccordion>

@@ -1,7 +1,7 @@
 import { TextField, Typography } from "@mui/material";
 import { useHistory } from "react-router";
 import PageContainer from "../../components/PageContainer";
-import { LoginButton, LoginForm, LoginPageContainer } from "./styledComponents";
+import { LoginButton, LoginForm, LoginPageContainer } from "./styled";
 
 export default function Home() {
   const history = useHistory();
