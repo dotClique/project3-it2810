@@ -14,12 +14,12 @@ describe("Snapshot tests", () => {
   });
 
   test("Snapshotting MovieGroup", () => {
-    const result = toJson(shallow(<MovieGroup title={"test"}/>));
+    const result = toJson(shallow(<MovieGroup title={"test"} />));
     expect(result).toMatchSnapshot();
   });
 
   test("Snapshotting FavoriteIcon", () => {
-    const result = toJson(shallow(<FavoriteIcon width={20} isFilled={true}/>));
+    const result = toJson(shallow(<FavoriteIcon width={20} isFilled={true} />));
     expect(result).toMatchSnapshot();
   });
 });
