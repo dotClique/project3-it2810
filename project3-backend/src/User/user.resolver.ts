@@ -34,6 +34,23 @@ export class UserResolver {
         return prisma.user.create({data: {alias}});
     }
 
+    @Mutation(returns => User)
+    async createUserOrCheckIfExists(@Args('alias') alias: string) {
+        const user = await prisma.user.findUnique({
+            where: {
+                alias: alias,
+            },
+            include: {
+                participates: true,
+                favorites: true
+            }
+        })
+        if (user) {
+            return user
+        }
+        return prisma.user.create({data: {alias}});
+    }
+
 
     @Mutation(returns => MovieGroup)
     async addFavorite(@Args('movieGroupId') movieGroupId: string,
