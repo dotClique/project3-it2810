@@ -9,12 +9,12 @@ describe("Snapshot tests", () => {
     console.error = jest.fn();
   });
 
-  test("Snapshotting App", () => {
+  test("Snapshotting MovieGroupsPage", () => {
     const rend = createSnapshot(<MovieGroupsPage />);
     expect(rend).toMatchSnapshot();
   });
 
-  test("Snapshotting MovieGroup", () => {
+  test("Snapshotting MovieGroupItem", () => {
     const result = createSnapshot(<MovieGroupItem title={"test"} />);
     expect(result).toMatchSnapshot();
   });
