@@ -1,6 +1,6 @@
 import { FavoriteIcon } from "../components/FavoriteIcon";
 import MovieGroupItem from "../components/MovieGroupItem";
-import MovieGroupsPage from "../pages/MovieGroups/index";
+import MovieGroupsPage from "../pages/MovieGroupsPage/index";
 import { createSnapshot } from "./utils/index";
 
 describe("Snapshot tests", () => {
