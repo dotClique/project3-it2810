@@ -1,5 +1,5 @@
 import { User } from "./user.model";
-import { Resolver, Mutation, Args, Query, Float } from "@nestjs/graphql";
+import { Resolver, Mutation, Args, Query, Parent, ResolveField } from "@nestjs/graphql";
 import { prisma } from "../../../project3-common/src/prisma";
 import { MovieGroup } from "../Group/group.model";
 import { MovieEvent } from "../Event/event.model";
@@ -12,21 +12,23 @@ export class UserResolver {
       where: {
         alias: alias,
       },
-      include: {
-        participates: true,
-        favorites: true,
-      },
     });
   }
 
   @Query((returns) => [User])
   async users(): Promise<User[]> {
-    return await prisma.user.findMany({
-      include: {
-        participates: true,
-        favorites: true,
-      },
-    });
+    return await prisma.user.findMany({});
+  }
+
+  @ResolveField(() => [MovieGroup])
+  async favorites(@Parent() user) {
+    const { alias } = user;
+    return prisma.user.findUnique({ where: { alias } }).favorites();
+  }
+  @ResolveField(() => [MovieEvent])
+  async participates(@Parent() user) {
+    const { alias } = user;
+    return prisma.user.findUnique({ where: { alias } }).participates();
   }
 
   @Mutation((returns) => User)
