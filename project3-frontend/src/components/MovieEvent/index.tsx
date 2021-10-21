@@ -1,21 +1,33 @@
-import { MovieEventCard, MovieImage, TextData } from "./styledComponents";
+import { MovieEventCard, TextData } from "./styledComponents";
+import { Typography } from "@mui/material";
 
 type Props = {
-    image: string;
-    title: string;
-    location: string;
-    datetime: string;
-}
+  description: string;
+  title: string;
+  location: string;
+  datetime: string;
+};
 
-export default function MovieEvent(props: Props){
-    return(
-        <MovieEventCard>
-            <MovieImage src={props.image}/>
-            <TextData>
-                <h3>{props.title}</h3>
-                <div>{props.location}</div>
-                <div>{props.datetime}</div>
-            </TextData>
-        </MovieEventCard>
-    )
+export default function MovieEvent(props: Props) {
+  let description;
+  if (props.description.length > 100) {
+    description = props.description.substr(0, 100) + "...";
+  } else {
+    description = props.description;
+  }
+  return (
+    <MovieEventCard>
+      <TextData>
+        <Typography variant={"h3"}>{props.title}</Typography>
+        <Typography variant={"body2"} component={"div"} sx={{ textAlign: "left" }}>
+          {description}
+        </Typography>
+      </TextData>
+
+      <TextData>
+        <div>{props.location}</div>
+        <div>{props.datetime}</div>
+      </TextData>
+    </MovieEventCard>
+  );
 }
