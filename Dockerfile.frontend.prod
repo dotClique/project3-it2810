@@ -1,0 +1,25 @@
+# build environment
+FROM node:14-alpine as build
+WORKDIR /app
+# Installing with only package.json to make it faster
+COPY ./package.json .
+RUN npm install 
+COPY ./project3-frontend/package.json ./project3-frontend/
+WORKDIR /app/project3-frontend
+RUN npm install
+WORKDIR /app
+COPY ./index.ts .
+COPY ./.env .
+COPY ./project3-common ./project3-common/
+COPY ./project3-frontend/ ./project3-frontend/
+RUN npm run prepare
+WORKDIR /app/project3-frontend
+RUN npm run build
+
+# production environment
+FROM nginx:stable-alpine
+COPY --from=build /app/project3-frontend/build /usr/share/nginx/html
+# Chenge nginx config at build time
+COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
