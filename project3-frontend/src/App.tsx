@@ -1,15 +1,16 @@
+import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 import theme from "./helpers/themes";
 import APITest from "./pages/APITest/index";
 import Home from "./pages/Home";
-import { CssBaseline } from "@mui/material";
 import MovieGroups from "./pages/MovieGroupsPage";
+import GroupPage from "./pages/GroupPage";
+import client from "./helpers/apollo";
+import { ApolloProvider } from "@apollo/client";
 import MoviePage from "./pages/MoviePage";
 import AddMoviePage from "./pages/AddMoviePage";
-import { ApolloProvider } from "@apollo/client";
-import client from "./helpers/apollo";
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
               </Route>
               <Route exact path="/testapi">
                 <APITest />
+              </Route>
+              <Route exact path="/group">
+                <GroupPage />
               </Route>
               <Route exact path="/movie">
                 <MoviePage />
