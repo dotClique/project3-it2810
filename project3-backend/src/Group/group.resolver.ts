@@ -27,9 +27,31 @@ export class MovieGroupResolver {
         });
     }
 
+    @Query(returns => [MovieGroup])
+    async movieGroupsFavorite(@Args('alias') alias: string): Promise<MovieGroup[]> {
+        return await prisma.movieGroup.findMany({
+            where: {userFavorites: {some: {alias}}},
+            include: {
+                movieEvents: true,
+                userFavorites: true
+            }
+        });
+    }
+
+    @Query(returns => [MovieGroup])
+    async movieGroupsNotFavorite(@Args('alias') alias: string): Promise<MovieGroup[]> {
+        return await prisma.movieGroup.findMany({
+            where: {userFavorites: {none: {alias}}},
+            include: {
+                movieEvents: true,
+                userFavorites: true
+            }
+        });
+    }
+
     @Mutation(returns => MovieGroup)
     async createMovieGroup(@Args('name') name: string,
-                     @Args('description') description: string) {
+                           @Args('description') description: string) {
         return prisma.movieGroup.create({data: {name, description}});
     }
 

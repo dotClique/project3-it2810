@@ -1,4 +1,4 @@
-import {Resolver, Mutation, Args, Query} from '@nestjs/graphql';
+import {Resolver, Args, Query} from '@nestjs/graphql';
 import {prisma} from "../../../project3-common/src/prisma";
 import {Movie} from "./movie.model";
 
