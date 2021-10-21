@@ -19,7 +19,7 @@ import {
   MovieGroupsContainer,
   NewGroupButton,
 } from "./styled";
-import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import {
   ADD_USER_TO_MOVIE_GROUP,
   CREATE_MOVIE_GROUP,
@@ -81,7 +81,6 @@ export default function MovieGroupsPage() {
   useEffect(() => {
     if (alias) {
       notFavoriteGroupsQuery({ variables: { alias, page, pageSize } });
-      console.log(alias);
       fetchCountQuery({ variables: { alias } });
     }
   }, [page, alias]);
