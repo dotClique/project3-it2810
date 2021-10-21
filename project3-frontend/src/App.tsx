@@ -11,7 +11,6 @@ import AddMovie from "./pages/AddMovie";
 import { ApolloProvider } from "@apollo/client";
 import client from "./helpers/apollo";
 
-
 function App() {
   return (
     <ApolloProvider client={client}>
