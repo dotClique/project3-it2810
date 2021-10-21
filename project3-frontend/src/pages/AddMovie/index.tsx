@@ -1,26 +1,40 @@
 import PageContainer from "../../components/PageContainer";
-import { Typography, Card, TextField, Box, Button } from "@mui/material";
-import { MovieGrid, MovieImage, MovieGroupsContainer } from "./styledComponents";
+import { Typography, Card, TextField, Button } from "@mui/material";
+import { MovieGrid, MovieGroupsContainer } from "./styledComponents";
 
 export default function AddMovie() {
   return (
     <PageContainer>
       <MovieGroupsContainer>
-          <Button variant={"contained"}>Back</Button>
-          <MovieGrid>
-          <Typography variant="h1" component="h1" style={{width: '100%'}}>
-              Ny filmvisning
+        <Button variant={"contained"}>Back</Button>
+        <MovieGrid>
+          <Typography variant="h2" component="h2" style={{ width: "100%" }}>
+            Ny filmvisning
           </Typography>
-          <Box component={"span"} sx={{ height: '100%', width:'100%', p: 2, border: '1px dashed grey' }}>Upload Image</Box>
-            <TextField id="tittelfelt" label="Tittel" variant="outlined" style={{width: '100%', height: '100%'}}/>
-          <Card variant='outlined' style={{width: '100%', height: '100%'}}>
-              <TextField id="stedfelt" label="Sted" variant="outlined" style={{width: '100%', height: '20%'}}/>
-              <MovieImage src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxeJ_Lkb8bKMAPDmyTRX-AqJxvSKQu8m4Jfg&usqp=CAU'/>
+          <TextField
+            id="tittelfelt"
+            label="Tittel"
+            variant="outlined"
+            style={{ width: "100%", height: "100%" }}
+          />
+          <Card variant="outlined" style={{ width: "100%", height: "100%" }}>
+            <TextField
+              id="stedfelt"
+              label="Sted"
+              variant="outlined"
+              style={{ width: "100%", height: "20%" }}
+            />
           </Card>
-          <h1>Datetimepicker</h1>
-      </MovieGrid>
-          <Button variant={"contained"}>Create</Button>
+          <TextField
+            variant={"outlined"}
+            type={"datetime-local"}
+            style={{ width: "100%", height: "100%" }}
+          />
+        </MovieGrid>
+        <Button variant={"contained"} style={{ margin: "10%, 0" }}>
+          Create
+        </Button>
       </MovieGroupsContainer>
-      </PageContainer>
+    </PageContainer>
   );
 }
