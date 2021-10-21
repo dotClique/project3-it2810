@@ -8,7 +8,6 @@ import { MovieEvent } from "../Event/event.model";
  */
 @Resolver((of) => MovieGroup)
 export class MovieGroupResolver {
-
   /**
    * Gets a particular movie group
    * @param movieGroupId

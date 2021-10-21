@@ -9,7 +9,6 @@ import { User } from "../User/user.model";
  */
 @Resolver((of) => MovieEvent)
 export class MovieEventResolver {
-
   /**
    * Gets a single movie event based on ID
    * @param movieEventId

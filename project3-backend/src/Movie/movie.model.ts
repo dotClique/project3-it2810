@@ -1,6 +1,5 @@
 import { ObjectType, Field, Int } from "@nestjs/graphql";
-import { User } from "../User/user.model";
-import { MovieEvent } from "../Event/event.model";
+
 @ObjectType()
 export class Movie {
   @Field()
