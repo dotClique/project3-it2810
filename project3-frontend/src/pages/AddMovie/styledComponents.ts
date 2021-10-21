@@ -5,7 +5,7 @@ export const MovieGrid = styled("div")(() => ({
   display: "grid",
   width: "100%",
   gridTemplateColumns: "1fr",
-  gridTemplateRows: "10fr 5fr 5fr 5fr 5fr",
+  gridTemplateRows: "10fr 5fr 15fr 5fr 5fr 5fr",
 
   justifyItems: "center",
 }));

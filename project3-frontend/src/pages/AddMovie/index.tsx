@@ -17,6 +17,14 @@ export default function AddMovie() {
             variant="outlined"
             style={{ width: "100%", height: "100%" }}
           />
+          <TextField
+            id="Beskrivelsefelt"
+            label="Beskrivelse"
+            variant="outlined"
+            rows={6}
+            multiline={true}
+            style={{ width: "100%", height: "100%" }}
+          />
           <Card variant="outlined" style={{ width: "100%", height: "100%" }}>
             <TextField
               id="stedfelt"
