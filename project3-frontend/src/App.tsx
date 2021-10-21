@@ -9,6 +9,8 @@ import MovieGroups from "./pages/MovieGroupsPage";
 import GroupPage from "./pages/GroupPage";
 import client from "./helpers/apollo";
 import { ApolloProvider } from "@apollo/client";
+import MoviePage from "./pages/MoviePage";
+import AddMoviePage from "./pages/AddMoviePage";
 
 function App() {
   return (
@@ -29,6 +31,12 @@ function App() {
               </Route>
               <Route exact path="/group">
                 <GroupPage />
+              </Route>
+              <Route exact path="/movie">
+                <MoviePage />
+              </Route>
+              <Route exact path="/addmovie">
+                <AddMoviePage />
               </Route>
             </Switch>
           </BrowserRouter>
