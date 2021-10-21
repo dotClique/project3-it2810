@@ -5,14 +5,14 @@ import {
   MovieGroupContainer,
   MovieGroupLink,
   MovieGroupTitle,
-} from "./styledComponents";
+} from "./styled";
 
 type Props = {
   title: string;
   id?: string;
   favorite?: boolean;
 };
-export default function MovieGroup(props: Props) {
+export default function MovieGroupItem(props: Props) {
   const history = useHistory();
   return (
     <MovieGroupContainer>
