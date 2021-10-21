@@ -6,7 +6,7 @@ import theme from "./helpers/themes";
 import APITest from "./pages/APITest/index";
 import Home from "./pages/Home";
 import MovieGroups from "./pages/MovieGroupsPage";
-import Group from "./pages/Group";
+import GroupPage from "./pages/GroupPage";
 import client from "./helpers/apollo";
 import { ApolloProvider } from "@apollo/client";
 
@@ -28,7 +28,7 @@ function App() {
                 <APITest />
               </Route>
               <Route exact path="/group">
-                <Group />
+                <GroupPage />
               </Route>
             </Switch>
           </BrowserRouter>

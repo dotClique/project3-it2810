@@ -1,4 +1,4 @@
-import { MovieEventCard, TextData } from "./styledComponents";
+import { MovieEventCard, TextData } from "./styled";
 import { Typography } from "@mui/material";
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
   datetime: string;
 };
 
-export default function MovieEvent(props: Props) {
+export default function MovieEventComponent(props: Props) {
   let description;
   if (props.description.length > 100) {
     description = props.description.substr(0, 100) + "...";

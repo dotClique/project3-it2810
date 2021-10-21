@@ -1,5 +1,5 @@
 import PageContainer from "../../components/PageContainer";
-import { MovieGroupsContainer, GroupGrid, FilterGrid } from "./styledComponents";
+import { MovieGroupsContainer, GroupGrid, FilterGrid } from "./styled";
 import {
   MenuItem,
   Pagination,
@@ -10,9 +10,9 @@ import {
   Card,
   Button,
 } from "@mui/material";
-import MovieEvent from "../../components/MovieEvent";
+import MovieEventComponent from "../../components/MovieEventComponent";
 
-export default function Group() {
+export default function GroupPage() {
   return (
     <PageContainer>
       <MovieGroupsContainer>
@@ -40,7 +40,7 @@ export default function Group() {
           <p id="Description">Beskrivelse</p>
         </Card>
         <GroupGrid>
-          <MovieEvent
+          <MovieEventComponent
             description={
               "http://www.femalefirst.co.uk/image-library/land/500/n/nicolas-cage-in-justice.jpg"
             }
@@ -48,7 +48,7 @@ export default function Group() {
             location={"gløshaugen"}
             datetime={"04.10.1999"}
           />
-          <MovieEvent
+          <MovieEventComponent
             description={
               "http://www.femalefirst.co.uk/image-library/land/500/n/nicolas-cage-in-justice.jpgddddddddddddddddddddddddddddddd"
             }
@@ -56,7 +56,7 @@ export default function Group() {
             location={"gløshaugen"}
             datetime={"04.10.1999"}
           />
-          <MovieEvent
+          <MovieEventComponent
             description={
               "http://www.femalefirst.co.uk/image-library/land/500/n/nicolas-cage-in-justice.jpg"
             }
@@ -64,7 +64,7 @@ export default function Group() {
             location={"gløshaugen"}
             datetime={"04.10.1999 03:22"}
           />
-          <MovieEvent
+          <MovieEventComponent
             description={
               "http://www.femalefirst.co.uk/image-library/land/500/n/nicolas-cage-in-justice.jpg"
             }
@@ -72,7 +72,7 @@ export default function Group() {
             location={"gløshaugen"}
             datetime={"04.10.1999"}
           />
-          <MovieEvent
+          <MovieEventComponent
             description={
               "http://www.femalefirst.co.uk/image-library/land/500/n/nicolas-cage-in-justice.jpg"
             }
@@ -80,7 +80,7 @@ export default function Group() {
             location={"gløshaugen"}
             datetime={"04.10.1999"}
           />
-          <MovieEvent
+          <MovieEventComponent
             description={
               "http://www.femalefirst.co.uk/image-library/land/500/n/nicolas-cage-in-justice.jpg"
             }
@@ -88,7 +88,7 @@ export default function Group() {
             location={"gløshaugen"}
             datetime={"04.10.1999"}
           />
-          <MovieEvent
+          <MovieEventComponent
             description={
               "http://www.femalefirst.co.uk/image-library/land/500/n/nicolas-cage-in-justice.jpg"
             }
