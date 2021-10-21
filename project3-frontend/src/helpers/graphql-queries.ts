@@ -8,17 +8,18 @@ export const ADD_OR_GET_USER = gql`
   }
 `;
 
-export const GET_MOVIE_GROUP_NAMES_NOT_FAVORITE = gql`
+export const GET_MOVIE_GROUP_NOT_FAVORITE = gql`
   query ($alias: String!, $page: Int!, $pageSize: Int!) {
     movieGroupsNotFavorite(alias: $alias, page: $page, pageSize: $pageSize) {
+      movieGroupId
       name
     }
   }
 `;
 
-export const GET_COUNT_MOVIE_GROUPS = gql`
-  query {
-    movieGroupCount
+export const GET_COUNT_MOVIE_GROUPS_NOT_FAVORITE = gql`
+  query ($alias: String!) {
+    countMovieGroupNotFavorite(alias: $alias)
   }
 `;
 
@@ -54,6 +55,17 @@ export const CREATE_MOVIE_EVENT = gql`
         userFavorites {
           alias
         }
+      }
+    }
+  }
+`;
+
+export const ADD_USER_TO_MOVIE_GROUP = gql`
+  mutation ($movieGroupId: String!, $useralias: String!) {
+    addUserToMovieGroup(movieGroupId: $movieGroupId, useralias: $useralias) {
+      name
+      userFavorites {
+        alias
       }
     }
   }

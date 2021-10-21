@@ -21,24 +21,28 @@ import {
 } from "./styled";
 import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import {
+  ADD_USER_TO_MOVIE_GROUP,
   CREATE_MOVIE_GROUP,
-  GET_COUNT_MOVIE_GROUPS,
-  GET_MOVIE_GROUP_NAMES_NOT_FAVORITE,
+  GET_COUNT_MOVIE_GROUPS_NOT_FAVORITE,
+  GET_MOVIE_GROUP_NOT_FAVORITE,
 } from "../../helpers/graphql-queries";
 
 export default function MovieGroupsPage() {
-  // This is meant as an example of graphQL use and is to be changed in later versions
-  const {
-    data: dataCount,
-    loading: loadingCount,
-    refetch: refetchCount,
-  } = useQuery(GET_COUNT_MOVIE_GROUPS, { fetchPolicy: "network-only" });
-  const [notFavoriteGroupsQuery, { data: dataGroups, loading: loadingGroups }] = useLazyQuery(
-    GET_MOVIE_GROUP_NAMES_NOT_FAVORITE,
+  // This is only meant as an example of graphQL use and is to be changed in later versions
+  const [fetchCountQuery, { data: dataCount, loading: loadingCount }] = useLazyQuery(
+    GET_COUNT_MOVIE_GROUPS_NOT_FAVORITE,
     { fetchPolicy: "network-only" },
   );
+
+  const [notFavoriteGroupsQuery, { data: dataGroups, loading: loadingGroups }] = useLazyQuery(
+    GET_MOVIE_GROUP_NOT_FAVORITE,
+    { fetchPolicy: "network-only" },
+  );
+
   const [createNewGroup, { data: dataNewGroup, loading: loadingNewGroup }] =
     useMutation(CREATE_MOVIE_GROUP);
+
+  const [addUserToGroup] = useMutation(ADD_USER_TO_MOVIE_GROUP);
 
   const [alias, setAlias] = useState("");
   const [expanded, setExpanded] = useState("allMovies");
@@ -58,25 +62,24 @@ export default function MovieGroupsPage() {
 
   useEffect(() => {
     if (!loadingCount && dataCount) {
-      setCount(Math.ceil(dataCount.movieGroupCount / pageSize));
+      setCount(Math.ceil(dataCount.countMovieGroupNotFavorite / pageSize));
     }
   }, [loadingCount, dataCount]);
 
   useEffect(() => {
-    if (!loadingGroups && dataGroups) {
-    }
-  }, [loadingGroups, dataGroups]);
-
-  useEffect(() => {
     if (!loadingNewGroup && dataNewGroup) {
       notFavoriteGroupsQuery({ variables: { alias, page, pageSize } });
-      refetchCount();
+      fetchCountQuery({ variables: { alias } });
     }
   }, [loadingNewGroup]);
 
   useEffect(() => {
-    notFavoriteGroupsQuery({ variables: { alias, page, pageSize } });
-  }, [page]);
+    if (alias) {
+      notFavoriteGroupsQuery({ variables: { alias, page, pageSize } });
+      console.log(alias);
+      fetchCountQuery({ variables: { alias } });
+    }
+  }, [page, alias]);
 
   return (
     <PageContainer>
@@ -115,9 +118,23 @@ export default function MovieGroupsPage() {
               {loadingGroups
                 ? false
                 : dataGroups
-                ? dataGroups.movieGroupsNotFavorite.map((item: { name: string }) => (
-                    <MovieGroupItem title={item.name} key={item.name} />
-                  ))
+                ? dataGroups.movieGroupsNotFavorite.map(
+                    (item: { name: string; movieGroupId: string }) => (
+                      <MovieGroupItem
+                        title={item.name}
+                        key={item.movieGroupId}
+                        onToggleFavorite={() => {
+                          addUserToGroup({
+                            variables: { useralias: alias, movieGroupId: item.movieGroupId },
+                          }).then(() => {
+                            notFavoriteGroupsQuery({ variables: { alias, page, pageSize } });
+                            fetchCountQuery({ variables: { alias } });
+                          });
+                        }}
+                        id={item.movieGroupId}
+                      />
+                    ),
+                  )
                 : false}
             </GroupGrid>
           </AccordionDetails>

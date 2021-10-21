@@ -10,6 +10,7 @@ import {
 type Props = {
   title: string;
   id?: string;
+  onToggleFavorite?: () => void;
   favorite?: boolean;
 };
 export default function MovieGroupItem(props: Props) {
@@ -27,7 +28,11 @@ export default function MovieGroupItem(props: Props) {
           </MovieGroupTitle>
         </MovieGroupCardContent>
       </MovieGroupLink>
-      <FavoriteIcon width={30} isFilled={props.favorite || false} />
+      <FavoriteIcon
+        width={30}
+        isFilled={props.favorite || false}
+        onClick={props.onToggleFavorite}
+      />
     </MovieGroupContainer>
   );
 }
