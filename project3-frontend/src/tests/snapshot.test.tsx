@@ -2,6 +2,7 @@ import { FavoriteIcon } from "../components/FavoriteIcon";
 import MovieGroupItem from "../components/MovieGroupItem";
 import MovieGroupsPage from "../pages/MovieGroupsPage/index";
 import { createSnapshot } from "./utils/index";
+import { MockedProvider } from "@apollo/client/testing";
 
 describe("Snapshot tests", () => {
   beforeEach(() => {
@@ -10,7 +11,11 @@ describe("Snapshot tests", () => {
   });
 
   test("Snapshotting MovieGroupsPage", () => {
-    const rend = createSnapshot(<MovieGroupsPage />);
+    const rend = createSnapshot(
+      <MockedProvider>
+        <MovieGroupsPage />
+      </MockedProvider>,
+    );
     expect(rend).toMatchSnapshot();
   });
 

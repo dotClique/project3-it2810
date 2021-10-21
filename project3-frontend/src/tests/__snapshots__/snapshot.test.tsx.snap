@@ -1,6 +1,66 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Snapshot tests Snapshotting App 1`] = `
+exports[`Snapshot tests Snapshotting FavoriteIcon 1`] = `
+<div
+  className="css-1alm560"
+>
+  <svg
+    fill="currentColor"
+    viewBox="0 0 20 20"
+    width={20}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      clipRule="evenodd"
+      d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+      fillRule="evenodd"
+    />
+  </svg>
+</div>
+`;
+
+exports[`Snapshot tests Snapshotting MovieGroupItem 1`] = `
+<div
+  className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1xujwbf-MuiPaper-root-MuiCard-root"
+>
+  <a
+    className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1v89a1p-MuiTypography-root-MuiLink-root"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+  >
+    <div
+      className="MuiCardContent-root css-qipjie-MuiCardContent-root"
+    >
+      <h5
+        className="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap css-1dx1hbw-MuiTypography-root"
+      >
+        test
+      </h5>
+    </div>
+  </a>
+  <div
+    className="css-1alm560"
+  >
+    <svg
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      width={30}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+      />
+    </svg>
+  </div>
+</div>
+`;
+
+exports[`Snapshot tests Snapshotting MovieGroupsPage 1`] = `
 <div
   className="MuiContainer-root MuiContainer-maxWidthMd css-hxly6x-MuiContainer-root"
 >
@@ -229,540 +289,7 @@ exports[`Snapshot tests Snapshotting App 1`] = `
                 </div>
                 <div
                   className="css-1m4ehug"
-                >
-                  <div
-                    className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1xujwbf-MuiPaper-root-MuiCard-root"
-                  >
-                    <a
-                      className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1v89a1p-MuiTypography-root-MuiLink-root"
-                      onBlur={[Function]}
-                      onClick={[Function]}
-                      onFocus={[Function]}
-                    >
-                      <div
-                        className="MuiCardContent-root css-qipjie-MuiCardContent-root"
-                      >
-                        <h5
-                          className="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap css-1dx1hbw-MuiTypography-root"
-                        >
-                          Marvel
-                        </h5>
-                      </div>
-                    </a>
-                    <div
-                      className="css-1alm560"
-                    >
-                      <svg
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        width={30}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div
-                    className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1xujwbf-MuiPaper-root-MuiCard-root"
-                  >
-                    <a
-                      className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1v89a1p-MuiTypography-root-MuiLink-root"
-                      onBlur={[Function]}
-                      onClick={[Function]}
-                      onFocus={[Function]}
-                    >
-                      <div
-                        className="MuiCardContent-root css-qipjie-MuiCardContent-root"
-                      >
-                        <h5
-                          className="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap css-1dx1hbw-MuiTypography-root"
-                        >
-                          Sitcoms
-                        </h5>
-                      </div>
-                    </a>
-                    <div
-                      className="css-1alm560"
-                    >
-                      <svg
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        width={30}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div
-                    className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1xujwbf-MuiPaper-root-MuiCard-root"
-                  >
-                    <a
-                      className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1v89a1p-MuiTypography-root-MuiLink-root"
-                      onBlur={[Function]}
-                      onClick={[Function]}
-                      onFocus={[Function]}
-                    >
-                      <div
-                        className="MuiCardContent-root css-qipjie-MuiCardContent-root"
-                      >
-                        <h5
-                          className="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap css-1dx1hbw-MuiTypography-root"
-                        >
-                          Action
-                        </h5>
-                      </div>
-                    </a>
-                    <div
-                      className="css-1alm560"
-                    >
-                      <svg
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        width={30}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div
-                    className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1xujwbf-MuiPaper-root-MuiCard-root"
-                  >
-                    <a
-                      className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1v89a1p-MuiTypography-root-MuiLink-root"
-                      onBlur={[Function]}
-                      onClick={[Function]}
-                      onFocus={[Function]}
-                    >
-                      <div
-                        className="MuiCardContent-root css-qipjie-MuiCardContent-root"
-                      >
-                        <h5
-                          className="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap css-1dx1hbw-MuiTypography-root"
-                        >
-                          Another
-                        </h5>
-                      </div>
-                    </a>
-                    <div
-                      className="css-1alm560"
-                    >
-                      <svg
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        width={30}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div
-                    className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1xujwbf-MuiPaper-root-MuiCard-root"
-                  >
-                    <a
-                      className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1v89a1p-MuiTypography-root-MuiLink-root"
-                      onBlur={[Function]}
-                      onClick={[Function]}
-                      onFocus={[Function]}
-                    >
-                      <div
-                        className="MuiCardContent-root css-qipjie-MuiCardContent-root"
-                      >
-                        <h5
-                          className="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap css-1dx1hbw-MuiTypography-root"
-                        >
-                          Marvel
-                        </h5>
-                      </div>
-                    </a>
-                    <div
-                      className="css-1alm560"
-                    >
-                      <svg
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        width={30}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div
-                    className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1xujwbf-MuiPaper-root-MuiCard-root"
-                  >
-                    <a
-                      className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1v89a1p-MuiTypography-root-MuiLink-root"
-                      onBlur={[Function]}
-                      onClick={[Function]}
-                      onFocus={[Function]}
-                    >
-                      <div
-                        className="MuiCardContent-root css-qipjie-MuiCardContent-root"
-                      >
-                        <h5
-                          className="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap css-1dx1hbw-MuiTypography-root"
-                        >
-                          Sitcoms
-                        </h5>
-                      </div>
-                    </a>
-                    <div
-                      className="css-1alm560"
-                    >
-                      <svg
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        width={30}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div
-                    className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1xujwbf-MuiPaper-root-MuiCard-root"
-                  >
-                    <a
-                      className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1v89a1p-MuiTypography-root-MuiLink-root"
-                      onBlur={[Function]}
-                      onClick={[Function]}
-                      onFocus={[Function]}
-                    >
-                      <div
-                        className="MuiCardContent-root css-qipjie-MuiCardContent-root"
-                      >
-                        <h5
-                          className="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap css-1dx1hbw-MuiTypography-root"
-                        >
-                          Action
-                        </h5>
-                      </div>
-                    </a>
-                    <div
-                      className="css-1alm560"
-                    >
-                      <svg
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        width={30}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div
-                    className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1xujwbf-MuiPaper-root-MuiCard-root"
-                  >
-                    <a
-                      className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1v89a1p-MuiTypography-root-MuiLink-root"
-                      onBlur={[Function]}
-                      onClick={[Function]}
-                      onFocus={[Function]}
-                    >
-                      <div
-                        className="MuiCardContent-root css-qipjie-MuiCardContent-root"
-                      >
-                        <h5
-                          className="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap css-1dx1hbw-MuiTypography-root"
-                        >
-                          Another
-                        </h5>
-                      </div>
-                    </a>
-                    <div
-                      className="css-1alm560"
-                    >
-                      <svg
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        width={30}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div
-                    className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1xujwbf-MuiPaper-root-MuiCard-root"
-                  >
-                    <a
-                      className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1v89a1p-MuiTypography-root-MuiLink-root"
-                      onBlur={[Function]}
-                      onClick={[Function]}
-                      onFocus={[Function]}
-                    >
-                      <div
-                        className="MuiCardContent-root css-qipjie-MuiCardContent-root"
-                      >
-                        <h5
-                          className="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap css-1dx1hbw-MuiTypography-root"
-                        >
-                          Marvel
-                        </h5>
-                      </div>
-                    </a>
-                    <div
-                      className="css-1alm560"
-                    >
-                      <svg
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        width={30}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div
-                    className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1xujwbf-MuiPaper-root-MuiCard-root"
-                  >
-                    <a
-                      className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1v89a1p-MuiTypography-root-MuiLink-root"
-                      onBlur={[Function]}
-                      onClick={[Function]}
-                      onFocus={[Function]}
-                    >
-                      <div
-                        className="MuiCardContent-root css-qipjie-MuiCardContent-root"
-                      >
-                        <h5
-                          className="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap css-1dx1hbw-MuiTypography-root"
-                        >
-                          Marvel
-                        </h5>
-                      </div>
-                    </a>
-                    <div
-                      className="css-1alm560"
-                    >
-                      <svg
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        width={30}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div
-                    className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1xujwbf-MuiPaper-root-MuiCard-root"
-                  >
-                    <a
-                      className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1v89a1p-MuiTypography-root-MuiLink-root"
-                      onBlur={[Function]}
-                      onClick={[Function]}
-                      onFocus={[Function]}
-                    >
-                      <div
-                        className="MuiCardContent-root css-qipjie-MuiCardContent-root"
-                      >
-                        <h5
-                          className="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap css-1dx1hbw-MuiTypography-root"
-                        >
-                          Marvel
-                        </h5>
-                      </div>
-                    </a>
-                    <div
-                      className="css-1alm560"
-                    >
-                      <svg
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        width={30}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div
-                    className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1xujwbf-MuiPaper-root-MuiCard-root"
-                  >
-                    <a
-                      className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1v89a1p-MuiTypography-root-MuiLink-root"
-                      onBlur={[Function]}
-                      onClick={[Function]}
-                      onFocus={[Function]}
-                    >
-                      <div
-                        className="MuiCardContent-root css-qipjie-MuiCardContent-root"
-                      >
-                        <h5
-                          className="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap css-1dx1hbw-MuiTypography-root"
-                        >
-                          Marvel
-                        </h5>
-                      </div>
-                    </a>
-                    <div
-                      className="css-1alm560"
-                    >
-                      <svg
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        width={30}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div
-                    className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1xujwbf-MuiPaper-root-MuiCard-root"
-                  >
-                    <a
-                      className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1v89a1p-MuiTypography-root-MuiLink-root"
-                      onBlur={[Function]}
-                      onClick={[Function]}
-                      onFocus={[Function]}
-                    >
-                      <div
-                        className="MuiCardContent-root css-qipjie-MuiCardContent-root"
-                      >
-                        <h5
-                          className="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap css-1dx1hbw-MuiTypography-root"
-                        >
-                          Marvel
-                        </h5>
-                      </div>
-                    </a>
-                    <div
-                      className="css-1alm560"
-                    >
-                      <svg
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        width={30}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div
-                    className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1xujwbf-MuiPaper-root-MuiCard-root"
-                  >
-                    <a
-                      className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1v89a1p-MuiTypography-root-MuiLink-root"
-                      onBlur={[Function]}
-                      onClick={[Function]}
-                      onFocus={[Function]}
-                    >
-                      <div
-                        className="MuiCardContent-root css-qipjie-MuiCardContent-root"
-                      >
-                        <h5
-                          className="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap css-1dx1hbw-MuiTypography-root"
-                        >
-                          Marvel
-                        </h5>
-                      </div>
-                    </a>
-                    <div
-                      className="css-1alm560"
-                    >
-                      <svg
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        width={30}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
+                />
               </div>
             </div>
           </div>
@@ -1045,66 +572,6 @@ exports[`Snapshot tests Snapshotting App 1`] = `
         </ul>
       </nav>
     </div>
-  </div>
-</div>
-`;
-
-exports[`Snapshot tests Snapshotting FavoriteIcon 1`] = `
-<div
-  className="css-1alm560"
->
-  <svg
-    fill="currentColor"
-    viewBox="0 0 20 20"
-    width={20}
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      clipRule="evenodd"
-      d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-      fillRule="evenodd"
-    />
-  </svg>
-</div>
-`;
-
-exports[`Snapshot tests Snapshotting MovieGroup 1`] = `
-<div
-  className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1xujwbf-MuiPaper-root-MuiCard-root"
->
-  <a
-    className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1v89a1p-MuiTypography-root-MuiLink-root"
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-  >
-    <div
-      className="MuiCardContent-root css-qipjie-MuiCardContent-root"
-    >
-      <h5
-        className="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap css-1dx1hbw-MuiTypography-root"
-      >
-        test
-      </h5>
-    </div>
-  </a>
-  <div
-    className="css-1alm560"
-  >
-    <svg
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      width={30}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-      />
-    </svg>
   </div>
 </div>
 `;
