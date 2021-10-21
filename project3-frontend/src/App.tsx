@@ -5,8 +5,7 @@ import "./App.css";
 import theme from "./helpers/themes";
 import APITest from "./pages/APITest/index";
 import Home from "./pages/Home";
-import { CssBaseline } from "@mui/material";
-import MovieGroups from "./pages/MovieGroups";
+import MovieGroups from "./pages/MovieGroupsPage";
 import Group from "./pages/Group";
 import client from "./helpers/apollo";
 import { ApolloProvider } from "@apollo/client";
@@ -28,8 +27,8 @@ function App() {
               <Route exact path="/testapi">
                 <APITest />
               </Route>
-               <Route exact path="/group">
-                  <Group />
+              <Route exact path="/group">
+                <Group />
               </Route>
             </Switch>
           </BrowserRouter>
