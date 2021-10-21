@@ -8,7 +8,7 @@ import { MovieEventResolver } from "./Event/event.resolver";
 import { MovieResolver } from "./Movie/movie.resolver";
 
 @Module({
-  imports: [GraphQLModule.forRoot({ autoSchemaFile: true })],
+  imports: [GraphQLModule.forRoot({ autoSchemaFile: true, path: "api" })],
   controllers: [AppController],
   providers: [AppService, UserResolver, MovieGroupResolver, MovieEventResolver, MovieResolver],
 })
