@@ -79,7 +79,7 @@ export class MovieGroupResolver {
    * @param pageSize
    * @param page
    */
-  @Query((returns) => [MovieGroup])
+  @Query(() => [MovieGroup])
   async movieGroupsFavorite(
     @Args("alias") alias: string,
     @Args("pageSize", { type: () => Int }) pageSize: number,
@@ -100,7 +100,7 @@ export class MovieGroupResolver {
    * @param pageSize
    * @param page
    */
-  @Query((returns) => [MovieGroup])
+  @Query(() => [MovieGroup])
   async movieGroupsNotFavorite(
     @Args("alias") alias: string,
     @Args("pageSize", { type: () => Int }) pageSize: number,
@@ -122,7 +122,7 @@ export class MovieGroupResolver {
    * @param name
    * @param description
    */
-  @Mutation((returns) => MovieGroup)
+  @Mutation(() => MovieGroup)
   async createMovieGroup(@Args("name") name: string, @Args("description") description: string) {
     return prisma.movieGroup.create({ data: { name, description } });
   }

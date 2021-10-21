@@ -13,7 +13,7 @@ export class MovieResolver {
    * @param searchString
    * @param maxCount The max number of movies to return
    */
-  @Query((returns) => [Movie])
+  @Query(() => [Movie])
   async movies(@Args("searchString") searchString: string,
                @Args("maxCount", {type: () => Int}) maxCount: number ): Promise<Movie[]> {
     return await prisma.movie.findMany({
