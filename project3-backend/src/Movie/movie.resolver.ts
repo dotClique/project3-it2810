@@ -7,8 +7,7 @@ export class MovieResolver {
 
     @Query(returns => [Movie])
     async movies(): Promise<Movie[]> {
-        const response = await prisma.$queryRaw`SELECT * FROM Movie Limit 5` as Movie[]
-        return response;
+        return await prisma.movie.findMany({take: 10})
     }
 
 }
