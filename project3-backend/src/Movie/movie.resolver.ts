@@ -7,7 +7,7 @@ export class MovieResolver {
 
     @Query(returns => [Movie])
     async movies(): Promise<Movie[]> {
-        return await prisma.movie.findMany({take: 10})
+        return await prisma.movie.findMany({take: 10, where: {primarytitle: {startsWith: "hey", mode: "insensitive"}}})
     }
 
 }
