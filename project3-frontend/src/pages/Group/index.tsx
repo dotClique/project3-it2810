@@ -36,6 +36,9 @@ export default function Group() {
             <MenuItem>Allerede vist</MenuItem>
           </Select>
         </FilterGrid>
+        <Card variant={"outlined"} sx={{ minHeight: "100px", width: "100%" }}>
+          <p id="Description">Beskrivelse</p>
+        </Card>
         <GroupGrid>
           <MovieEvent
             description={
