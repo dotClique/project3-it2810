@@ -7,3 +7,11 @@ export const ADD_OR_GET_USER = gql`
     }
   }
 `;
+
+export const GET_MOVIE_GROUP_NAMES = gql`
+  query {
+    movieGroups {
+      name
+    }
+  }
+`;

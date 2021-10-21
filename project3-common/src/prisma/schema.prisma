@@ -35,3 +35,10 @@ model MovieEvent {
   movieGroup   MovieGroup @relation(fields: [movieGroupId], references: [movieGroupId], onDelete: Cascade)
   participants User[]
 }
+
+model movie {
+tconst       String  @id
+primarytitle String
+startyear    Int
+genres       String?
+}

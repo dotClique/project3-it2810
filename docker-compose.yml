@@ -13,6 +13,7 @@ services:
       POSTGRES_DB: project3-it2810
     volumes:
       - database-data:/var/lib/postgresql/data/ # persist data even if container shuts down
+      - ./db:/docker-entrypoint-initdb.d/ # persist data even if container shuts down
 
   # Start the frontend web server
   frontend:

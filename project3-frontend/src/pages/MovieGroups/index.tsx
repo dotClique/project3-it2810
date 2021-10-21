@@ -19,8 +19,11 @@ import {
   MovieGroupsContainer,
   NewGroupButton,
 } from "./styledComponents";
+import { useQuery } from "@apollo/client";
+import { GET_MOVIE_GROUP_NAMES } from "../../helpers/graphql-queries";
 
 export default function MovieGroups() {
+  const { data, loading, error } = useQuery(GET_MOVIE_GROUP_NAMES);
   const [expanded, setExpanded] = useState("allMovies");
   const history = useHistory();
 
@@ -62,20 +65,11 @@ export default function MovieGroups() {
               sx={{ width: "90%", marginBottom: 1 }}
             />
             <GroupGrid>
-              <MovieGroup title={"Marvel"} />
-              <MovieGroup title={"Sitcoms"} />
-              <MovieGroup title={"Action"} />
-              <MovieGroup title={"Another"} />
-              <MovieGroup title={"Marvel"} />
-              <MovieGroup title={"Sitcoms"} />
-              <MovieGroup title={"Action"} />
-              <MovieGroup title={"Another"} />
-              <MovieGroup title={"Marvel"} />
-              <MovieGroup title={"Marvel"} />
-              <MovieGroup title={"Marvel"} />
-              <MovieGroup title={"Marvel"} />
-              <MovieGroup title={"Marvel"} />
-              <MovieGroup title={"Marvel"} />
+              {loading
+                ? false
+                : data.movieGroups.map((item: { name: string }) => (
+                    <MovieGroup title={item.name} key={item.name} />
+                  ))}
             </GroupGrid>
           </AccordionDetails>
         </GroupAccordion>
