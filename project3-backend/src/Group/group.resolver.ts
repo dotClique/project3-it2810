@@ -15,8 +15,20 @@ export class MovieGroupResolver {
   }
 
   @Query((returns) => [MovieGroup])
-  async movieGroups(): Promise<MovieGroup[]> {
-    return await prisma.movieGroup.findMany();
+  async movieGroups(
+    @Args("pageSize", { type: () => Int }) pageSize: number,
+    @Args("page", { type: () => Int }) page: number,
+    @Args("searchString", { nullable: true }) searchString?: string,
+  ): Promise<MovieGroup[]> {
+    const pagination = { take: pageSize, skip: (page - 1) * pageSize };
+    if (searchString) {
+      return await prisma.movieGroup.findMany({
+        where: { name: { mode: "insensitive", contains: searchString } },
+        ...pagination,
+      });
+    } else {
+      return await prisma.movieGroup.findMany(pagination);
+    }
   }
 
   @Query((returns) => Int)

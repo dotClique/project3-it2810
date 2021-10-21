@@ -72,7 +72,10 @@ export class UserResolver {
   }
 
   @Mutation((returns) => MovieEvent)
-  async addUserToEvent(@Args("movieEventId") movieEventId: string, @Args("useralias") useralias: string) {
+  async addUserToEvent(
+    @Args("movieEventId") movieEventId: string,
+    @Args("useralias") useralias: string,
+  ) {
     return prisma.movieEvent.update({
       where: {
         movieEventId,

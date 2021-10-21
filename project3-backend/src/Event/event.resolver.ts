@@ -1,4 +1,4 @@
-import {Resolver, Mutation, Args, Query, ResolveField, Parent, Int} from "@nestjs/graphql";
+import { Resolver, Mutation, Args, Query, ResolveField, Parent, Int } from "@nestjs/graphql";
 import { prisma } from "../../../project3-common/src/prisma";
 import { MovieEvent } from "./event.model";
 import { MovieGroup } from "../Group/group.model";
@@ -16,8 +16,20 @@ export class MovieEventResolver {
   }
 
   @Query((returns) => [MovieEvent])
-  async movieEvents(): Promise<MovieEvent[]> {
-    return await prisma.movieEvent.findMany();
+  async movieEvents(
+    @Args("pageSize", { type: () => Int }) pageSize: number,
+    @Args("page", { type: () => Int }) page: number,
+    @Args("searchString", { nullable: true }) searchString?: string,
+  ): Promise<MovieEvent[]> {
+    const pagination = { take: pageSize, skip: (page - 1) * pageSize };
+    if (searchString) {
+      return await prisma.movieEvent.findMany({
+        where: { title: { mode: "insensitive", contains: searchString } },
+        ...pagination,
+      });
+    } else {
+      return await prisma.movieEvent.findMany(pagination);
+    }
   }
 
   @Query((returns) => Int)
