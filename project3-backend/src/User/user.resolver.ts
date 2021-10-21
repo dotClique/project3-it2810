@@ -54,7 +54,7 @@ export class UserResolver {
   }
 
   @Mutation((returns) => MovieGroup)
-  async addFavorite(
+  async addUserToMovieGroup(
     @Args("movieGroupId") movieGroupId: string,
     @Args("useralias") useralias: string,
   ) {
@@ -67,7 +67,7 @@ export class UserResolver {
   }
 
   @Mutation((returns) => MovieEvent)
-  async addEvent(@Args("movieEventId") movieEventId: string, @Args("useralias") useralias: string) {
+  async addUserToEvent(@Args("movieEventId") movieEventId: string, @Args("useralias") useralias: string) {
     return prisma.movieEvent.update({
       where: {
         movieEventId,
