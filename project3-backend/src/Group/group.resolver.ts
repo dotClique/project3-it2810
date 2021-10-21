@@ -4,7 +4,7 @@ import { MovieGroup } from "./group.model";
 import { MovieEvent } from "../Event/event.model";
 
 /**
- * Resolves all GraphQL queries related to Movie Groups
+ * Resolves all GraphQL queries related to MoviePage Groups
  */
 @Resolver((of) => MovieGroup)
 export class MovieGroupResolver {

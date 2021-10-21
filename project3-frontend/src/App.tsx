@@ -6,11 +6,10 @@ import APITest from "./pages/APITest/index";
 import Home from "./pages/Home";
 import { CssBaseline } from "@mui/material";
 import MovieGroups from "./pages/MovieGroupsPage";
-import Movie from "./pages/Movie";
-import AddMovie from "./pages/AddMovie";
+import MoviePage from "./pages/MoviePage";
+import AddMoviePage from "./pages/AddMoviePage";
 import { ApolloProvider } from "@apollo/client";
 import client from "./helpers/apollo";
-
 
 function App() {
   return (
@@ -30,10 +29,10 @@ function App() {
                 <APITest />
               </Route>
               <Route exact path="/movie">
-                <Movie />
+                <MoviePage />
               </Route>
               <Route exact path="/addmovie">
-                <AddMovie />
+                <AddMoviePage />
               </Route>
             </Switch>
           </BrowserRouter>

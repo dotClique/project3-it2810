@@ -1,8 +1,8 @@
 import PageContainer from "../../components/PageContainer";
 import { Typography, Button, Card } from "@mui/material";
-import { MovieGrid, MovieGroupsContainer } from "./styledComponents";
+import { MovieGrid, MovieGroupsContainer } from "./styled";
 
-export default function Movie() {
+export default function MoviePage() {
   return (
     <PageContainer>
       <MovieGroupsContainer>
