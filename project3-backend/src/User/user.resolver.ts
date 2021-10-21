@@ -1,5 +1,5 @@
 import { User } from "./user.model";
-import { Resolver, Mutation, Args, Query, Parent, ResolveField } from "@nestjs/graphql";
+import { Resolver, Mutation, Args, Query, Parent, ResolveField, Int } from "@nestjs/graphql";
 import { prisma } from "../../../project3-common/src/prisma";
 import { MovieGroup } from "../Group/group.model";
 import { MovieEvent } from "../Event/event.model";
@@ -17,7 +17,12 @@ export class UserResolver {
 
   @Query((returns) => [User])
   async users(): Promise<User[]> {
-    return await prisma.user.findMany({});
+    return await prisma.user.findMany();
+  }
+
+  @Query((returns) => Int)
+  async userCount(): Promise<number> {
+    return await prisma.user.count();
   }
 
   @ResolveField(() => [MovieGroup])

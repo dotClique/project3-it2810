@@ -19,6 +19,11 @@ export class MovieGroupResolver {
     return await prisma.movieGroup.findMany();
   }
 
+  @Query((returns) => Int)
+  async movieGroupCount(): Promise<number> {
+    return await prisma.movieGroup.count();
+  }
+
   @ResolveField(() => [MovieEvent])
   async movieEvents(@Parent() movieGroup) {
     const { movieGroupId } = movieGroup;

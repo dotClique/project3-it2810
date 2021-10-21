@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Args, Query, ResolveField, Parent } from "@nestjs/graphql";
+import {Resolver, Mutation, Args, Query, ResolveField, Parent, Int} from "@nestjs/graphql";
 import { prisma } from "../../../project3-common/src/prisma";
 import { MovieEvent } from "./event.model";
 import { MovieGroup } from "../Group/group.model";
@@ -18,6 +18,11 @@ export class MovieEventResolver {
   @Query((returns) => [MovieEvent])
   async movieEvents(): Promise<MovieEvent[]> {
     return await prisma.movieEvent.findMany();
+  }
+
+  @Query((returns) => Int)
+  async movieEventCount(): Promise<number> {
+    return await prisma.movieEvent.count();
   }
 
   @ResolveField(() => [MovieGroup])
