@@ -117,6 +117,22 @@ export class MovieGroupResolver {
   }
 
   /**
+   * Gets the total number of movie groups a user has favorited
+   */
+  @Query(() => Int)
+  async countMovieGroupFavorite(@Args("alias") alias: string): Promise<number> {
+    return await prisma.movieGroup.count({ where: { userFavorites: { some: { alias } } } });
+  }
+
+  /**
+   * Gets the total number of movie groups a user hasn't favorited
+   */
+  @Query(() => Int)
+  async countMovieGroupNotFavorite(@Args("alias") alias: string): Promise<number> {
+    return await prisma.movieGroup.count({ where: { userFavorites: { none: { alias } } } });
+  }
+
+  /**
    * Creates a new movie group
    * @param name
    * @param description
