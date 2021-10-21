@@ -7,7 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import MovieGroupItem from "../../components/MovieGroupItem";
 import PageContainer from "../../components/PageContainer";
@@ -19,17 +19,64 @@ import {
   MovieGroupsContainer,
   NewGroupButton,
 } from "./styled";
-import { useQuery } from "@apollo/client";
-import { GET_MOVIE_GROUP_NAMES } from "../../helpers/graphql-queries";
+import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
+import {
+  CREATE_MOVIE_GROUP,
+  GET_COUNT_MOVIE_GROUPS,
+  GET_MOVIE_GROUP_NAMES_NOT_FAVORITE,
+} from "../../helpers/graphql-queries";
 
 export default function MovieGroupsPage() {
-  const { data, loading, error } = useQuery(GET_MOVIE_GROUP_NAMES);
+  // This is meant as an example of graphQL use and is to be changed in later versions
+  const {
+    data: dataCount,
+    loading: loadingCount,
+    refetch: refetchCount,
+  } = useQuery(GET_COUNT_MOVIE_GROUPS, { fetchPolicy: "network-only" });
+  const [notFavoriteGroupsQuery, { data: dataGroups, loading: loadingGroups }] = useLazyQuery(
+    GET_MOVIE_GROUP_NAMES_NOT_FAVORITE,
+    { fetchPolicy: "network-only" },
+  );
+  const [createNewGroup, { data: dataNewGroup, loading: loadingNewGroup }] =
+    useMutation(CREATE_MOVIE_GROUP);
+
+  const [alias, setAlias] = useState("");
   const [expanded, setExpanded] = useState("allMovies");
+  const [page, setPage] = useState(1);
+  const [count, setCount] = useState(1);
+  const pageSize = 3;
+
   const history = useHistory();
 
   const handleChange = (panel: string) => () => {
     setExpanded(panel);
   };
+
+  useEffect(() => {
+    setAlias(localStorage.getItem("alias") || "");
+  }, []);
+
+  useEffect(() => {
+    if (!loadingCount && dataCount) {
+      setCount(Math.ceil(dataCount.movieGroupCount / pageSize));
+    }
+  }, [loadingCount, dataCount]);
+
+  useEffect(() => {
+    if (!loadingGroups && dataGroups) {
+    }
+  }, [loadingGroups, dataGroups]);
+
+  useEffect(() => {
+    if (!loadingNewGroup && dataNewGroup) {
+      notFavoriteGroupsQuery({ variables: { alias, page, pageSize } });
+      refetchCount();
+    }
+  }, [loadingNewGroup]);
+
+  useEffect(() => {
+    notFavoriteGroupsQuery({ variables: { alias, page, pageSize } });
+  }, [page]);
 
   return (
     <PageContainer>
@@ -65,20 +112,33 @@ export default function MovieGroupsPage() {
               sx={{ width: "90%", marginBottom: 1 }}
             />
             <GroupGrid>
-              {loading
+              {loadingGroups
                 ? false
-                : data.movieGroups.map((item: { name: string }) => (
+                : dataGroups
+                ? dataGroups.movieGroupsNotFavorite.map((item: { name: string }) => (
                     <MovieGroupItem title={item.name} key={item.name} />
-                  ))}
+                  ))
+                : false}
             </GroupGrid>
           </AccordionDetails>
         </GroupAccordion>
         <MovieGroupFooter>
-          <NewGroupButton>Add new movie group</NewGroupButton>
+          <NewGroupButton
+            onClick={() => {
+              createNewGroup({
+                variables: {
+                  name: Math.random().toString().substr(2, 8),
+                  description: "more test",
+                },
+              });
+            }}
+          >
+            Add new movie group
+          </NewGroupButton>
           <LogOutButton color={"secondary"} onClick={() => history.push("/")}>
             Change Alias
           </LogOutButton>
-          <Pagination count={100} color="primary" />
+          <Pagination count={count} page={page} onChange={(e, v) => setPage(v)} color="primary" />
         </MovieGroupFooter>
       </MovieGroupsContainer>
     </PageContainer>

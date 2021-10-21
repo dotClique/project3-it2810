@@ -17,6 +17,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!loading && data && !error) {
+      localStorage.setItem("alias", data.createUserOrCheckIfExists.alias);
       history.push("/groups");
     }
   }, [loading]);
