@@ -1,25 +1,31 @@
-import Enzyme, { shallow } from "enzyme";
-import toJson from "enzyme-to-json";
-import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
-import MovieGroups from "../components/MovieGroup";
 import { FavoriteIcon } from "../components/FavoriteIcon";
-import MovieGroup from "../components/MovieGroup";
-
-Enzyme.configure({ adapter: new Adapter() });
+import MovieGroupItem from "../components/MovieGroupItem";
+import MovieGroupsPage from "../pages/MovieGroupsPage/index";
+import { createSnapshot } from "./utils/index";
+import { MockedProvider } from "@apollo/client/testing";
 
 describe("Snapshot tests", () => {
-  test("Snapshotting MovieGroups", () => {
-    const result = toJson(shallow(<MovieGroups />));
-    expect(result).toMatchSnapshot();
+  beforeEach(() => {
+    // eslint-disable-next-line no-console
+    console.error = jest.fn();
   });
 
-  test("Snapshotting MovieGroup", () => {
-    const result = toJson(shallow(<MovieGroup title={"test"}/>));
+  test("Snapshotting MovieGroupsPage", () => {
+    const rend = createSnapshot(
+      <MockedProvider>
+        <MovieGroupsPage />
+      </MockedProvider>,
+    );
+    expect(rend).toMatchSnapshot();
+  });
+
+  test("Snapshotting MovieGroupItem", () => {
+    const result = createSnapshot(<MovieGroupItem title={"test"} />);
     expect(result).toMatchSnapshot();
   });
 
   test("Snapshotting FavoriteIcon", () => {
-    const result = toJson(shallow(<FavoriteIcon width={20} isFilled={true}/>));
+    const result = createSnapshot(<FavoriteIcon width={20} isFilled={true} />);
     expect(result).toMatchSnapshot();
   });
 });

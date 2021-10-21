@@ -1,8 +1,26 @@
-import PageContainer from "../../components/PageContainer";
 import { TextField, Typography } from "@mui/material";
-import { LoginPageContainer, LoginButton, LoginForm } from "./styledComponents";
+import { useHistory } from "react-router";
+import PageContainer from "../../components/PageContainer";
+import { LoginButton, LoginForm, LoginPageContainer } from "./styled";
+import { ADD_OR_GET_USER } from "../../helpers/graphql-queries";
+import { useMutation } from "@apollo/client";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const history = useHistory();
+  const [alias, setAlias] = useState("");
+  const [addOrGetUser, { data, loading, error }] = useMutation(ADD_OR_GET_USER);
+
+  function handleClick() {
+    addOrGetUser({ variables: { alias } });
+  }
+
+  useEffect(() => {
+    if (!loading && data && !error) {
+      localStorage.setItem("alias", data.createUserOrCheckIfExists.alias);
+      history.push("/groups");
+    }
+  }, [loading]);
   return (
     <PageContainer>
       <LoginPageContainer>
@@ -14,8 +32,14 @@ export default function Home() {
           Please enter an alias before continuing.
         </Typography>
         <LoginForm>
-          <TextField label="alias" id="outlined-basic" variant="outlined" />
-          <LoginButton href={"/groups"}>Enter</LoginButton>
+          <TextField
+            label="alias"
+            id="outlined-basic"
+            variant="outlined"
+            value={alias}
+            onChange={(e) => setAlias(e.target.value)}
+          />
+          <LoginButton onClick={handleClick}>Enter</LoginButton>
         </LoginForm>
       </LoginPageContainer>
     </PageContainer>
