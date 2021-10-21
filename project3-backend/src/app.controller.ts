@@ -4,7 +4,7 @@ import { HelloAPI } from "../../project3-common/src/types";
 import { AppService } from "./app.service";
 import { AsyncAPIRes } from "./helpers/types";
 
-@Controller("api")
+@Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 

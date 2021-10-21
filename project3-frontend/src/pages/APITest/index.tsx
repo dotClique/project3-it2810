@@ -1,8 +1,16 @@
 import { User } from ".prisma/client";
+import { gql, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { HelloAPI } from "../../../../project3-common/src/types";
 import { createUserFromAPI, getHelloFromAPI, getUserFromAPI } from "../../helpers/api-calls";
 
+const users = gql`
+  query {
+    users {
+      alias
+    }
+  }
+`;
 /**
  * A page testing that the client and server work.
  */
@@ -10,6 +18,11 @@ export default function APITest() {
   const [hello, setHello] = useState<HelloAPI | null>(null);
   const [postUser, setPostUser] = useState<User | null>(null);
   const [getUser, setGetUser] = useState<User | null>(null);
+  const { loading, error, data } = useQuery(users);
+
+  useEffect(() => {
+    console.log(loading, error, data);
+  }, [loading]);
 
   useEffect(() => {
     getHelloFromAPI()
@@ -38,7 +51,7 @@ export default function APITest() {
         // eslint-disable-next-line no-console
         console.log("getUser error", err);
       });
-  });
+  }, []);
   return (
     <div>
       <div>
