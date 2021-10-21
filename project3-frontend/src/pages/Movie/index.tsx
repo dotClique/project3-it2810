@@ -22,6 +22,7 @@ export default function Movie() {
             Sted
           </Typography>
           <h1>04.10.1999</h1>
+          <Button variant={"contained"}>Bli med!</Button>
         </MovieGrid>
       </MovieGroupsContainer>
     </PageContainer>
