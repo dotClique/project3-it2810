@@ -29,6 +29,11 @@ import {
 
 export default function MovieGroupsPage() {
   // This is only meant as an example of graphQL use and is to be changed in later versions
+  // This is only meant as an example of graphQL use and is to be changed in later versions
+  // This is only meant as an example of graphQL use and is to be changed in later versions
+  // This is only meant as an example of graphQL use and is to be changed in later versions
+  // This is only meant as an example of graphQL use and is to be changed in later versions
+  // This is only meant as an example of graphQL use and is to be changed in later versions
   const [fetchCountQuery, { data: dataCount, loading: loadingCount }] = useLazyQuery(
     GET_COUNT_MOVIE_GROUPS_NOT_FAVORITE,
     { fetchPolicy: "network-only" },
