@@ -8,14 +8,14 @@ export default function AddMoviePage() {
       <MovieGroupsContainer>
         <Button variant={"contained"}>Back</Button>
         <MovieGrid>
-          <Typography variant="h2" component="h2" style={{ width: "100%" }}>
+          <Typography variant="h2" component="h2" sx={{ width: "100%" }}>
             Ny filmvisning
           </Typography>
           <TextField
             id="tittelfelt"
             label="Tittel"
             variant="outlined"
-            style={{ width: "100%", height: "100%" }}
+            sx={{ width: "100%", height: "100%" }}
           />
           <TextField
             id="Beskrivelsefelt"
@@ -23,23 +23,23 @@ export default function AddMoviePage() {
             variant="outlined"
             rows={6}
             multiline={true}
-            style={{ width: "100%", height: "100%" }}
+            sx={{ width: "100%", height: "100%" }}
           />
-          <Card variant="outlined" style={{ width: "100%", height: "100%" }}>
+          <Card variant="outlined" sx={{ width: "100%", height: "100%" }}>
             <TextField
               id="stedfelt"
               label="Sted"
               variant="outlined"
-              style={{ width: "100%", height: "20%" }}
+              sx={{ width: "100%", height: "20%" }}
             />
           </Card>
           <TextField
             variant={"outlined"}
             type={"datetime-local"}
-            style={{ width: "100%", height: "100%" }}
+            sx={{ width: "100%", height: "100%" }}
           />
         </MovieGrid>
-        <Button variant={"contained"} style={{ margin: "10%, 0" }}>
+        <Button variant={"contained"} sx={{ margin: "10%, 0" }}>
           Create
         </Button>
       </MovieGroupsContainer>
