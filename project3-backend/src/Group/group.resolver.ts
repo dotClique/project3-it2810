@@ -3,9 +3,17 @@ import { prisma } from "../../../project3-common/src/prisma";
 import { MovieGroup } from "./group.model";
 import { MovieEvent } from "../Event/event.model";
 
+/**
+ * Resolves all GraphQL queries related to Movie Groups
+ */
 @Resolver((of) => MovieGroup)
 export class MovieGroupResolver {
-  @Query((returns) => MovieGroup)
+
+  /**
+   * Gets a particular movie group
+   * @param movieGroupId
+   */
+  @Query(() => MovieGroup)
   async movieGroup(@Args("movieGroupId") movieGroupId: string): Promise<MovieGroup> {
     return await prisma.movieGroup.findUnique({
       where: {
@@ -14,7 +22,13 @@ export class MovieGroupResolver {
     });
   }
 
-  @Query((returns) => [MovieGroup])
+  /**
+   * Gets all movie groups (with pagination) based on a searchString
+   * @param pageSize
+   * @param page
+   * @param searchString
+   */
+  @Query(() => [MovieGroup])
   async movieGroups(
     @Args("pageSize", { type: () => Int }) pageSize: number,
     @Args("page", { type: () => Int }) page: number,
@@ -31,23 +45,40 @@ export class MovieGroupResolver {
     }
   }
 
-  @Query((returns) => Int)
+  /**
+   * Gets the total number of movie groups
+   */
+  @Query(() => Int)
   async movieGroupCount(): Promise<number> {
     return await prisma.movieGroup.count();
   }
 
+  /**
+   * Gets the movie events related to a movie group
+   * @param movieGroup
+   */
   @ResolveField(() => [MovieEvent])
   async movieEvents(@Parent() movieGroup) {
     const { movieGroupId } = movieGroup;
     return prisma.movieGroup.findUnique({ where: { movieGroupId } }).movieEvents();
   }
 
+  /**
+   * Gets the users who have set a movie group as a favorite
+   * @param movieGroup
+   */
   @ResolveField(() => [MovieEvent])
   async userFavorites(@Parent() movieGroup) {
     const { movieGroupId } = movieGroup;
     return prisma.movieGroup.findUnique({ where: { movieGroupId } }).userFavorites();
   }
 
+  /**
+   * Gets all movie groups a particular user has favorited
+   * @param alias the alias of the user
+   * @param pageSize
+   * @param page
+   */
   @Query((returns) => [MovieGroup])
   async movieGroupsFavorite(
     @Args("alias") alias: string,
@@ -63,6 +94,12 @@ export class MovieGroupResolver {
     });
   }
 
+  /**
+   * Gets all the movie groups a particular user hasn't favorited
+   * @param alias the alias of the user
+   * @param pageSize
+   * @param page
+   */
   @Query((returns) => [MovieGroup])
   async movieGroupsNotFavorite(
     @Args("alias") alias: string,
@@ -80,6 +117,11 @@ export class MovieGroupResolver {
     });
   }
 
+  /**
+   * Creates a new movie group
+   * @param name
+   * @param description
+   */
   @Mutation((returns) => MovieGroup)
   async createMovieGroup(@Args("name") name: string, @Args("description") description: string) {
     return prisma.movieGroup.create({ data: { name, description } });
