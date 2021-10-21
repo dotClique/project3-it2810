@@ -1,2 +1,0 @@
-# Script to save all images from a docker-compose.yml file
-$images = @(); docker-compose -f docker-compose.prod.yml config | Where-Object { $_ -match "image:.*$" } | ForEach-Object { $images += ($_ -replace "image: ", "").Trim() }; docker save -o services.img $images

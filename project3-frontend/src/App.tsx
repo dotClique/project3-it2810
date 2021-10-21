@@ -5,9 +5,9 @@ import "./App.css";
 import theme from "./helpers/themes";
 import APITest from "./pages/APITest/index";
 import Home from "./pages/Home";
-import MovieGroups from "./pages/MovieGroups";
 import client from "./helpers/apollo";
 import { ApolloProvider } from "@apollo/client";
+import MovieGroups from "./pages/MovieGroupsPage";
 
 function App() {
   return (

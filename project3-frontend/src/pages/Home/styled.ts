@@ -1,7 +1,7 @@
-import { Button, Paper } from "@mui/material";
+import { Button, Paper, PaperProps } from "@mui/material";
 import { styled } from "@mui/system";
 
-export const LoginPageContainer = styled(Paper)(({ theme }) => ({
+export const LoginPageContainer = styled(Paper)<PaperProps>(({ theme }) => ({
   marginTop: `max(calc((100vh - ${theme.breakpoints.values.md}px) / 2), 0px)`,
   paddingTop: theme.spacing(8),
   borderRadius: theme.shape.borderRadius,

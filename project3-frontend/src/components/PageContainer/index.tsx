@@ -1,6 +1,5 @@
-import { Container } from "@mui/material";
 import { ReactNode } from "react";
-import styles from "./styles";
+import StyledContainer from "./styled";
 
 type PageContainerProps = {
   children: ReactNode;
@@ -9,10 +8,10 @@ type PageContainerProps = {
 
 function PageContainer(props: PageContainerProps) {
   return (
-    <Container sx={styles.main} maxWidth="md">
+    <StyledContainer maxWidth="md">
       {props.title ? <h3>{props.title}</h3> : false}
       {props.children}
-    </Container>
+    </StyledContainer>
   );
 }
 

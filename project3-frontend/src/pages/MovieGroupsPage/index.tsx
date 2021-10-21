@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useHistory } from "react-router";
-import MovieGroup from "../../components/MovieGroup";
+import MovieGroupItem from "../../components/MovieGroupItem";
 import PageContainer from "../../components/PageContainer";
 import {
   GroupAccordion,
@@ -18,11 +18,11 @@ import {
   MovieGroupFooter,
   MovieGroupsContainer,
   NewGroupButton,
-} from "./styledComponents";
+} from "./styled";
 import { useQuery } from "@apollo/client";
 import { GET_MOVIE_GROUP_NAMES } from "../../helpers/graphql-queries";
 
-export default function MovieGroups() {
+export default function MovieGroupsPage() {
   const { data, loading, error } = useQuery(GET_MOVIE_GROUP_NAMES);
   const [expanded, setExpanded] = useState("allMovies");
   const history = useHistory();
@@ -44,7 +44,7 @@ export default function MovieGroups() {
           </AccordionSummary>
           <AccordionDetails>
             <GroupGrid>
-              <MovieGroup title={"Marvel"} favorite />
+              <MovieGroupItem title={"Marvel"} favorite />
             </GroupGrid>
           </AccordionDetails>
         </GroupAccordion>
@@ -68,7 +68,7 @@ export default function MovieGroups() {
               {loading
                 ? false
                 : data.movieGroups.map((item: { name: string }) => (
-                    <MovieGroup title={item.name} key={item.name} />
+                    <MovieGroupItem title={item.name} key={item.name} />
                   ))}
             </GroupGrid>
           </AccordionDetails>

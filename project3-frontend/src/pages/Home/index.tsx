@@ -1,7 +1,7 @@
 import { TextField, Typography } from "@mui/material";
 import { useHistory } from "react-router";
 import PageContainer from "../../components/PageContainer";
-import { LoginButton, LoginForm, LoginPageContainer } from "./styledComponents";
+import { LoginButton, LoginForm, LoginPageContainer } from "./styled";
 import { ADD_OR_GET_USER } from "../../helpers/graphql-queries";
 import { useMutation } from "@apollo/client";
 import { useEffect, useState } from "react";
