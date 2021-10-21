@@ -6,8 +6,8 @@ import {Movie} from "./movie.model";
 export class MovieResolver {
 
     @Query(returns => [Movie])
-    async movies(): Promise<Movie[]> {
-        return await prisma.movie.findMany({take: 10, where: {primarytitle: {startsWith: "hey", mode: "insensitive"}}})
+    async movies(@Args('searchString') searchString: string): Promise<Movie[]> {
+        return await prisma.movie.findMany({take: 10, where: {primarytitle: {mode: "insensitive", contains: searchString}}})
     }
 
 }
