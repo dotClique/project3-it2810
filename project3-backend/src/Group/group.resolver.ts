@@ -90,6 +90,8 @@ export class MovieGroupResolver {
         movieEvents: true,
         userFavorites: true,
       },
+      take: pageSize,
+      skip: pageSize * (page - 1),
     });
   }
 
