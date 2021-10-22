@@ -1,18 +1,9 @@
 import { SearchIcon } from "@heroicons/react/solid";
-import {
-  AccordionDetails,
-  AccordionSummary,
-  InputAdornment,
-  Pagination,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { InputAdornment, Pagination, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import MovieGroupItem from "../../components/MovieGroupItem";
 import PageContainer from "../../components/PageContainer";
 import {
-  GroupAccordion,
   GroupGrid,
   LogOutButton,
   MovieGroupFooter,
@@ -23,11 +14,13 @@ import { useLazyQuery, useMutation } from "@apollo/client";
 import {
   ADD_USER_TO_MOVIE_GROUP,
   CREATE_MOVIE_GROUP,
-  GET_COUNT_MOVIE_GROUPS_NOT_FAVORITE,
-  GET_MOVIE_GROUP_NOT_FAVORITE,
+  GET_COUNT_MOVIE_GROUPS_FAVORITE,
+  GET_MOVIE_GROUP_FAVORITE,
 } from "../../helpers/graphql-queries";
+import MovieGroupWithUpcomingEvents from "../../components/MovieGroupsWithUpcomingEvents";
+import * as querystring from "querystring";
 
-export default function MovieGroupsPage() {
+export default function FavoriteMovieGroupsPage() {
   // This is only meant as an example of graphQL use and is to be changed in later versions
   // This is only meant as an example of graphQL use and is to be changed in later versions
   // This is only meant as an example of graphQL use and is to be changed in later versions
@@ -35,12 +28,12 @@ export default function MovieGroupsPage() {
   // This is only meant as an example of graphQL use and is to be changed in later versions
   // This is only meant as an example of graphQL use and is to be changed in later versions
   const [fetchCountQuery, { data: dataCount, loading: loadingCount }] = useLazyQuery(
-    GET_COUNT_MOVIE_GROUPS_NOT_FAVORITE,
+    GET_COUNT_MOVIE_GROUPS_FAVORITE,
     { fetchPolicy: "network-only" },
   );
 
-  const [notFavoriteGroupsQuery, { data: dataGroups, loading: loadingGroups }] = useLazyQuery(
-    GET_MOVIE_GROUP_NOT_FAVORITE,
+  const [favoriteGroupsQuery, { data: dataGroups, loading: loadingGroups }] = useLazyQuery(
+    GET_MOVIE_GROUP_FAVORITE,
     { fetchPolicy: "network-only" },
   );
 
@@ -53,7 +46,7 @@ export default function MovieGroupsPage() {
   const [expanded, setExpanded] = useState("allMovies");
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(1);
-  const pageSize = 8;
+  const pageSize = 6;
 
   const history = useHistory();
 
@@ -67,20 +60,20 @@ export default function MovieGroupsPage() {
 
   useEffect(() => {
     if (!loadingCount && dataCount) {
-      setCount(Math.ceil(dataCount.countMovieGroupNotFavorite / pageSize));
+      setCount(Math.ceil(dataCount.countMovieGroupFavorite / pageSize));
     }
   }, [loadingCount, dataCount]);
 
   useEffect(() => {
     if (!loadingNewGroup && dataNewGroup) {
-      notFavoriteGroupsQuery({ variables: { alias, page, pageSize } });
+      favoriteGroupsQuery({ variables: { alias, page, pageSize } });
       fetchCountQuery({ variables: { alias } });
     }
   }, [loadingNewGroup]);
 
   useEffect(() => {
     if (alias) {
-      notFavoriteGroupsQuery({ variables: { alias, page, pageSize } });
+      favoriteGroupsQuery({ variables: { alias, page, pageSize } });
       fetchCountQuery({ variables: { alias } });
     }
   }, [page, alias]);
@@ -89,9 +82,8 @@ export default function MovieGroupsPage() {
     <PageContainer>
       <MovieGroupsContainer>
         <Typography gutterBottom variant={"h3"}>
-          Movie Groups
+          Favorite Movie Groups
         </Typography>
-
         <TextField
           InputProps={{
             endAdornment: (
@@ -107,20 +99,25 @@ export default function MovieGroupsPage() {
           {loadingGroups
             ? false
             : dataGroups
-            ? dataGroups.movieGroupsNotFavorite.map(
-                (item: { name: string; movieGroupId: string }) => (
-                  <MovieGroupItem
+            ? dataGroups.movieGroupsFavorite.map(
+                (item: {
+                  name: string;
+                  movieGroupId: string;
+                  movieEvents: { title: string; date: string }[];
+                }) => (
+                  <MovieGroupWithUpcomingEvents
                     title={item.name}
                     key={item.movieGroupId}
                     onToggleFavorite={() => {
                       addUserToGroup({
                         variables: { useralias: alias, movieGroupId: item.movieGroupId },
                       }).then(() => {
-                        notFavoriteGroupsQuery({ variables: { alias, page, pageSize } });
+                        favoriteGroupsQuery({ variables: { alias, page, pageSize } });
                         fetchCountQuery({ variables: { alias } });
                       });
                     }}
                     id={item.movieGroupId}
+                    events={item.movieEvents}
                   />
                 ),
               )

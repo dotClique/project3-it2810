@@ -8,6 +8,25 @@ export const ADD_OR_GET_USER = gql`
   }
 `;
 
+export const GET_MOVIE_GROUP_FAVORITE = gql`
+  query ($alias: String!, $page: Int!, $pageSize: Int!) {
+    movieGroupsFavorite(alias: $alias, page: $page, pageSize: $pageSize) {
+      movieGroupId
+      name
+      movieEvents {
+        title
+        date
+      }
+    }
+  }
+`;
+
+export const GET_COUNT_MOVIE_GROUPS_FAVORITE = gql`
+  query ($alias: String!) {
+    countMovieGroupFavorite(alias: $alias)
+  }
+`;
+
 export const GET_MOVIE_GROUP_NOT_FAVORITE = gql`
   query ($alias: String!, $page: Int!, $pageSize: Int!) {
     movieGroupsNotFavorite(alias: $alias, page: $page, pageSize: $pageSize) {

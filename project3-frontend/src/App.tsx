@@ -11,6 +11,7 @@ import client from "./helpers/apollo";
 import { ApolloProvider } from "@apollo/client";
 import MoviePage from "./pages/MoviePage";
 import AddMoviePage from "./pages/AddMoviePage";
+import FavoriteMovieGroupsPage from "./pages/FavoriteMovieGroupsPage";
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
               </Route>
               <Route exact path="/groups">
                 <MovieGroups />
+              </Route>
+              <Route exact path="/favoritegroups">
+                <FavoriteMovieGroupsPage />
               </Route>
               <Route exact path="/testapi">
                 <APITest />

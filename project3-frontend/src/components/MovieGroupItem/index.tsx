@@ -6,17 +6,19 @@ import {
   MovieGroupLink,
   MovieGroupTitle,
 } from "./styled";
+import { SxProps } from "@mui/system";
 
 type Props = {
   title: string;
   id?: string;
   onToggleFavorite?: () => void;
   favorite?: boolean;
+  sx?: SxProps;
 };
 export default function MovieGroupItem(props: Props) {
   const history = useHistory();
   return (
-    <MovieGroupContainer>
+    <MovieGroupContainer sx={props.sx}>
       <MovieGroupLink
         onClick={() => history.push(`/group/${props.id}`)}
         color={"inherit"}
