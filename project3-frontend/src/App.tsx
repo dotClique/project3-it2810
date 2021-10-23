@@ -4,6 +4,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 import client from "./helpers/apollo";
+import { Paths } from "./helpers/constants";
 import theme from "./helpers/themes";
 import AddMovieGroupPage from "./pages/AddMovieGroupPage/index";
 import AddMoviePage from "./pages/AddMoviePage";
@@ -21,25 +22,25 @@ function App() {
         <ThemeProvider theme={theme}>
           <BrowserRouter basename="/project3">
             <Switch>
-              <Route exact path="/">
+              <Route exact path={Paths.HOME}>
                 <Home />
               </Route>
-              <Route exact path="/groups">
+              <Route exact path={Paths.MOVIE_GROUP}>
                 <MovieGroups />
               </Route>
-              <Route exact path="/add-movie-group">
+              <Route exact path={Paths.ADD_MOVIE_GROUP}>
                 <AddMovieGroupPage />
               </Route>
               <Route exact path="/testapi">
                 <APITest />
               </Route>
-              <Route exact path="/group">
+              <Route exact path={Paths.MOVIE_GROUP}>
                 <GroupPage />
               </Route>
-              <Route exact path="/movie">
+              <Route exact path={Paths.MOVIE_EVENT}>
                 <MoviePage />
               </Route>
-              <Route exact path="/addmovie">
+              <Route exact path={Paths.ADD_MOVIE_EVENT}>
                 <AddMoviePage />
               </Route>
             </Switch>
