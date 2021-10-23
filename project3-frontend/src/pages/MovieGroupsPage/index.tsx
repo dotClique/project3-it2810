@@ -90,7 +90,7 @@ export default function MovieGroupsPage() {
             Go to favorites
           </FavoritesButton>
           <LogOutButton color={"secondary"} onClick={() => history.push("/")}>
-            Change Alias
+            Log out
           </LogOutButton>
           <Pagination
             count={pageCount}

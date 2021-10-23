@@ -3,13 +3,19 @@ import { InputAdornment, Pagination, TextField, Typography } from "@mui/material
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import PageContainer from "../../components/PageContainer";
-import { GroupGrid, MovieGroupFooter, MovieGroupsContainer, AllGroupsButton } from "./styled";
+import {
+  GroupGrid,
+  MovieGroupFooter,
+  MovieGroupsContainer,
+  AllGroupsButton,
+  GridHeader,
+} from "./styled";
 import MovieGroupWithUpcomingEvents from "../../components/MovieGroupsWithUpcomingEvents";
 import { LogOutButton } from "../../components/LogOutButton";
 import { useFavoriteMovieGroups } from "./utils";
 
 export default function FavoriteMovieGroupsPage() {
-  const pageSize = 6;
+  const pageSize = 4;
   const [alias, setAlias] = useState("");
   const [page, setPage] = useState(1);
   const [searchString, setSearchString] = useState("");
@@ -43,6 +49,14 @@ export default function FavoriteMovieGroupsPage() {
             setSearchString(e.target.value);
           }}
         />
+        <GridHeader>
+          <Typography variant={"h5"} component={"h5"}>
+            Group
+          </Typography>
+          <Typography variant={"h5"} component={"h5"}>
+            Upcoming Events
+          </Typography>
+        </GridHeader>
         <GroupGrid>
           {movieGroups.map(
             (item: {
@@ -68,7 +82,7 @@ export default function FavoriteMovieGroupsPage() {
             Go to all movie groups
           </AllGroupsButton>
           <LogOutButton color={"secondary"} onClick={() => history.push("/")}>
-            Change Alias
+            Log out
           </LogOutButton>
           <Pagination
             count={pageCount}
