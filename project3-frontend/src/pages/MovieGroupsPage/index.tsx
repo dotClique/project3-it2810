@@ -7,7 +7,6 @@ import PageContainer from "../../components/PageContainer";
 import {
   FavoritesButton,
   GroupGrid,
-  LogOutButton,
   MovieGroupFooter,
   MovieGroupsContainer,
   NewGroupButton,
@@ -20,6 +19,7 @@ import {
   GET_MOVIE_GROUPS,
   REMOVE_USER_FROM_MOVIE_GROUP,
 } from "../../helpers/graphql-queries";
+import { LogOutButton } from "../../components/LogOutButton";
 
 export default function MovieGroupsPage() {
   // This is only meant as an example of graphQL use and is to be changed in later versions
@@ -45,16 +45,11 @@ export default function MovieGroupsPage() {
   const [removeUserFromGroup] = useMutation(REMOVE_USER_FROM_MOVIE_GROUP);
 
   const [alias, setAlias] = useState("");
-  const [expanded, setExpanded] = useState("allMovies");
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(1);
   const pageSize = 8;
 
   const history = useHistory();
-
-  const handleChange = (panel: string) => () => {
-    setExpanded(panel);
-  };
 
   useEffect(() => {
     setAlias(localStorage.getItem("alias") || "");

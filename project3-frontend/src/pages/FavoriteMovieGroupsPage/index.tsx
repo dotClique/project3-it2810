@@ -3,22 +3,15 @@ import { InputAdornment, Pagination, TextField, Typography } from "@mui/material
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import PageContainer from "../../components/PageContainer";
-import {
-  GroupGrid,
-  LogOutButton,
-  MovieGroupFooter,
-  MovieGroupsContainer,
-  AllGroupsButton,
-} from "./styled";
+import { GroupGrid, MovieGroupFooter, MovieGroupsContainer, AllGroupsButton } from "./styled";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import {
   ADD_USER_TO_MOVIE_GROUP,
-  CREATE_MOVIE_GROUP,
   GET_COUNT_MOVIE_GROUPS_FAVORITE,
   GET_MOVIE_GROUP_FAVORITE,
 } from "../../helpers/graphql-queries";
 import MovieGroupWithUpcomingEvents from "../../components/MovieGroupsWithUpcomingEvents";
-import * as querystring from "querystring";
+import { LogOutButton } from "../../components/LogOutButton";
 
 export default function FavoriteMovieGroupsPage() {
   // This is only meant as an example of graphQL use and is to be changed in later versions
@@ -37,22 +30,14 @@ export default function FavoriteMovieGroupsPage() {
     { fetchPolicy: "network-only" },
   );
 
-  const [createNewGroup, { data: dataNewGroup, loading: loadingNewGroup }] =
-    useMutation(CREATE_MOVIE_GROUP);
-
   const [addUserToGroup] = useMutation(ADD_USER_TO_MOVIE_GROUP);
 
   const [alias, setAlias] = useState("");
-  const [expanded, setExpanded] = useState("allMovies");
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(1);
   const pageSize = 6;
 
   const history = useHistory();
-
-  const handleChange = (panel: string) => () => {
-    setExpanded(panel);
-  };
 
   useEffect(() => {
     setAlias(localStorage.getItem("alias") || "");
@@ -63,13 +48,6 @@ export default function FavoriteMovieGroupsPage() {
       setCount(Math.ceil(dataCount.movieGroupCount / pageSize));
     }
   }, [loadingCount, dataCount]);
-
-  useEffect(() => {
-    if (!loadingNewGroup && dataNewGroup) {
-      favoriteGroupsQuery({ variables: { alias, page, pageSize } });
-      fetchCountQuery({ variables: { alias } });
-    }
-  }, [loadingNewGroup]);
 
   useEffect(() => {
     if (alias) {
