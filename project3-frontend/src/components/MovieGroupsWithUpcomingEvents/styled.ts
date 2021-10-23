@@ -1,6 +1,5 @@
 import { styled } from "@mui/system";
-import { Button, Card, Link } from "@mui/material";
-import MovieGroupItem from "../MovieGroupItem";
+import { Box, Button, Card, Link } from "@mui/material";
 
 export const GroupAndEventContainer = styled(Card)(({ theme }) => ({
   width: "100%",
@@ -12,7 +11,6 @@ export const GroupAndEventContainer = styled(Card)(({ theme }) => ({
     gridTemplateAreas: '"group group" "events events"',
     gridGap: 0,
   },
-  position: "relative",
   gridGap: "10px",
   justifyContent: "center",
   alignContent: "center",
@@ -24,7 +22,16 @@ export const CenteredLink = styled(Button)(({}) => ({
   justifyContent: "center",
   alignItems: "center",
   height: "100%",
+  width: "100%",
+}));
+
+export const MovieGroupBox = styled(Box)(({}) => ({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  height: "100%",
   width: "90%",
   margin: "0 5%",
   gridArea: "group",
+  position: "relative",
 }));

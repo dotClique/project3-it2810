@@ -1,27 +1,36 @@
-import { GroupAndEventContainer, CenteredLink } from "./styled";
-import { SxProps } from "@mui/system";
+import { GroupAndEventContainer, CenteredLink, MovieGroupBox } from "./styled";
 import { List, ListItemButton, ListItemText, Typography } from "@mui/material";
 import { useHistory } from "react-router";
+import { FavoriteIcon } from "../FavoriteIcon";
 
 type Props = {
   title: string;
   id: string;
-  onToggleFavorite?: () => void;
-  sx?: SxProps;
+  onUnFavorite: () => void;
   events: { title: string; date: string; movieEventId: string }[];
 };
 
 export default function MovieGroupWithUpcomingEvents(props: Props) {
   const history = useHistory();
+
   return (
     <GroupAndEventContainer>
-      <CenteredLink
-        onClick={() => {
-          history.push(`/group/${props.id}`);
-        }}
-      >
-        <Typography variant={"h5"}>{props.title}</Typography>
-      </CenteredLink>
+      <MovieGroupBox>
+        <CenteredLink
+          onClick={() => {
+            history.push(`/group/${props.id}`);
+          }}
+        >
+          <Typography variant={"h5"}>{props.title}</Typography>
+        </CenteredLink>
+        <FavoriteIcon
+          width={30}
+          isFilled
+          onClick={() => {
+            props.onUnFavorite();
+          }}
+        ></FavoriteIcon>
+      </MovieGroupBox>
 
       <List sx={{ gridArea: "events", margin: 0, padding: 0 }}>
         {props.events.map((item) => (
@@ -36,6 +45,9 @@ export default function MovieGroupWithUpcomingEvents(props: Props) {
               "&:hover": {
                 backgroundColor: "primary.light",
               },
+            }}
+            onClick={() => {
+              history.push(`/movie/${item.movieEventId}`);
             }}
           >
             <ListItemText

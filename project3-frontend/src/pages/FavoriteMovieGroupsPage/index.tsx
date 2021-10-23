@@ -13,14 +13,21 @@ import {
 import MovieGroupWithUpcomingEvents from "../../components/MovieGroupsWithUpcomingEvents";
 import { LogOutButton } from "../../components/LogOutButton";
 import { useFavoriteMovieGroups } from "./utils";
+import { useMutation } from "@apollo/client";
+import { REMOVE_USER_FROM_MOVIE_GROUP } from "../../helpers/graphql-queries";
 
 export default function FavoriteMovieGroupsPage() {
   const pageSize = 4;
   const [alias, setAlias] = useState("");
   const [page, setPage] = useState(1);
   const [searchString, setSearchString] = useState("");
-
-  const { movieGroups, pageCount } = useFavoriteMovieGroups(page, pageSize, alias, searchString);
+  const [removeUserFromGroup] = useMutation(REMOVE_USER_FROM_MOVIE_GROUP);
+  const { movieGroups, pageCount, refetch } = useFavoriteMovieGroups(
+    page,
+    pageSize,
+    alias,
+    searchString,
+  );
 
   const history = useHistory();
 
@@ -69,6 +76,11 @@ export default function FavoriteMovieGroupsPage() {
                 key={item.movieGroupId}
                 id={item.movieGroupId}
                 events={item.movieEvents}
+                onUnFavorite={() => {
+                  removeUserFromGroup({
+                    variables: { useralias: alias, movieGroupId: item.movieGroupId },
+                  }).then(() => refetch());
+                }}
               />
             ),
           )}
