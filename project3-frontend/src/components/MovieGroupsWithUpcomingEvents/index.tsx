@@ -29,7 +29,7 @@ export default function MovieGroupWithUpcomingEvents(props: Props) {
           onClick={() => {
             props.onUnFavorite();
           }}
-        ></FavoriteIcon>
+        />
       </MovieGroupBox>
 
       <List sx={{ gridArea: "events", margin: 0, padding: 0 }}>
