@@ -6,7 +6,7 @@ import { MovieGroup } from "./group.model";
 /**
  * Resolves all GraphQL queries related to MoviePage Groups
  */
-@Resolver((of) => MovieGroup)
+@Resolver(() => MovieGroup)
 export class MovieGroupResolver {
   /**
    * Gets a particular movie group
@@ -45,15 +45,6 @@ export class MovieGroupResolver {
     // Handle pagination
     const pagination = { take: pageSize, skip: (page - 1) * pageSize };
 
-    // Include movieEvents and userFavorites in the result if an alias is given
-    const isFavoriteParam = aliasFavoriteUser !== undefined || aliasNotFavoriteUser !== undefined;
-    const includeEventsAndFavorites = {
-      include: {
-        movieEvents: isFavoriteParam,
-        userFavorites: isFavoriteParam,
-      },
-    };
-
     // Add filter by the alias of users that have favorited this movieGroup
     const filterByFavorite =
       aliasFavoriteUser !== undefined
@@ -63,7 +54,7 @@ export class MovieGroupResolver {
     // Add filter by the alias of the users that have not favorited this movieGroup.
     const filterByNotFavorite =
       aliasNotFavoriteUser !== undefined
-        ? { userFavorites: { none: { alias: aliasFavoriteUser } } }
+        ? { userFavorites: { none: { alias: aliasNotFavoriteUser } } }
         : {};
 
     // The prisma query to get by request.
@@ -74,7 +65,6 @@ export class MovieGroupResolver {
         ...filterByFavorite,
         ...filterByNotFavorite,
       },
-      ...includeEventsAndFavorites,
       ...pagination,
     });
   }
