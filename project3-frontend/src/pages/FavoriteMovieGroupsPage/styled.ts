@@ -19,25 +19,6 @@ export const MovieGroupsContainer = styled(Paper)(({ theme }) => ({
   padding: "20px 5vw 0",
 }));
 
-export const NewGroupButton = styled(Button)(({ theme }) => ({
-  color: theme.palette.primary.contrastText,
-  backgroundColor: theme.palette.primary.main,
-  "&:hover": {
-    backgroundColor: theme.palette.primary.light,
-  },
-  width: "100%",
-  height: 50,
-  marginTop: theme.spacing(2),
-}));
-
-export const MovieGroupFooter = styled("div")(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  gap: theme.spacing(3),
-  marginTop: "auto",
-  marginBottom: theme.spacing(2),
-}));
-
 export const GroupGrid = styled("div")(({ theme }) => ({
   display: "grid",
   width: "100%",
@@ -48,6 +29,25 @@ export const GroupGrid = styled("div")(({ theme }) => ({
   "& > *": {
     minHeight: "80px",
   },
+}));
+
+export const MovieGroupFooter = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  gap: theme.spacing(3),
+  marginTop: "auto",
+  marginBottom: theme.spacing(2),
+}));
+
+export const AllGroupsButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.primary.contrastText,
+  backgroundColor: theme.palette.primary.main,
+  "&:hover": {
+    backgroundColor: theme.palette.primary.light,
+  },
+  width: "100%",
+  height: 50,
+  marginTop: theme.spacing(2),
 }));
 
 export const LogOutButton = styled(Button)(({ theme }) => ({

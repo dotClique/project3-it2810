@@ -8,7 +8,7 @@ import {
   LogOutButton,
   MovieGroupFooter,
   MovieGroupsContainer,
-  NewGroupButton,
+  AllGroupsButton,
 } from "./styled";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import {
@@ -124,18 +124,13 @@ export default function FavoriteMovieGroupsPage() {
             : false}
         </GroupGrid>
         <MovieGroupFooter>
-          <NewGroupButton
+          <AllGroupsButton
             onClick={() => {
-              createNewGroup({
-                variables: {
-                  name: Math.random().toString().substr(2, 8),
-                  description: "more test",
-                },
-              });
+              history.push("/groups");
             }}
           >
-            Add new movie group
-          </NewGroupButton>
+            Go to all movie groups
+          </AllGroupsButton>
           <LogOutButton color={"secondary"} onClick={() => history.push("/")}>
             Change Alias
           </LogOutButton>
