@@ -17,7 +17,7 @@ import {
   REMOVE_USER_FROM_MOVIE_GROUP,
 } from "../../helpers/graphql-queries";
 import { LogOutButton } from "../../components/LogOutButton";
-import { useMovieGroups } from "../GroupPage/utils";
+import { useMovieGroups } from "./utils";
 
 export default function MovieGroupsPage() {
   const pageSize = 8;
@@ -25,7 +25,7 @@ export default function MovieGroupsPage() {
   const [page, setPage] = useState(1);
   const [searchString, setSearchString] = useState("");
 
-  const { movieGroups, pageCount, refetch } = useMovieGroups(page, pageSize, alias, searchString);
+  const { movieGroups, pageCount, refetch } = useMovieGroups(page, pageSize, searchString);
   const [addUserToGroup] = useMutation(ADD_USER_TO_MOVIE_GROUP);
   const [removeUserFromGroup] = useMutation(REMOVE_USER_FROM_MOVIE_GROUP);
   const history = useHistory();
