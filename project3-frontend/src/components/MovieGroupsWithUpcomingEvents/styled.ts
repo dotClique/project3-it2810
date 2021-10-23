@@ -1,5 +1,5 @@
 import { styled } from "@mui/system";
-import { Card } from "@mui/material";
+import { Card, Link } from "@mui/material";
 import MovieGroupItem from "../MovieGroupItem";
 
 export const GroupAndEventContainer = styled(Card)(() => ({
@@ -16,22 +16,10 @@ export const MovieGroupItemInGrid = styled(MovieGroupItem)(() => ({
   backgroundColor: "red",
 }));
 
-export const styledddDiv = styled("div")(() => ({
-  backgroundColor: "red",
-}));
-
-export const styledddDiv2 = styled("div")(() => ({
-  backgroundColor: "red",
-}));
-
-export const doubleStyledDiv = styled(styledddDiv)(() => ({
-  color: "darkolivegreen",
-}));
-
-styled("div")(({ theme }) => ({
+export const CenteredLink = styled(Link)(({ theme }) => ({
+  backgroundColor: theme.palette.secondary.contrastText,
   display: "flex",
-  flexDirection: "column",
-  gap: theme.spacing(3),
-  marginTop: "auto",
-  marginBottom: theme.spacing(2),
+  justifyContent: "center",
+  alignItems: "center",
+  height: "100%",
 }));

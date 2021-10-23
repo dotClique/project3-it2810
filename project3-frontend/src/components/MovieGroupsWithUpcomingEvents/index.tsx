@@ -1,7 +1,7 @@
 import MovieGroupItem from "../MovieGroupItem";
-import { GroupAndEventContainer, MovieGroupItemInGrid } from "./styled";
+import { GroupAndEventContainer, CenteredLink } from "./styled";
 import { SxProps } from "@mui/system";
-import { List, ListItemButton, ListItemText } from "@mui/material";
+import { Link, List, ListItemButton, ListItemText, Typography } from "@mui/material";
 
 type Props = {
   title: string;
@@ -14,13 +14,10 @@ type Props = {
 export default function MovieGroupWithUpcomingEvents(props: Props) {
   return (
     <GroupAndEventContainer>
-      <MovieGroupItem
-        title={props.title}
-        id={props.id}
-        onToggleFavorite={props.onToggleFavorite}
-        sx={{ gridArea: "group" }}
-        favorite
-      />
+      <CenteredLink>
+        <Typography variant={"h5"}>{props.title}</Typography>
+      </CenteredLink>
+
       <List sx={{ gridArea: "events" }}>
         {props.events.map((item) => (
           <ListItemButton
