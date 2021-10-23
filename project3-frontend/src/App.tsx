@@ -7,13 +7,13 @@ import ToastProvider from "./components/Toast/index";
 import client from "./helpers/apollo";
 import { Paths } from "./helpers/constants";
 import theme from "./helpers/themes";
+import AddMovieEventPage from "./pages/AddMovieEventPage";
 import AddMovieGroupPage from "./pages/AddMovieGroupPage/index";
-import AddMoviePage from "./pages/AddMoviePage";
 import APITest from "./pages/APITest/index";
 import GroupPage from "./pages/GroupPage";
 import Home from "./pages/Home";
+import MovieEventPage from "./pages/MovieEventPage";
 import MovieGroups from "./pages/MovieGroupsPage";
-import MoviePage from "./pages/MoviePage";
 
 function App() {
   return (
@@ -40,10 +40,10 @@ function App() {
                   <GroupPage />
                 </Route>
                 <Route exact path={Paths.MOVIE_EVENT}>
-                  <MoviePage />
+                  <MovieEventPage />
                 </Route>
                 <Route exact path={Paths.ADD_MOVIE_EVENT}>
-                  <AddMoviePage />
+                  <AddMovieEventPage />
                 </Route>
               </Switch>
             </BrowserRouter>

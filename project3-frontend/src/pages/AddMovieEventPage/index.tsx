@@ -1,12 +1,11 @@
+import { Button, Card, TextField, Typography } from "@mui/material";
 import PageContainer from "../../components/PageContainer";
-import { Typography, Card, TextField, Button } from "@mui/material";
 import { MovieGrid, MovieGroupsContainer } from "./styled";
 
-export default function AddMoviePage() {
+export default function AddMovieEventPage() {
   return (
     <PageContainer>
       <MovieGroupsContainer>
-        <Button variant={"contained"}>Back</Button>
         <MovieGrid>
           <Typography variant="h2" component="h2" sx={{ width: "100%" }}>
             Ny filmvisning
