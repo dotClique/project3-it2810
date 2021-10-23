@@ -1,12 +1,13 @@
-import { TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { Field, Form, Formik } from "formik";
-import yup from "yup";
-import PageContainer from "../../components/PageContainer";
+import * as yup from "yup";
+import { FormContainer } from "./styled";
+import styles from "./styles";
 
-const formNames = {
-  name: "name",
-  description: "description",
-};
+enum FormNames {
+  name = "name",
+  description = "description",
+}
 
 const formInitialValues = {
   name: "",
@@ -20,27 +21,51 @@ const validationSchema = yup.object({
 
 export default function AddMovieGroupForm() {
   const handleSubmit = (values: typeof formInitialValues) => {
-    values;
+    console.log(values);
   };
   return (
-    <PageContainer title="Add Movie Group">
+    <div>
       <Formik
         initialValues={formInitialValues}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
+        validateOnChange={false}
+        validateOnBlur={false}
       >
-        {({ errors }) => {
+        {({ errors }) => (
           <Form>
-            <Field name={formNames.name} as={TextField} label="Name of group" />
-            <Field
-              name={formNames.description}
-              as={TextField}
-              multiline
-              label="Description of group"
-            />
-          </Form>;
-        }}
+            <FormContainer>
+              <Box>
+                <Field
+                  name={FormNames.name}
+                  as={TextField}
+                  label="Name of group"
+                  error={errors[FormNames.name] !== undefined}
+                  helperText={errors[FormNames.name]}
+                  sx={styles.field}
+                />
+              </Box>
+              <Box>
+                <Field
+                  name={FormNames.description}
+                  as={TextField}
+                  multiline
+                  label="Description of group"
+                  error={errors[FormNames.description] !== undefined}
+                  helperText={errors[FormNames.description]}
+                  rows={4}
+                  sx={styles.field}
+                />
+              </Box>
+              <Box>
+                <Button type="submit" color="primary" variant="contained">
+                  Submit
+                </Button>
+              </Box>
+            </FormContainer>
+          </Form>
+        )}
       </Formik>
-    </PageContainer>
+    </div>
   );
 }
