@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "prepare": "npx prisma generate",
-    "prepareuse": "npx prisma generate && node ./index.ts  && npx prisma db push"
+    "prepareuse": "npx prisma generate && node ./index.ts  && npx prisma db push",
+    "install:all": "npm i && cd project3-backend && npm i && cd ../project3-frontend && npm i"
   },
   "author": "",
   "dependencies": {
