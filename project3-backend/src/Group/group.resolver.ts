@@ -1,7 +1,7 @@
-import { Resolver, Mutation, Args, Query, Int, ResolveField, Parent } from "@nestjs/graphql";
+import { Args, Int, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
 import { prisma } from "../../../project3-common/src/prisma";
-import { MovieGroup } from "./group.model";
 import { MovieEvent } from "../Event/event.model";
+import { MovieGroup } from "./group.model";
 
 /**
  * Resolves all GraphQL queries related to MoviePage Groups
@@ -22,26 +22,61 @@ export class MovieGroupResolver {
   }
 
   /**
-   * Gets all movie groups (with pagination) based on a searchString
-   * @param pageSize
-   * @param page
-   * @param searchString
+   * Method to get all movieGroups by page with some filter paramteres.
+   * @param pageSize The (optional) pageSize reterned. By default 10.
+   * @param page The (optional) page number based on the pageSize, by default 1.
+   * @param titleSearchString The (opitonal) search string for the title.
+   * @param descriptionSearchString The (optional) search string for the description.
+   * @param aliasFavoriteUser The (optional) alias of a user to get only the movieGroups favorited by this user.
+   * @param aliasNotFavoriteUser The (optional) alias of a user to get only the movieGroups not favorited by this user.
+   * @returns A list ov movieGroups that match the paramters.
+   *
+   * @remarks The matching of search strings are not case sensitive.
    */
   @Query(() => [MovieGroup])
   async movieGroups(
-    @Args("pageSize", { type: () => Int }) pageSize: number,
-    @Args("page", { type: () => Int }) page: number,
-    @Args("searchString", { nullable: true }) searchString?: string,
+    @Args("pageSize", { type: () => Int, nullable: true }) pageSize = 10,
+    @Args("page", { type: () => Int, nullable: true }) page = 1,
+    @Args("titleSearchString", { nullable: true }) titleSearchString?: string,
+    @Args("descriptionSearchString", { nullable: true }) descriptionSearchString?: string,
+    @Args("aliasFavoriteUser", { nullable: true }) aliasFavoriteUser?: string,
+    @Args("aliasNotFavoriteUser", { nullable: true }) aliasNotFavoriteUser?: string,
   ): Promise<MovieGroup[]> {
+    // Handle pagination
     const pagination = { take: pageSize, skip: (page - 1) * pageSize };
-    if (searchString) {
-      return await prisma.movieGroup.findMany({
-        where: { name: { mode: "insensitive", contains: searchString } },
-        ...pagination,
-      });
-    } else {
-      return await prisma.movieGroup.findMany(pagination);
-    }
+
+    // Include movieEvents and userFavorites in the result if an alias is given
+    const isFavoriteParam = aliasFavoriteUser !== undefined || aliasNotFavoriteUser !== undefined;
+    const includeEventsAndFavorites = {
+      include: {
+        movieEvents: isFavoriteParam,
+        userFavorites: isFavoriteParam,
+      },
+    };
+
+    // Add filter by the alias of users that have favorited this movieGroup
+    const filterByFavorite =
+      aliasFavoriteUser !== undefined
+        ? { userFavorites: { some: { alias: aliasFavoriteUser } } }
+        : {};
+
+    // Add filter by the alias of the users that have not favorited this movieGroup.
+    const filterByNotFavorite =
+      aliasNotFavoriteUser !== undefined
+        ? { userFavorites: { none: { alias: aliasFavoriteUser } } }
+        : {};
+
+    // The prisma query to get by request.
+    return await prisma.movieGroup.findMany({
+      where: {
+        name: { mode: "insensitive", contains: titleSearchString },
+        description: { mode: "insensitive", contains: descriptionSearchString },
+        ...filterByFavorite,
+        ...filterByNotFavorite,
+      },
+      ...includeEventsAndFavorites,
+      ...pagination,
+    });
   }
 
   /**
@@ -70,50 +105,6 @@ export class MovieGroupResolver {
   async userFavorites(@Parent() movieGroup) {
     const { movieGroupId } = movieGroup;
     return prisma.movieGroup.findUnique({ where: { movieGroupId } }).userFavorites();
-  }
-
-  /**
-   * Gets all movie groups a particular user has favorited
-   * @param alias the alias of the user
-   * @param pageSize
-   * @param page
-   */
-  @Query(() => [MovieGroup])
-  async movieGroupsFavorite(
-    @Args("alias") alias: string,
-    @Args("pageSize", { type: () => Int }) pageSize: number,
-    @Args("page", { type: () => Int }) page: number,
-  ): Promise<MovieGroup[]> {
-    return await prisma.movieGroup.findMany({
-      where: { userFavorites: { some: { alias } } },
-      include: {
-        movieEvents: true,
-        userFavorites: true,
-      },
-    });
-  }
-
-  /**
-   * Gets all the movie groups a particular user hasn't favorited
-   * @param alias the alias of the user
-   * @param pageSize
-   * @param page
-   */
-  @Query(() => [MovieGroup])
-  async movieGroupsNotFavorite(
-    @Args("alias") alias: string,
-    @Args("pageSize", { type: () => Int }) pageSize: number,
-    @Args("page", { type: () => Int }) page: number,
-  ): Promise<MovieGroup[]> {
-    return await prisma.movieGroup.findMany({
-      where: { userFavorites: { none: { alias } } },
-      include: {
-        movieEvents: true,
-        userFavorites: true,
-      },
-      take: pageSize,
-      skip: pageSize * (page - 1),
-    });
   }
 
   /**
