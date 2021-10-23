@@ -1,16 +1,16 @@
 import { Typography } from "@mui/material";
-import AddMovieGroupForm from "../../components/AddMovieGroupForm/";
+import CreateMovieGroupForm from "../../components/CreateMovieGroupForm";
 import PageContainer from "../../components/PageContainer";
 import { MovieGroupsContainer } from "../CreateMovieEventPage/styled";
 
-export default function AddMovieGroupPage() {
+export default function CreateMovieGroupPage() {
   return (
     <PageContainer>
       <MovieGroupsContainer>
         <Typography gutterBottom variant={"h3"}>
-          Add Movie Group
+          Create Movie Group
         </Typography>
-        <AddMovieGroupForm />
+        <CreateMovieGroupForm />
       </MovieGroupsContainer>
     </PageContainer>
   );

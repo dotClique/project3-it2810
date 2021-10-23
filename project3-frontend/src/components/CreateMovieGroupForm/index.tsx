@@ -22,7 +22,7 @@ const validationSchema = yup.object({
   description: yup.string().notRequired(),
 });
 
-export default function AddMovieGroupForm() {
+export default function CreateMovieGroupForm() {
   const history = useHistory();
   return (
     <CreationForm

@@ -8,7 +8,7 @@ import client from "./helpers/apollo";
 import { Paths } from "./helpers/constants";
 import theme from "./helpers/themes";
 import CreateMovieEventPage from "./pages/CreateMovieEventPage";
-import AddMovieGroupPage from "./pages/AddMovieGroupPage/index";
+import CreateMovieGroupPage from "./pages/CreateMovieGroupPage/index";
 import APITest from "./pages/APITest/index";
 import GroupPage from "./pages/GroupPage";
 import Home from "./pages/Home";
@@ -31,7 +31,7 @@ function App() {
                   <MovieGroups />
                 </Route>
                 <Route exact path={Paths.ADD_MOVIE_GROUP}>
-                  <AddMovieGroupPage />
+                  <CreateMovieGroupPage />
                 </Route>
                 <Route exact path="/testapi">
                   <APITest />
