@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import AddMovieGroupForm from "../../components/AddMovieGroupForm/";
 import PageContainer from "../../components/PageContainer";
-import { MovieGroupsContainer } from "../AddMovieEventPage/styled";
+import { MovieGroupsContainer } from "../CreateMovieEventPage/styled";
 
 export default function AddMovieGroupPage() {
   return (

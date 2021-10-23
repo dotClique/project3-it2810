@@ -8,13 +8,18 @@ import { FormContainer } from "./styled";
 type CreationFormProps<T> = {
   children: (errors: FormikErrors<T>) => ReactNode;
   formInitialValues: T;
-  validationSchema: unknown;
+  validationSchema?: unknown;
   mutationCall: DocumentNode;
   onCompleted: () => void;
+  additionalRequestVaraibles?: { [key: string]: string | number };
 };
 
 export default function CreationForm<T>(props: CreationFormProps<T>) {
-  const [handleSubmit, loading] = useCreationForm(props.mutationCall, props.onCompleted);
+  const [handleSubmit, loading] = useCreationForm(
+    props.mutationCall,
+    props.onCompleted,
+    props.additionalRequestVaraibles,
+  );
 
   return (
     <div>

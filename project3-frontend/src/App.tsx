@@ -7,7 +7,7 @@ import ToastProvider from "./components/Toast/index";
 import client from "./helpers/apollo";
 import { Paths } from "./helpers/constants";
 import theme from "./helpers/themes";
-import AddMovieEventPage from "./pages/AddMovieEventPage";
+import CreateMovieEventPage from "./pages/CreateMovieEventPage";
 import AddMovieGroupPage from "./pages/AddMovieGroupPage/index";
 import APITest from "./pages/APITest/index";
 import GroupPage from "./pages/GroupPage";
@@ -43,7 +43,7 @@ function App() {
                   <MovieEventPage />
                 </Route>
                 <Route exact path={Paths.ADD_MOVIE_EVENT}>
-                  <AddMovieEventPage />
+                  <CreateMovieEventPage />
                 </Route>
               </Switch>
             </BrowserRouter>
