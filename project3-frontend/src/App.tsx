@@ -32,7 +32,7 @@ function App() {
               <Route exact path="/group">
                 <GroupPage />
               </Route>
-              <Route exact path="/movie">
+              <Route path="/movie/:id">
                 <MoviePage />
               </Route>
               <Route exact path="/addmovie">

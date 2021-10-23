@@ -60,6 +60,17 @@ export const CREATE_MOVIE_EVENT = gql`
   }
 `;
 
+export const GET_MOVIE_EVENT = gql`
+  query ($movieEventId: String!) {
+    movieEvent(movieEventId: $movieEventId) {
+      title
+      date
+      description
+      location
+    }
+  }
+`;
+
 export const ADD_USER_TO_MOVIE_GROUP = gql`
   mutation ($movieGroupId: String!, $useralias: String!) {
     addUserToMovieGroup(movieGroupId: $movieGroupId, useralias: $useralias) {
