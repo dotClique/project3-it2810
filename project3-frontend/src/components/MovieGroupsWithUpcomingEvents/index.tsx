@@ -8,7 +8,7 @@ type Props = {
   id: string;
   onToggleFavorite?: () => void;
   sx?: SxProps;
-  events: { title: string; date: string }[];
+  events: { title: string; date: string; movieEventId: string }[];
 };
 
 export default function MovieGroupWithUpcomingEvents(props: Props) {
@@ -21,10 +21,24 @@ export default function MovieGroupWithUpcomingEvents(props: Props) {
         sx={{ gridArea: "group" }}
         favorite
       />
-      <List sx={{ gridArea: "events", backgroundColor: "yellowgreen" }}>
+      <List sx={{ gridArea: "events" }}>
         {props.events.map((item) => (
-          <ListItemButton divider>
-            <ListItemText inset primary={item.title} secondary={item.date}></ListItemText>
+          <ListItemButton
+            key={item.movieEventId}
+            divider
+            sx={{
+              backgroundColor: "primary.contrastText",
+              color: "primary.main",
+              margin: 1,
+              borderRadius: 1,
+            }}
+          >
+            <ListItemText
+              inset
+              primary={item.title}
+              secondary={item.date}
+              secondaryTypographyProps={{ color: "primary.dark" }}
+            />
           </ListItemButton>
         ))}
       </List>

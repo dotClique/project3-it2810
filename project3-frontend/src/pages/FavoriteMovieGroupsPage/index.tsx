@@ -103,7 +103,7 @@ export default function FavoriteMovieGroupsPage() {
                 (item: {
                   name: string;
                   movieGroupId: string;
-                  movieEvents: { title: string; date: string }[];
+                  movieEvents: { title: string; date: string; movieEventId: string }[];
                 }) => (
                   <MovieGroupWithUpcomingEvents
                     title={item.name}

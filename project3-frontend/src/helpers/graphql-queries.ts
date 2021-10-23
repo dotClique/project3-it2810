@@ -16,6 +16,7 @@ export const GET_MOVIE_GROUP_FAVORITE = gql`
       movieEvents {
         title
         date
+        movieEventId
       }
     }
   }
