@@ -73,8 +73,19 @@ export class MovieGroupResolver {
    * Gets the total number of movie groups
    */
   @Query(() => Int)
-  async movieGroupCount(): Promise<number> {
-    return await prisma.movieGroup.count();
+  async movieGroupCount(
+    @Args("aliasFavoriteUser", { nullable: true }) aliasFavoriteUser?: string,
+    @Args("aliasNotFavoriteUser", { nullable: true }) aliasNotFavoriteUser?: string,
+  ): Promise<number> {
+    if (aliasFavoriteUser)
+      return await prisma.movieGroup.count({
+        where: { userFavorites: { some: { alias: aliasFavoriteUser } } },
+      });
+    else if (aliasNotFavoriteUser)
+      return await prisma.movieGroup.count({
+        where: { userFavorites: { none: { alias: aliasNotFavoriteUser } } },
+      });
+    return prisma.movieGroup.count();
   }
 
   /**
@@ -102,7 +113,7 @@ export class MovieGroupResolver {
    */
   @Query(() => Int)
   async countMovieGroupFavorite(@Args("alias") alias: string): Promise<number> {
-    return await prisma.movieGroup.count({ where: { userFavorites: { some: { alias } } } });
+    return await prisma.movieGroup.count();
   }
 
   /**

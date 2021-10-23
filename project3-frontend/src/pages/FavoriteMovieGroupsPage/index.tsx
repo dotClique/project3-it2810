@@ -60,7 +60,7 @@ export default function FavoriteMovieGroupsPage() {
 
   useEffect(() => {
     if (!loadingCount && dataCount) {
-      setCount(Math.ceil(dataCount.countMovieGroupFavorite / pageSize));
+      setCount(Math.ceil(dataCount.movieGroupCount / pageSize));
     }
   }, [loadingCount, dataCount]);
 
@@ -99,7 +99,7 @@ export default function FavoriteMovieGroupsPage() {
           {loadingGroups
             ? false
             : dataGroups
-            ? dataGroups.movieGroupsFavorite.map(
+            ? dataGroups.movieGroups.map(
                 (item: {
                   name: string;
                   movieGroupId: string;
