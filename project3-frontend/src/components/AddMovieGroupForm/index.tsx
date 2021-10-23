@@ -1,7 +1,10 @@
-import { Box, Button, TextField } from "@mui/material";
-import { Field, Form, Formik } from "formik";
+import { Box, TextField } from "@mui/material";
+import { Field } from "formik";
+import { useHistory } from "react-router-dom";
 import * as yup from "yup";
-import { FormContainer } from "./styled";
+import { Paths } from "../../helpers/constants";
+import { CREATE_MOVIE_GROUP } from "../../helpers/graphql-queries";
+import CreationForm from "../CreationForm";
 import styles from "./styles";
 
 enum FormNames {
@@ -20,52 +23,40 @@ const validationSchema = yup.object({
 });
 
 export default function AddMovieGroupForm() {
-  const handleSubmit = (values: typeof formInitialValues) => {
-    console.log(values);
-  };
+  const history = useHistory();
   return (
-    <div>
-      <Formik
-        initialValues={formInitialValues}
-        onSubmit={handleSubmit}
-        validationSchema={validationSchema}
-        validateOnChange={false}
-        validateOnBlur={false}
-      >
-        {({ errors }) => (
-          <Form>
-            <FormContainer>
-              <Box>
-                <Field
-                  name={FormNames.name}
-                  as={TextField}
-                  label="Name of group"
-                  error={errors[FormNames.name] !== undefined}
-                  helperText={errors[FormNames.name]}
-                  sx={styles.field}
-                />
-              </Box>
-              <Box>
-                <Field
-                  name={FormNames.description}
-                  as={TextField}
-                  multiline
-                  label="Description of group"
-                  error={errors[FormNames.description] !== undefined}
-                  helperText={errors[FormNames.description]}
-                  rows={4}
-                  sx={styles.field}
-                />
-              </Box>
-              <Box>
-                <Button type="submit" color="primary" variant="contained">
-                  Submit
-                </Button>
-              </Box>
-            </FormContainer>
-          </Form>
-        )}
-      </Formik>
-    </div>
+    <CreationForm
+      formInitialValues={formInitialValues}
+      mutationCall={CREATE_MOVIE_GROUP}
+      validationSchema={validationSchema}
+      onCompleted={() => history.push(Paths.MOVIE_GROUPS)}
+    >
+      {(errors) => (
+        <>
+          <Box>
+            <Field
+              name={FormNames.name}
+              as={TextField}
+              label="Name of group"
+              error={errors[FormNames.name] !== undefined}
+              helperText={errors[FormNames.name]}
+              sx={styles.field}
+            />
+          </Box>
+          <Box>
+            <Field
+              name={FormNames.description}
+              as={TextField}
+              multiline
+              label="Description of group"
+              error={errors[FormNames.description] !== undefined}
+              helperText={errors[FormNames.description]}
+              rows={4}
+              sx={styles.field}
+            />
+          </Box>
+        </>
+      )}
+    </CreationForm>
   );
 }

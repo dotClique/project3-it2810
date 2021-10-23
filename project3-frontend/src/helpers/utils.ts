@@ -1,3 +1,5 @@
+import { useMutation } from "@apollo/client";
+import { DocumentNode } from "graphql";
 import { useCallback, useContext } from "react";
 import { ToastOptions, ToastProps } from "../components/Toast/types";
 import { ToastContext } from "./contexts";
@@ -14,6 +16,10 @@ export const getEnv = (envName: string): string => {
   return variable;
 };
 
+/**
+ * Hook to handle the usage of a Toast.
+ * @returns A function to show the toast.
+ */
 export const useToast = () => {
   const { toastData, setToastData } = useContext(ToastContext);
 
@@ -45,3 +51,31 @@ export const useToast = () => {
     [toastData, setToastData],
   );
 };
+
+export function useCreationForm<FormValues>(
+  MUTATION_CALL: DocumentNode,
+  onCompleted: () => void,
+): [(values: FormValues) => void, boolean] {
+  const toast = useToast();
+  const [performMutation, { loading }] = useMutation(MUTATION_CALL, {
+    onCompleted,
+    onError: (error) => {
+      toast({
+        title: "An error occured.",
+        type: "alert",
+        color: "error",
+        description: error.message,
+      });
+    },
+  });
+
+  const handleSubmit = useCallback(
+    (values: FormValues) => {
+      performMutation({
+        variables: values,
+      });
+    },
+    [performMutation],
+  );
+  return [handleSubmit, loading];
+}

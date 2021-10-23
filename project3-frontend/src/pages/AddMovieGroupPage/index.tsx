@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import AddMovieGroupForm from "../../components/AddMovieGroupForm";
+import AddMovieGroupForm from "../../components/AddMovieGroupForm/";
 import PageContainer from "../../components/PageContainer";
 import { MovieGroupsContainer } from "../AddMoviePage/styled";
 
