@@ -22,11 +22,14 @@ export const GET_MOVIE_GROUP_FAVORITE = gql`
   }
 `;
 
-export const GET_MOVIE_GROUP_NOT_FAVORITE = gql`
-  query ($alias: String!, $page: Int!, $pageSize: Int!) {
-    movieGroups(aliasNotFavoriteUser: $alias, page: $page, pageSize: $pageSize) {
+export const GET_MOVIE_GROUPS = gql`
+  query ($page: Int!, $pageSize: Int!) {
+    movieGroups(page: $page, pageSize: $pageSize) {
       movieGroupId
       name
+      userFavorites {
+        alias
+      }
     }
   }
 `;
@@ -37,9 +40,9 @@ export const GET_COUNT_MOVIE_GROUPS_FAVORITE = gql`
   }
 `;
 
-export const GET_COUNT_MOVIE_GROUPS_NOT_FAVORITE = gql`
-  query ($alias: String!) {
-    movieGroupCount(aliasNotFavoriteUser: $alias)
+export const GET_COUNT_MOVIE_GROUPS = gql`
+  query {
+    movieGroupCount
   }
 `;
 
@@ -83,6 +86,17 @@ export const CREATE_MOVIE_EVENT = gql`
 export const ADD_USER_TO_MOVIE_GROUP = gql`
   mutation ($movieGroupId: String!, $useralias: String!) {
     addUserToMovieGroup(movieGroupId: $movieGroupId, useralias: $useralias) {
+      name
+      userFavorites {
+        alias
+      }
+    }
+  }
+`;
+
+export const REMOVE_USER_FROM_MOVIE_GROUP = gql`
+  mutation ($movieGroupId: String!, $useralias: String!) {
+    removeUserFromMovieGroup(movieGroupId: $movieGroupId, useralias: $useralias) {
       name
       userFavorites {
         alias

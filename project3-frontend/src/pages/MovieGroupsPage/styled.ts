@@ -19,25 +19,6 @@ export const MovieGroupsContainer = styled(Paper)(({ theme }) => ({
   padding: "20px 5vw 0",
 }));
 
-export const NewGroupButton = styled(Button)(({ theme }) => ({
-  color: theme.palette.primary.contrastText,
-  backgroundColor: theme.palette.primary.main,
-  "&:hover": {
-    backgroundColor: theme.palette.primary.light,
-  },
-  width: "100%",
-  height: 50,
-  marginTop: theme.spacing(2),
-}));
-
-export const MovieGroupFooter = styled("div")(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  gap: theme.spacing(3),
-  marginTop: "auto",
-  marginBottom: theme.spacing(2),
-}));
-
 export const GroupGrid = styled("div")(({ theme }) => ({
   display: "grid",
   width: "100%",
@@ -53,16 +34,23 @@ export const GroupGrid = styled("div")(({ theme }) => ({
   },
 }));
 
-export const GroupAccordion = styled(Accordion)(({ theme }) => ({
-  width: "100%",
-  border: `1px solid ${theme.palette.divider}`,
-  boxShadow: "none",
+export const MovieGroupFooter = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  gap: theme.spacing(2),
+  marginTop: "auto",
+  marginBottom: theme.spacing(2),
+}));
+
+export const NewGroupButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.primary.contrastText,
+  backgroundColor: theme.palette.primary.main,
   "&:hover": {
-    filter: "brightness(90%)",
+    backgroundColor: theme.palette.primary.light,
   },
-  "&.Mui-expanded": {
-    filter: "brightness(100%)!important",
-  },
+  width: "100%",
+  height: 50,
+  marginTop: theme.spacing(2),
 }));
 
 export const LogOutButton = styled(Button)(({ theme }) => ({
@@ -78,5 +66,14 @@ export const LogOutButton = styled(Button)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
   "&:hover": {
     backgroundColor: theme.palette.secondary.light,
+  },
+}));
+
+export const FavoritesButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.primary.contrastText,
+  backgroundColor: theme.palette.primary.main,
+  height: 50,
+  "&:hover": {
+    backgroundColor: theme.palette.primary.light,
   },
 }));

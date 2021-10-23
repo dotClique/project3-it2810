@@ -1,18 +1,11 @@
 import { SearchIcon } from "@heroicons/react/solid";
-import {
-  AccordionDetails,
-  AccordionSummary,
-  InputAdornment,
-  Pagination,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { InputAdornment, Pagination, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import MovieGroupItem from "../../components/MovieGroupItem";
 import PageContainer from "../../components/PageContainer";
 import {
-  GroupAccordion,
+  FavoritesButton,
   GroupGrid,
   LogOutButton,
   MovieGroupFooter,
@@ -23,8 +16,9 @@ import { useLazyQuery, useMutation } from "@apollo/client";
 import {
   ADD_USER_TO_MOVIE_GROUP,
   CREATE_MOVIE_GROUP,
-  GET_COUNT_MOVIE_GROUPS_NOT_FAVORITE,
-  GET_MOVIE_GROUP_NOT_FAVORITE,
+  GET_COUNT_MOVIE_GROUPS,
+  GET_MOVIE_GROUPS,
+  REMOVE_USER_FROM_MOVIE_GROUP,
 } from "../../helpers/graphql-queries";
 
 export default function MovieGroupsPage() {
@@ -35,12 +29,12 @@ export default function MovieGroupsPage() {
   // This is only meant as an example of graphQL use and is to be changed in later versions
   // This is only meant as an example of graphQL use and is to be changed in later versions
   const [fetchCountQuery, { data: dataCount, loading: loadingCount }] = useLazyQuery(
-    GET_COUNT_MOVIE_GROUPS_NOT_FAVORITE,
+    GET_COUNT_MOVIE_GROUPS,
     { fetchPolicy: "network-only" },
   );
 
   const [notFavoriteGroupsQuery, { data: dataGroups, loading: loadingGroups }] = useLazyQuery(
-    GET_MOVIE_GROUP_NOT_FAVORITE,
+    GET_MOVIE_GROUPS,
     { fetchPolicy: "network-only" },
   );
 
@@ -48,6 +42,7 @@ export default function MovieGroupsPage() {
     useMutation(CREATE_MOVIE_GROUP);
 
   const [addUserToGroup] = useMutation(ADD_USER_TO_MOVIE_GROUP);
+  const [removeUserFromGroup] = useMutation(REMOVE_USER_FROM_MOVIE_GROUP);
 
   const [alias, setAlias] = useState("");
   const [expanded, setExpanded] = useState("allMovies");
@@ -107,21 +102,37 @@ export default function MovieGroupsPage() {
           {loadingGroups
             ? false
             : dataGroups
-            ? dataGroups.movieGroups.map((item: { name: string; movieGroupId: string }) => (
-                <MovieGroupItem
-                  title={item.name}
-                  key={item.movieGroupId}
-                  onToggleFavorite={() => {
-                    addUserToGroup({
-                      variables: { useralias: alias, movieGroupId: item.movieGroupId },
-                    }).then(() => {
-                      notFavoriteGroupsQuery({ variables: { alias, page, pageSize } });
-                      fetchCountQuery({ variables: { alias } });
-                    });
-                  }}
-                  id={item.movieGroupId}
-                />
-              ))
+            ? dataGroups.movieGroups.map(
+                (item: {
+                  name: string;
+                  movieGroupId: string;
+                  userFavorites: { alias: string }[];
+                }) => {
+                  const isFavorite = item.userFavorites.some((e) => e.alias === alias);
+                  return (
+                    <MovieGroupItem
+                      title={item.name}
+                      key={item.movieGroupId}
+                      onToggleFavorite={() => {
+                        let action;
+                        if (isFavorite) {
+                          action = removeUserFromGroup;
+                        } else {
+                          action = addUserToGroup;
+                        }
+                        action({
+                          variables: { useralias: alias, movieGroupId: item.movieGroupId },
+                        }).then(() => {
+                          notFavoriteGroupsQuery({ variables: { alias, page, pageSize } });
+                          fetchCountQuery({ variables: { alias } });
+                        });
+                      }}
+                      favorite={isFavorite}
+                      id={item.movieGroupId}
+                    />
+                  );
+                },
+              )
             : false}
         </GroupGrid>
         <MovieGroupFooter>
@@ -137,6 +148,9 @@ export default function MovieGroupsPage() {
           >
             Add new movie group
           </NewGroupButton>
+          <FavoritesButton onClick={() => history.push("/favoritegroups")}>
+            Go to favorites
+          </FavoritesButton>
           <LogOutButton color={"secondary"} onClick={() => history.push("/")}>
             Change Alias
           </LogOutButton>
