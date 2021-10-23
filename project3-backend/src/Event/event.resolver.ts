@@ -33,6 +33,8 @@ export class MovieEventResolver {
    * @param locationSearchString The (optional) search string for the location of the movieEvents.
    * @param fromDate The (optional) earliest date the movieEvents can take place.
    * @param toDate The (optional) latest date the movieEvent can take place.
+   * @param sortBy The (optional) sorting parameter.
+   * @param asc The (optional) parameter for sorting ascending
    *
    * @remarks All search strings match with case insensitivity.
    */
@@ -46,18 +48,64 @@ export class MovieEventResolver {
     @Args("location", { nullable: true }) locationSearchString?: string,
     @Args("fromDate", { nullable: true }) fromDate?: Date,
     @Args("toDate", { nullable: true }) toDate?: Date,
+    @Args("sortBy", { type: () => Int, nullable: true }) sortBy = 0,
+    @Args("asc", { type: () => Boolean, nullable: true }) asc = false,
+
+
   ): Promise<MovieEvent[]> {
+
     const pagination = { take: pageSize, skip: (page - 1) * pageSize };
-    return await prisma.movieEvent.findMany({
-      where: {
-        title: { mode: "insensitive", contains: titleSearchString },
-        movieGroupId,
-        description: { mode: "insensitive", contains: descriptionSearchString },
-        location: { mode: "insensitive", contains: locationSearchString },
-        date: { gte: fromDate, lte: toDate },
-      },
-      ...pagination,
-    });
+    switch (sortBy) {
+      case 0:
+        return await prisma.movieEvent.findMany({
+          orderBy: [
+            {
+              date: (asc ? "asc" : "desc"),
+            }
+          ],
+          where: {
+            title: { mode: "insensitive", contains: titleSearchString },
+            movieGroupId,
+            description: { mode: "insensitive", contains: descriptionSearchString },
+            location: { mode: "insensitive", contains: locationSearchString },
+            date: { gte: fromDate, lte: toDate },
+          },
+          ...pagination,
+        });
+      case 1:
+        return await prisma.movieEvent.findMany({
+          orderBy: [
+            {
+              title: (asc ? "asc" : "desc"),
+            }
+          ],
+          where: {
+            title: { mode: "insensitive", contains: titleSearchString },
+            movieGroupId,
+            description: { mode: "insensitive", contains: descriptionSearchString },
+            location: { mode: "insensitive", contains: locationSearchString },
+            date: { gte: fromDate, lte: toDate },
+          },
+          ...pagination,
+        });
+      case 2:
+        return await prisma.movieEvent.findMany({
+          orderBy: [
+            {
+              location: (asc ? "asc" : "desc"),
+            }
+          ],
+          where: {
+            title: { mode: "insensitive", contains: titleSearchString },
+            movieGroupId,
+            description: { mode: "insensitive", contains: descriptionSearchString },
+            location: { mode: "insensitive", contains: locationSearchString },
+            date: { gte: fromDate, lte: toDate },
+          },
+          ...pagination,
+        });
+    }
+
   }
 
   /**
