@@ -12,8 +12,9 @@ export default function FavoriteMovieGroupsPage() {
   const pageSize = 6;
   const [alias, setAlias] = useState("");
   const [page, setPage] = useState(1);
+  const [searchString, setSearchString] = useState("");
 
-  const { movieGroups, pageCount } = useFavoriteMovieGroups(page, pageSize, alias);
+  const { movieGroups, pageCount } = useFavoriteMovieGroups(page, pageSize, alias, searchString);
 
   const history = useHistory();
 
@@ -37,6 +38,10 @@ export default function FavoriteMovieGroupsPage() {
           }}
           placeholder={"search for groups"}
           sx={{ width: "90%", marginBottom: 1 }}
+          value={searchString}
+          onChange={(e) => {
+            setSearchString(e.target.value);
+          }}
         />
         <GroupGrid>
           {movieGroups.map(

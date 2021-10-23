@@ -23,8 +23,9 @@ export default function MovieGroupsPage() {
   const pageSize = 8;
   const [alias, setAlias] = useState("");
   const [page, setPage] = useState(1);
+  const [searchString, setSearchString] = useState("");
 
-  const { movieGroups, pageCount, refetch } = useMovieGroups(page, pageSize, alias);
+  const { movieGroups, pageCount, refetch } = useMovieGroups(page, pageSize, alias, searchString);
   const [addUserToGroup] = useMutation(ADD_USER_TO_MOVIE_GROUP);
   const [removeUserFromGroup] = useMutation(REMOVE_USER_FROM_MOVIE_GROUP);
   const history = useHistory();
@@ -50,6 +51,10 @@ export default function MovieGroupsPage() {
           }}
           placeholder={"search for groups"}
           sx={{ width: "90%", marginBottom: 1 }}
+          value={searchString}
+          onChange={(e) => {
+            setSearchString(e.target.value);
+          }}
         />
         <GroupGrid>
           {movieGroups.map((item) => {

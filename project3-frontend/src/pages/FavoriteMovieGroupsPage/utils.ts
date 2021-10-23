@@ -5,7 +5,12 @@ import {
 } from "../../helpers/graphql-queries";
 import { useEffect, useState } from "react";
 
-export function useFavoriteMovieGroups(page: number, pageSize: number, alias: string) {
+export function useFavoriteMovieGroups(
+  page: number,
+  pageSize: number,
+  alias: string,
+  searchString: string,
+) {
   const [fetchCountQuery, { data: dataCount, loading: loadingCount }] = useLazyQuery(
     GET_COUNT_MOVIE_GROUPS_FAVORITE,
     { fetchPolicy: "network-only" },
@@ -41,10 +46,10 @@ export function useFavoriteMovieGroups(page: number, pageSize: number, alias: st
     if (alias) {
       refetch();
     }
-  }, [page, alias]);
+  }, [page, alias, searchString]);
 
   function refetch() {
-    movieGroupsQuery({ variables: { alias, page, pageSize } });
+    movieGroupsQuery({ variables: { alias, page, pageSize, searchString } });
     fetchCountQuery({ variables: { alias } });
   }
 

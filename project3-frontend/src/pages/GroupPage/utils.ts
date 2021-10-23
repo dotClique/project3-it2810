@@ -2,7 +2,12 @@ import { useLazyQuery } from "@apollo/client";
 import { GET_COUNT_MOVIE_GROUPS, GET_MOVIE_GROUPS } from "../../helpers/graphql-queries";
 import { useEffect, useState } from "react";
 
-export function useMovieGroups(page: number, pageSize: number, alias: string) {
+export function useMovieGroups(
+  page: number,
+  pageSize: number,
+  alias: string,
+  searchString: string,
+) {
   const [fetchCountQuery, { data: dataCount, loading: loadingCount }] = useLazyQuery(
     GET_COUNT_MOVIE_GROUPS,
     { fetchPolicy: "network-only" },
@@ -34,10 +39,10 @@ export function useMovieGroups(page: number, pageSize: number, alias: string) {
     if (alias) {
       refetch();
     }
-  }, [page, alias]);
+  }, [page, alias, searchString]);
 
   function refetch() {
-    movieGroupsQuery({ variables: { alias, page, pageSize } });
+    movieGroupsQuery({ variables: { page, pageSize, searchString } });
     fetchCountQuery({ variables: { alias } });
   }
 

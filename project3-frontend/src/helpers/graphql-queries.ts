@@ -9,8 +9,13 @@ export const ADD_OR_GET_USER = gql`
 `;
 
 export const GET_MOVIE_GROUPS_FAVORITE = gql`
-  query ($alias: String!, $page: Int!, $pageSize: Int!) {
-    movieGroups(aliasFavoriteUser: $alias, page: $page, pageSize: $pageSize) {
+  query ($alias: String!, $page: Int!, $pageSize: Int!, $searchString: String) {
+    movieGroups(
+      aliasFavoriteUser: $alias
+      page: $page
+      pageSize: $pageSize
+      titleSearchString: $searchString
+    ) {
       movieGroupId
       name
       movieEvents {
@@ -23,8 +28,8 @@ export const GET_MOVIE_GROUPS_FAVORITE = gql`
 `;
 
 export const GET_MOVIE_GROUPS = gql`
-  query ($page: Int!, $pageSize: Int!) {
-    movieGroups(page: $page, pageSize: $pageSize) {
+  query ($page: Int!, $pageSize: Int!, $searchString: String) {
+    movieGroups(page: $page, pageSize: $pageSize, titleSearchString: $searchString) {
       movieGroupId
       name
       userFavorites {
