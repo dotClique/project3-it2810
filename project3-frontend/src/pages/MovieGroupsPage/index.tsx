@@ -67,7 +67,7 @@ export default function MovieGroupsPage() {
 
   useEffect(() => {
     if (!loadingCount && dataCount) {
-      setCount(Math.ceil(dataCount.countMovieGroupNotFavorite / pageSize));
+      setCount(Math.ceil(dataCount.movieGroupCount / pageSize));
     }
   }, [loadingCount, dataCount]);
 
@@ -107,23 +107,21 @@ export default function MovieGroupsPage() {
           {loadingGroups
             ? false
             : dataGroups
-            ? dataGroups.movieGroupsNotFavorite.map(
-                (item: { name: string; movieGroupId: string }) => (
-                  <MovieGroupItem
-                    title={item.name}
-                    key={item.movieGroupId}
-                    onToggleFavorite={() => {
-                      addUserToGroup({
-                        variables: { useralias: alias, movieGroupId: item.movieGroupId },
-                      }).then(() => {
-                        notFavoriteGroupsQuery({ variables: { alias, page, pageSize } });
-                        fetchCountQuery({ variables: { alias } });
-                      });
-                    }}
-                    id={item.movieGroupId}
-                  />
-                ),
-              )
+            ? dataGroups.movieGroups.map((item: { name: string; movieGroupId: string }) => (
+                <MovieGroupItem
+                  title={item.name}
+                  key={item.movieGroupId}
+                  onToggleFavorite={() => {
+                    addUserToGroup({
+                      variables: { useralias: alias, movieGroupId: item.movieGroupId },
+                    }).then(() => {
+                      notFavoriteGroupsQuery({ variables: { alias, page, pageSize } });
+                      fetchCountQuery({ variables: { alias } });
+                    });
+                  }}
+                  id={item.movieGroupId}
+                />
+              ))
             : false}
         </GroupGrid>
         <MovieGroupFooter>
