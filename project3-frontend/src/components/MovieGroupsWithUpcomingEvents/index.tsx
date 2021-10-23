@@ -1,7 +1,7 @@
-import MovieGroupItem from "../MovieGroupItem";
 import { GroupAndEventContainer, CenteredLink } from "./styled";
 import { SxProps } from "@mui/system";
-import { Link, List, ListItemButton, ListItemText, Typography } from "@mui/material";
+import { List, ListItemButton, ListItemText, Typography } from "@mui/material";
+import { useHistory } from "react-router";
 
 type Props = {
   title: string;
@@ -12,29 +12,37 @@ type Props = {
 };
 
 export default function MovieGroupWithUpcomingEvents(props: Props) {
+  const history = useHistory();
   return (
     <GroupAndEventContainer>
-      <CenteredLink>
+      <CenteredLink
+        onClick={() => {
+          history.push(`/group/${props.id}`);
+        }}
+      >
         <Typography variant={"h5"}>{props.title}</Typography>
       </CenteredLink>
 
-      <List sx={{ gridArea: "events" }}>
+      <List sx={{ gridArea: "events", margin: 0, padding: 0 }}>
         {props.events.map((item) => (
           <ListItemButton
             key={item.movieEventId}
             divider
             sx={{
-              backgroundColor: "primary.contrastText",
-              color: "primary.main",
+              backgroundColor: "primary.main",
+              color: "primary.contrastText",
               margin: 1,
               borderRadius: 1,
+              "&:hover": {
+                backgroundColor: "primary.light",
+              },
             }}
           >
             <ListItemText
               inset
               primary={item.title}
               secondary={item.date}
-              secondaryTypographyProps={{ color: "primary.dark" }}
+              secondaryTypographyProps={{ color: "primary.contrastText" }}
             />
           </ListItemButton>
         ))}

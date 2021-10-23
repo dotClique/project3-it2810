@@ -33,8 +33,11 @@ export const GroupGrid = styled("div")(({ theme }) => ({
 export const GridHeader = styled("div")(({ theme }) => ({
   width: "100%",
   display: "grid",
-  gridTemplateColumns: "1fr 1fr",
+  gridTemplateColumns: "1fr 2fr",
   marginTop: theme.spacing(1),
+  [theme.breakpoints.down("md")]: {
+    display: "none",
+  },
 }));
 export const MovieGroupFooter = styled("div")(({ theme }) => ({
   display: "flex",
