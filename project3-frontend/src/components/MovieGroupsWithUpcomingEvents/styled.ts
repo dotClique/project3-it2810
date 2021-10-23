@@ -1,5 +1,5 @@
 import { styled } from "@mui/system";
-import { Box, Button, Card, Link } from "@mui/material";
+import { Box, Button, Card } from "@mui/material";
 
 export const GroupAndEventContainer = styled(Card)(({ theme }) => ({
   width: "100%",
@@ -17,7 +17,7 @@ export const GroupAndEventContainer = styled(Card)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
 }));
 
-export const CenteredLink = styled(Button)(({}) => ({
+export const CenteredLink = styled(Button)(() => ({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
@@ -25,7 +25,7 @@ export const CenteredLink = styled(Button)(({}) => ({
   width: "100%",
 }));
 
-export const MovieGroupBox = styled(Box)(({}) => ({
+export const MovieGroupBox = styled(Box)(() => ({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
