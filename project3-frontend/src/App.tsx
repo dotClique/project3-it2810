@@ -25,7 +25,7 @@ function App() {
               <Route exact path={Paths.HOME}>
                 <Home />
               </Route>
-              <Route exact path={Paths.MOVIE_GROUP}>
+              <Route exact path={Paths.MOVIE_GROUPS}>
                 <MovieGroups />
               </Route>
               <Route exact path={Paths.ADD_MOVIE_GROUP}>

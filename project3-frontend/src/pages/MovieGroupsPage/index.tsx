@@ -64,27 +64,35 @@ export default function MovieGroupsPage() {
 
   useEffect(() => {
     setAlias(localStorage.getItem("alias") || "");
-  }, []);
+  }, [setAlias]);
 
   useEffect(() => {
     if (!loadingCount && dataCount) {
       setCount(Math.ceil(dataCount.countMovieGroupNotFavorite / pageSize));
     }
-  }, [loadingCount, dataCount]);
+  }, [loadingCount, dataCount, setCount]);
 
   useEffect(() => {
     if (!loadingNewGroup && dataNewGroup) {
       notFavoriteGroupsQuery({ variables: { alias, page, pageSize } });
       fetchCountQuery({ variables: { alias } });
     }
-  }, [loadingNewGroup]);
+  }, [
+    loadingNewGroup,
+    dataNewGroup,
+    notFavoriteGroupsQuery,
+    fetchCountQuery,
+    alias,
+    page,
+    pageSize,
+  ]);
 
   useEffect(() => {
     if (alias) {
       notFavoriteGroupsQuery({ variables: { alias, page, pageSize } });
       fetchCountQuery({ variables: { alias } });
     }
-  }, [page, alias]);
+  }, [page, alias, pageSize, notFavoriteGroupsQuery, fetchCountQuery]);
 
   return (
     <PageContainer>
