@@ -37,7 +37,7 @@ export default function MovieGroupsPage() {
     <PageContainer>
       <MovieGroupsContainer>
         <Typography gutterBottom variant={"h3"}>
-          Movie Groups"
+          Movie Groups
         </Typography>
 
         <TextField

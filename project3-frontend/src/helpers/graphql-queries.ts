@@ -8,7 +8,7 @@ export const ADD_OR_GET_USER = gql`
   }
 `;
 
-export const GET_MOVIE_GROUP_FAVORITE = gql`
+export const GET_MOVIE_GROUPS_FAVORITE = gql`
   query ($alias: String!, $page: Int!, $pageSize: Int!) {
     movieGroups(aliasFavoriteUser: $alias, page: $page, pageSize: $pageSize) {
       movieGroupId
