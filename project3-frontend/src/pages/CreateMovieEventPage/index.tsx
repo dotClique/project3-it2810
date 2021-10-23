@@ -3,6 +3,9 @@ import CreateMovieEventForm from "../../components/CreateMovieEventForm/index";
 import PageContainer from "../../components/PageContainer";
 import { MovieGroupsContainer } from "./styled";
 
+/**
+ * The page to create a movie event in a movie group.
+ */
 export default function CreateMovieEventPage() {
   return (
     <PageContainer>

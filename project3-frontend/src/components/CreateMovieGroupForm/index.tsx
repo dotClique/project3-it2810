@@ -7,6 +7,7 @@ import { CREATE_MOVIE_GROUP } from "../../helpers/graphql-queries";
 import CreationForm from "../CreationForm";
 import styles from "./styles";
 
+// Defining the form fields.
 enum FormNames {
   name = "name",
   description = "description",
@@ -17,11 +18,15 @@ const formInitialValues = {
   description: "",
 };
 
+// The schema used to validate the form.
 const validationSchema = yup.object({
   name: yup.string().min(3, "Min 3 characters").required("Required"),
   description: yup.string().notRequired(),
 });
 
+/**
+ * Component used to handle the form to create a movie group.
+ */
 export default function CreateMovieGroupForm() {
   const history = useHistory();
   return (

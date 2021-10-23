@@ -8,6 +8,7 @@ import { CREATE_MOVIE_EVENT } from "../../helpers/graphql-queries";
 import CreationForm from "../CreationForm";
 import styles from "./styles";
 
+// The names of the form fields.
 enum FormNames {
   title = "title",
   name = "name",
@@ -25,6 +26,7 @@ const formInitialValues = {
   imageUrl: "",
 };
 
+// Schema used to validate the form.
 const validationSchema = yup.object({
   title: yup.string().min(3, "Min 3 characters").required("Required"),
   description: yup.string().notRequired(),
@@ -37,6 +39,9 @@ type CreateMovieEventFormProps = {
   movieGroupId: string;
 };
 
+/**
+ * Component to handle the form to create a movie event..
+ */
 export default function CreateMovieEventForm(props: CreateMovieEventFormProps) {
   const history = useHistory();
   return (

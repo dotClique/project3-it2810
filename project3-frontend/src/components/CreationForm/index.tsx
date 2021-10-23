@@ -14,13 +14,18 @@ type CreationFormProps<T> = {
   additionalRequestVaraibles?: { [key: string]: string | number };
 };
 
+/**
+ * Component used to handle the top level functionality of forms that create something.
+ */
 export default function CreationForm<T>(props: CreationFormProps<T>) {
+  // Hook to handle the creation request to hte graphql api.
   const [handleSubmit, loading] = useCreationForm(
     props.mutationCall,
     props.onCompleted,
     props.additionalRequestVaraibles,
   );
 
+  // Using Formik to handle form state management, errors, validation and submit.
   return (
     <div>
       <Formik
@@ -39,6 +44,7 @@ export default function CreationForm<T>(props: CreationFormProps<T>) {
                   Submit
                 </Button>
               </Box>
+              {/* Loading icon if applicable */}
               <Box sx={{ height: 50 }}>
                 {loading && <CircularProgress variant="indeterminate" color="primary" />}
               </Box>
