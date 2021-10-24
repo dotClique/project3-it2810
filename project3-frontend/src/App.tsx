@@ -14,6 +14,7 @@ import GroupPage from "./pages/GroupPage";
 import Home from "./pages/Home";
 import MovieEventPage from "./pages/MovieEventPage";
 import MovieGroups from "./pages/MovieGroupsPage";
+import FavoriteMovieGroupsPage from "./pages/FavoriteMovieGroupsPage";
 
 function App() {
   return (
@@ -32,6 +33,9 @@ function App() {
                 </Route>
                 <Route exact path={Paths.ADD_MOVIE_GROUP}>
                   <CreateMovieGroupPage />
+                </Route>
+                <Route exact path={Paths.FAVORITE_GROUPS}>
+                  <FavoriteMovieGroupsPage />
                 </Route>
                 <Route exact path="/testapi">
                   <APITest />

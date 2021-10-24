@@ -2,33 +2,34 @@ import { SearchIcon } from "@heroicons/react/solid";
 import { InputAdornment, Pagination, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import MovieGroupItem from "../../components/MovieGroupItem";
 import PageContainer from "../../components/PageContainer";
 import {
-  FavoritesButton,
   GroupGrid,
   MovieGroupFooter,
   MovieGroupsContainer,
-  NewGroupButton,
+  AllGroupsButton,
+  GridHeader,
 } from "./styled";
-import { useMutation } from "@apollo/client";
-import { Paths } from "../../helpers/constants";
-import {
-  ADD_USER_TO_MOVIE_GROUP,
-  REMOVE_USER_FROM_MOVIE_GROUP,
-} from "../../helpers/graphql-queries";
+import MovieGroupWithUpcomingEvents from "../../components/MovieGroupsWithUpcomingEvents";
 import { LogOutButton } from "../../components/LogOutButton";
-import { useMovieGroups } from "./utils";
+import { useFavoriteMovieGroups } from "./utils";
+import { useMutation } from "@apollo/client";
+import { REMOVE_USER_FROM_MOVIE_GROUP } from "../../helpers/graphql-queries";
+import { Paths } from "../../helpers/constants";
 
-export default function MovieGroupsPage() {
-  const pageSize = 8;
+export default function FavoriteMovieGroupsPage() {
+  const pageSize = 4;
   const [alias, setAlias] = useState("");
   const [page, setPage] = useState(1);
   const [searchString, setSearchString] = useState("");
-
-  const { movieGroups, pageCount, refetch } = useMovieGroups(page, pageSize, searchString);
-  const [addUserToGroup] = useMutation(ADD_USER_TO_MOVIE_GROUP);
   const [removeUserFromGroup] = useMutation(REMOVE_USER_FROM_MOVIE_GROUP);
+  const { movieGroups, pageCount, refetch } = useFavoriteMovieGroups(
+    page,
+    pageSize,
+    alias,
+    searchString,
+  );
+
   const history = useHistory();
 
   useEffect(() => {
@@ -39,9 +40,8 @@ export default function MovieGroupsPage() {
     <PageContainer>
       <MovieGroupsContainer>
         <Typography gutterBottom variant={"h3"}>
-          Movie Groups
+          Favorite Movie Groups
         </Typography>
-
         <TextField
           InputProps={{
             endAdornment: (
@@ -57,39 +57,43 @@ export default function MovieGroupsPage() {
             setSearchString(e.target.value);
           }}
         />
+        <GridHeader>
+          <Typography variant={"h5"} component={"h5"}>
+            Group
+          </Typography>
+          <Typography variant={"h5"} component={"h5"}>
+            Upcoming Events
+          </Typography>
+        </GridHeader>
         <GroupGrid>
-          {movieGroups.map((item) => {
-            const isFavorite = item.userFavorites.some((e) => e.alias === alias);
-            return (
-              <MovieGroupItem
+          {movieGroups.map(
+            (item: {
+              name: string;
+              movieGroupId: string;
+              movieEvents: { title: string; date: string; movieEventId: string }[];
+            }) => (
+              <MovieGroupWithUpcomingEvents
                 title={item.name}
                 key={item.movieGroupId}
-                onToggleFavorite={() => {
-                  let action;
-                  if (isFavorite) {
-                    action = removeUserFromGroup;
-                  } else {
-                    action = addUserToGroup;
-                  }
-                  action({
-                    variables: { useralias: alias, movieGroupId: item.movieGroupId },
-                  }).then(() => {
-                    refetch();
-                  });
-                }}
-                favorite={isFavorite}
                 id={item.movieGroupId}
+                events={item.movieEvents}
+                onUnFavorite={() => {
+                  removeUserFromGroup({
+                    variables: { useralias: alias, movieGroupId: item.movieGroupId },
+                  }).then(() => refetch());
+                }}
               />
-            );
-          })}
+            ),
+          )}
         </GroupGrid>
         <MovieGroupFooter>
-          <NewGroupButton onClick={() => history.push(Paths.ADD_MOVIE_GROUP)}>
-            Add new movie group
-          </NewGroupButton>
-          <FavoritesButton onClick={() => history.push(Paths.FAVORITE_GROUPS)}>
-            Go to favorites
-          </FavoritesButton>
+          <AllGroupsButton
+            onClick={() => {
+              history.push(Paths.MOVIE_GROUPS);
+            }}
+          >
+            Go to all movie groups
+          </AllGroupsButton>
           <LogOutButton color={"secondary"} onClick={() => history.push(Paths.HOME)}>
             Log out
           </LogOutButton>
