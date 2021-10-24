@@ -71,6 +71,19 @@ export class UserResolver {
     });
   }
 
+  @Mutation(() => MovieGroup)
+  async removeUserFromMovieGroup(
+    @Args("movieGroupId") movieGroupId: string,
+    @Args("useralias") useralias: string,
+  ) {
+    return prisma.movieGroup.update({
+      where: {
+        movieGroupId,
+      },
+      data: { userFavorites: { disconnect: { alias: useralias } } },
+    });
+  }
+
   @Mutation(() => MovieEvent)
   async addUserToEvent(
     @Args("movieEventId") movieEventId: string,
@@ -81,6 +94,19 @@ export class UserResolver {
         movieEventId,
       },
       data: { participants: { connect: { alias: useralias } } },
+    });
+  }
+
+  @Mutation(() => MovieEvent)
+  async removeUserFromEvent(
+      @Args("movieEventId") movieEventId: string,
+      @Args("useralias") useralias: string,
+  ) {
+    return prisma.movieEvent.update({
+      where: {
+        movieEventId,
+      },
+      data: { participants: { disconnect: { alias: useralias } } },
     });
   }
 }

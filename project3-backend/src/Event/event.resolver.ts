@@ -126,6 +126,20 @@ export class MovieEventResolver {
   }
 
   /**
+   * Checks if a certain user is a participant
+   * @param movieEvent
+   * @param alias the user alias
+   */
+  @ResolveField(() => Boolean)
+  async userIsParticipant(@Parent() movieEvent, @Args("alias") alias?: string) {
+    const { movieEventId } = movieEvent;
+    return prisma.movieEvent
+      .findUnique({ where: { movieEventId } })
+      .participants({ where: { alias: { contains: alias } } })
+      .then((res) => res.length > 0);
+  }
+
+  /**
    * Creates a new MoviePage Event
    * @param title
    * @param description

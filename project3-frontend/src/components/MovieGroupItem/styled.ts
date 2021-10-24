@@ -10,6 +10,8 @@ export const MovieGroupContainer = styled(Card)(() => ({
 export const MovieGroupLink = styled(Link)(() => ({
   width: "100%",
   height: "100%",
+  cursor: "pointer",
+  textTransform: "uppercase",
 }));
 
 export const MovieGroupCardContent = styled(CardContent)(({ theme }) => ({

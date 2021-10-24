@@ -73,18 +73,38 @@ export class MovieGroupResolver {
    * Gets the total number of movie groups
    */
   @Query(() => Int)
-  async movieGroupCount(): Promise<number> {
-    return await prisma.movieGroup.count();
+  async movieGroupCount(
+    @Args("aliasFavoriteUser", { nullable: true }) aliasFavoriteUser?: string,
+    @Args("aliasNotFavoriteUser", { nullable: true }) aliasNotFavoriteUser?: string,
+  ): Promise<number> {
+    if (aliasFavoriteUser)
+      return await prisma.movieGroup.count({
+        where: { userFavorites: { some: { alias: aliasFavoriteUser } } },
+      });
+    else if (aliasNotFavoriteUser)
+      return await prisma.movieGroup.count({
+        where: { userFavorites: { none: { alias: aliasNotFavoriteUser } } },
+      });
+    return prisma.movieGroup.count();
   }
 
   /**
    * Gets the movie events related to a movie group
    * @param movieGroup
+   * @param take How many events to take
+   * @param fromNow If the query only should return future events
    */
   @ResolveField(() => [MovieEvent])
-  async movieEvents(@Parent() movieGroup) {
+  async movieEvents(
+    @Parent() movieGroup,
+    @Args("take", { type: () => Int, nullable: true }) take?: number,
+    @Args("fromNow", { type: () => Boolean, nullable: true }) fromNow?: boolean,
+  ) {
     const { movieGroupId } = movieGroup;
-    return prisma.movieGroup.findUnique({ where: { movieGroupId } }).movieEvents();
+    const filterFromNow = fromNow ? { where: { date: { gte: new Date() } } } : undefined;
+    return prisma.movieGroup
+      .findUnique({ where: { movieGroupId } })
+      .movieEvents({ orderBy: { date: "asc" }, take, ...filterFromNow });
   }
 
   /**
@@ -95,22 +115,6 @@ export class MovieGroupResolver {
   async userFavorites(@Parent() movieGroup) {
     const { movieGroupId } = movieGroup;
     return prisma.movieGroup.findUnique({ where: { movieGroupId } }).userFavorites();
-  }
-
-  /**
-   * Gets the total number of movie groups a user has favorited
-   */
-  @Query(() => Int)
-  async countMovieGroupFavorite(@Args("alias") alias: string): Promise<number> {
-    return await prisma.movieGroup.count({ where: { userFavorites: { some: { alias } } } });
-  }
-
-  /**
-   * Gets the total number of movie groups a user hasn't favorited
-   */
-  @Query(() => Int)
-  async countMovieGroupNotFavorite(@Args("alias") alias: string): Promise<number> {
-    return await prisma.movieGroup.count({ where: { userFavorites: { none: { alias } } } });
   }
 
   /**

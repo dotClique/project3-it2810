@@ -22,10 +22,6 @@ export const MovieGroupsContainer = styled(Paper)(({ theme }) => ({
 export const GroupGrid = styled("div")(({ theme }) => ({
   display: "grid",
   width: "100%",
-  gridTemplateColumns: "1fr 1fr",
-  [theme.breakpoints.down("md")]: {
-    gridTemplateColumns: "1fr",
-  },
   overflow: "auto",
   gap: theme.spacing(1),
   padding: theme.spacing(1),
@@ -34,15 +30,24 @@ export const GroupGrid = styled("div")(({ theme }) => ({
   },
 }));
 
+export const GridHeader = styled("div")(({ theme }) => ({
+  width: "100%",
+  display: "grid",
+  gridTemplateColumns: "1fr 2fr",
+  marginTop: theme.spacing(1),
+  [theme.breakpoints.down("md")]: {
+    display: "none",
+  },
+}));
 export const MovieGroupFooter = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
-  gap: theme.spacing(2),
+  gap: theme.spacing(3),
   marginTop: "auto",
   marginBottom: theme.spacing(2),
 }));
 
-export const NewGroupButton = styled(Button)(({ theme }) => ({
+export const AllGroupsButton = styled(Button)(({ theme }) => ({
   color: theme.palette.primary.contrastText,
   backgroundColor: theme.palette.primary.main,
   "&:hover": {
@@ -51,13 +56,4 @@ export const NewGroupButton = styled(Button)(({ theme }) => ({
   width: "100%",
   height: 50,
   marginTop: theme.spacing(2),
-}));
-
-export const FavoritesButton = styled(Button)(({ theme }) => ({
-  color: theme.palette.primary.contrastText,
-  backgroundColor: theme.palette.primary.main,
-  height: 50,
-  "&:hover": {
-    backgroundColor: theme.palette.primary.light,
-  },
 }));
