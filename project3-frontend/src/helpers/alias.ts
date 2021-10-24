@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export function useAlias() {
   const [alias, setAlias] = useState(localStorage.getItem("alias"));
@@ -8,7 +8,6 @@ export function useAlias() {
     setAlias(newAlias);
   }
   function logout() {
-    console.log("logout");
     updateAlias("");
   }
 
