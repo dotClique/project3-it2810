@@ -1,21 +1,17 @@
 import { styled } from "@mui/system";
-import { Paper } from "@mui/material";
+import { Card, Paper } from "@mui/material";
 
-export const MovieGrid = styled("div")(() => ({
-  display: "grid",
-  width: "100%",
-  gridTemplateColumns: "1fr",
-  gridTemplateRows: "25fr 5fr 5fr 3fr",
-  justifyItems: "center",
-}));
-
-export const MovieImage = styled("img")(({ theme }) => ({
+export const MovieGrid = styled(Card)(({ theme }) => ({
   display: "flex",
-  height: "100%",
   width: "100%",
-  objectFit: "contain",
-  backgroundColor: theme.palette.secondary,
-  paddingBottom: "2%",
+  flexDirection: "column",
+  gridGap: 2,
+  minHeight: theme.breakpoints.values.sm,
+  backgroundColor: theme.palette.secondary.main,
+  alignItems: "baseline",
+  padding: 20,
+  color: "secondary.contrastText",
+  marginBottom: theme.spacing(2),
 }));
 
 export const MovieGroupsContainer = styled(Paper)(({ theme }) => ({
