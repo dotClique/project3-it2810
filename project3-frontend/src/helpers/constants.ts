@@ -1,6 +1,6 @@
 export enum Paths {
   HOME = "/",
-  MOVIE_GROUP = "/group",
+  MOVIE_GROUP = "/group/:id",
   MOVIE_GROUPS = "/groups",
   ADD_MOVIE_GROUP = "/add-movie-group",
   MOVIE_EVENT = "/movie",

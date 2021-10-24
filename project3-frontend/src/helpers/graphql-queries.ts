@@ -70,3 +70,25 @@ export const ADD_USER_TO_MOVIE_GROUP = gql`
     }
   }
 `;
+
+export const GET_MOVIE_GROUP = gql`
+  query ($movieGroupId: String!) {
+    movieGroup(movieGroupId: $movieGroupId) {
+      name
+      description
+      movieGroupId
+    }
+  }
+`;
+
+export const GET_MOVIE_GROUP_EVENTS = gql`
+  query ($movieGroupId: String!, $sortBy: AllowedSortingParams, $searchString: String) {
+    movieEvents(movieGroupId: $movieGroupId, sortBy: $sortBy, titleSearchString: $searchString) {
+      title
+      description
+      date
+      location
+      movieEventId
+    }
+  }
+`;
