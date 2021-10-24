@@ -4,7 +4,8 @@ import { Box, Button, Card } from "@mui/material";
 export const GroupAndEventContainer = styled(Card)(({ theme }) => ({
   width: "100%",
   display: "grid",
-  gridTemplateColumns: "1fr 2fr",
+  gridTemplateColumns: "34% 66%",
+  gridTemplateRows: "1fr",
   gridTemplateAreas: '"group events"',
   [theme.breakpoints.down("md")]: {
     gridTemplateRows: "100px auto",

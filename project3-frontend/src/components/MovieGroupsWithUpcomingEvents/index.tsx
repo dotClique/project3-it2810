@@ -23,6 +23,7 @@ export default function MovieGroupWithUpcomingEvents(props: Props) {
         >
           <Typography
             variant={"h5"}
+            noWrap
             sx={{
               transform: "scale(1.0)",
               "&:hover": {
@@ -32,6 +33,7 @@ export default function MovieGroupWithUpcomingEvents(props: Props) {
                 transform: "scale(0.8)",
               },
               transitionDuration: "0.05s",
+              width: "100%",
             }}
           >
             {props.title}
@@ -46,7 +48,7 @@ export default function MovieGroupWithUpcomingEvents(props: Props) {
         />
       </MovieGroupBox>
 
-      <List sx={{ gridArea: "events", margin: 0, padding: 0 }}>
+      <List sx={{ gridArea: "events", margin: 0, padding: 0, width: "100%" }}>
         {props.events.map((item) => (
           <ListItemButton
             key={item.movieEventId}
