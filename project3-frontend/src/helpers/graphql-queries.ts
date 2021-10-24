@@ -67,6 +67,9 @@ export const GET_MOVIE_EVENT = gql`
       date
       description
       location
+      participants {
+        alias
+      }
     }
   }
 `;
@@ -76,6 +79,26 @@ export const ADD_USER_TO_MOVIE_GROUP = gql`
     addUserToMovieGroup(movieGroupId: $movieGroupId, useralias: $useralias) {
       name
       userFavorites {
+        alias
+      }
+    }
+  }
+`;
+
+export const ADD_USER_TO_EVENT = gql`
+  mutation ($movieEventId: String!, $useralias: String!) {
+    addUserToEvent(movieEventId: $movieEventId, useralias: $useralias) {
+      participants {
+        alias
+      }
+    }
+  }
+`;
+
+export const REMOVE_USER_FROM_EVENT = gql`
+  mutation ($movieEventId: String!, $useralias: String!) {
+    removeUserFromEvent(movieEventId: $movieEventId, useralias: $useralias) {
+      participants {
         alias
       }
     }
