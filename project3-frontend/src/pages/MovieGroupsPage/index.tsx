@@ -1,6 +1,6 @@
 import { SearchIcon } from "@heroicons/react/solid";
 import { InputAdornment, Pagination, TextField, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router";
 import MovieGroupItem from "../../components/MovieGroupItem";
 import PageContainer from "../../components/PageContainer";

@@ -9,12 +9,12 @@ import { Paths } from "./helpers/constants";
 import theme from "./helpers/themes";
 import CreateMovieEventPage from "./pages/CreateMovieEventPage";
 import CreateMovieGroupPage from "./pages/CreateMovieGroupPage/index";
-import APITest from "./pages/APITest/index";
 import GroupPage from "./pages/GroupPage";
 import Home from "./pages/Home";
 import MovieEventPage from "./pages/MovieEventPage";
 import MovieGroups from "./pages/MovieGroupsPage";
 import FavoriteMovieGroupsPage from "./pages/FavoriteMovieGroupsPage";
+import LoggedOutRouter from "./components/LoggedOutRouter";
 
 function App() {
   return (
@@ -24,6 +24,7 @@ function App() {
         <ThemeProvider theme={theme}>
           <ToastProvider>
             <BrowserRouter basename="/project3">
+              <LoggedOutRouter />
               <Switch>
                 <Route exact path={Paths.HOME}>
                   <Home />
@@ -36,9 +37,6 @@ function App() {
                 </Route>
                 <Route exact path={Paths.FAVORITE_GROUPS}>
                   <FavoriteMovieGroupsPage />
-                </Route>
-                <Route exact path="/testapi">
-                  <APITest />
                 </Route>
                 <Route exact path={Paths.MOVIE_GROUP}>
                   <GroupPage />
