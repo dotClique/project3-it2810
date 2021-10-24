@@ -1,4 +1,5 @@
 import { useHistory } from "react-router";
+import { Paths } from "../../helpers/constants";
 import { FavoriteIcon } from "../FavoriteIcon";
 import {
   MovieGroupCardContent,
@@ -18,7 +19,7 @@ export default function MovieGroupItem(props: Props) {
   return (
     <MovieGroupContainer>
       <MovieGroupLink
-        onClick={() => history.push(`/group/${props.id}`)}
+        onClick={() => history.push(`${Paths.MOVIE_GROUPS}/${props.id}`)}
         color={"inherit"}
         underline={"none"}
       >

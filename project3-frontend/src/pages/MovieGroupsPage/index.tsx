@@ -1,3 +1,4 @@
+import { useLazyQuery, useMutation } from "@apollo/client";
 import { SearchIcon } from "@heroicons/react/solid";
 import {
   AccordionDetails,
@@ -11,6 +12,13 @@ import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import MovieGroupItem from "../../components/MovieGroupItem";
 import PageContainer from "../../components/PageContainer";
+import { Paths } from "../../helpers/constants";
+import {
+  ADD_USER_TO_MOVIE_GROUP,
+  CREATE_MOVIE_GROUP,
+  GET_COUNT_MOVIE_GROUPS_NOT_FAVORITE,
+  GET_MOVIE_GROUP_NOT_FAVORITE,
+} from "../../helpers/graphql-queries";
 import {
   GroupAccordion,
   GroupGrid,
@@ -19,13 +27,6 @@ import {
   MovieGroupsContainer,
   NewGroupButton,
 } from "./styled";
-import { useLazyQuery, useMutation } from "@apollo/client";
-import {
-  ADD_USER_TO_MOVIE_GROUP,
-  CREATE_MOVIE_GROUP,
-  GET_COUNT_MOVIE_GROUPS_NOT_FAVORITE,
-  GET_MOVIE_GROUP_NOT_FAVORITE,
-} from "../../helpers/graphql-queries";
 
 export default function MovieGroupsPage() {
   // This is only meant as an example of graphQL use and is to be changed in later versions
@@ -63,27 +64,35 @@ export default function MovieGroupsPage() {
 
   useEffect(() => {
     setAlias(localStorage.getItem("alias") || "");
-  }, []);
+  }, [setAlias]);
 
   useEffect(() => {
     if (!loadingCount && dataCount) {
       setCount(Math.ceil(dataCount.countMovieGroupNotFavorite / pageSize));
     }
-  }, [loadingCount, dataCount]);
+  }, [loadingCount, dataCount, setCount]);
 
   useEffect(() => {
     if (!loadingNewGroup && dataNewGroup) {
       notFavoriteGroupsQuery({ variables: { alias, page, pageSize } });
       fetchCountQuery({ variables: { alias } });
     }
-  }, [loadingNewGroup]);
+  }, [
+    loadingNewGroup,
+    dataNewGroup,
+    notFavoriteGroupsQuery,
+    fetchCountQuery,
+    alias,
+    page,
+    pageSize,
+  ]);
 
   useEffect(() => {
     if (alias) {
       notFavoriteGroupsQuery({ variables: { alias, page, pageSize } });
       fetchCountQuery({ variables: { alias } });
     }
-  }, [page, alias]);
+  }, [page, alias, pageSize, notFavoriteGroupsQuery, fetchCountQuery]);
 
   return (
     <PageContainer>
@@ -156,7 +165,7 @@ export default function MovieGroupsPage() {
           >
             Add new movie group
           </NewGroupButton>
-          <LogOutButton color={"secondary"} onClick={() => history.push("/")}>
+          <LogOutButton color={"secondary"} onClick={() => history.push(Paths.HOME)}>
             Change Alias
           </LogOutButton>
           <Pagination count={count} page={page} onChange={(e, v) => setPage(v)} color="primary" />
