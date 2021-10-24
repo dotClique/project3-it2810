@@ -2,7 +2,6 @@ import { GroupAndEventContainer, CenteredLink, MovieGroupBox } from "./styled";
 import { List, ListItemButton, ListItemText, Typography } from "@mui/material";
 import { useHistory } from "react-router";
 import { FavoriteIcon } from "../FavoriteIcon";
-import { MovieGroupTitle } from "../MovieGroupItem/styled";
 
 type Props = {
   title: string;
