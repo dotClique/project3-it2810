@@ -21,13 +21,15 @@ export default function Home() {
       addOrGetUser({ variables: { alias: aliasField } });
     }
   }
-  // Redirect if already logged in
+
+  // Fetch data about the user if already logged in
   useEffect(() => {
     if (alias) {
       getUser({ variables: { alias } });
     }
   }, []);
 
+  // Redirect if already logged in
   useEffect(() => {
     if (alias && userData) {
       if (userData.user.userHasFavorites) {
