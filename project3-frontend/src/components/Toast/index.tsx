@@ -7,6 +7,9 @@ type ToastProviderProps = {
   children: ReactNode;
 };
 
+/**
+ * Component to handle the providing of the ToastContext and setting the Toast component up.
+ */
 export default function ToastProvider(props: ToastProviderProps) {
   const [toastData, setToastData] = useState<ToastProps>({
     open: false,

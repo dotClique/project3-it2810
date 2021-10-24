@@ -55,6 +55,7 @@ export const useToast = () => {
 export function useCreationForm<FormValues>(
   MUTATION_CALL: DocumentNode,
   onCompleted: () => void,
+  additionalRequestVariables?: { [key: string]: string | number },
 ): [(values: FormValues) => void, boolean] {
   const toast = useToast();
   const [performMutation, { loading }] = useMutation(MUTATION_CALL, {
@@ -72,7 +73,7 @@ export function useCreationForm<FormValues>(
   const handleSubmit = useCallback(
     (values: FormValues) => {
       performMutation({
-        variables: values,
+        variables: { ...values, ...additionalRequestVariables },
       });
     },
     [performMutation],
