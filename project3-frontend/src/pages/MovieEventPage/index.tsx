@@ -1,5 +1,5 @@
 import PageContainer from "../../components/PageContainer";
-import { Typography, Button, Card, Box, Divider } from "@mui/material";
+import { Typography, Button, Box, Divider } from "@mui/material";
 import { MovieGrid, MovieGroupsContainer } from "./styled";
 import { useParams, useHistory } from "react-router-dom";
 import { useMovieEvent } from "./utils";
@@ -17,14 +17,14 @@ export default function MovieEventPage() {
           </Typography>
 
           <Divider flexItem sx={{ width: "100%", margin: 1, borderColor: "primary.main" }} />
-          <Typography variant="h5" id="beskrivelse" color="primary">
+          <Typography variant="h5" color="primary">
             Description
           </Typography>
-          <Typography variant="body1" id="beskrivelse" color="secondary.contrastText">
+          <Typography variant="body1" color="secondary.contrastText">
             {movieData.description}
           </Typography>
           <Divider sx={{ width: "100%", margin: 1 }} />
-          <Typography variant="h5" id="beskrivelse" color="primary">
+          <Typography variant="h5" color="primary">
             Location
           </Typography>
           <Box sx={{ display: "flex", flexDirection: "row", gap: 4 }}>
@@ -34,14 +34,14 @@ export default function MovieEventPage() {
           </Box>
 
           <Divider sx={{ width: "100%", margin: 1 }} />
-          <Typography variant="h5" id="beskrivelse" color="primary">
+          <Typography variant="h5" color="primary">
             Date
           </Typography>
           <Typography variant="body1" component="h4" color="secondary.contrastText">
             {movieData.date}
           </Typography>
           <Divider sx={{ width: "100%", margin: 1 }} />
-          <Typography variant="h5" id="beskrivelse" color="primary">
+          <Typography variant="h5" color="primary">
             Status
           </Typography>
           <Box sx={{ display: "flex", flexDirection: "row", gap: 4 }}>

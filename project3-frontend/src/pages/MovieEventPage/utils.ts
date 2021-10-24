@@ -12,19 +12,13 @@ export function useMovieEvent(id: string) {
     fetchPolicy: "network-only",
   });
 
-  const [joinEvent, { data: joinData, loading: joinLoading, error: joinError }] = useMutation(
-    ADD_USER_TO_EVENT,
-    {
-      variables: { movieEventId: String(id), useralias: localStorage.getItem("alias") },
-    },
-  );
+  const [joinEvent, { data: joinData }] = useMutation(ADD_USER_TO_EVENT, {
+    variables: { movieEventId: String(id), useralias: localStorage.getItem("alias") },
+  });
 
-  const [leaveEvent, { data: leaveData, loading: leaveLoading, error: leaveError }] = useMutation(
-    REMOVE_USER_FROM_EVENT,
-    {
-      variables: { movieEventId: String(id), useralias: localStorage.getItem("alias") },
-    },
-  );
+  const [leaveEvent, { data: leaveData }] = useMutation(REMOVE_USER_FROM_EVENT, {
+    variables: { movieEventId: String(id), useralias: localStorage.getItem("alias") },
+  });
 
   const [isParticipant, setIsParticipant] = useState<boolean>(false);
   useEffect(() => {
