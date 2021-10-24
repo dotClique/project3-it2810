@@ -1,9 +1,27 @@
-import { Args, Int, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
+import {
+  Args,
+  Int,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+  registerEnumType,
+} from "@nestjs/graphql";
 import { prisma } from "../../../project3-common/src/prisma";
 import { MovieGroup } from "../Group/group.model";
 import { User } from "../User/user.model";
 import { MovieEvent } from "./event.model";
 
+enum AllowedSortingParams {
+  DATE,
+  TITLE,
+  LOCATION,
+}
+
+registerEnumType(AllowedSortingParams, {
+  name: "AllowedSortingParams",
+});
 /**
  * Resolves all GraphQL queries related to MoviePage Events
  */
@@ -33,6 +51,8 @@ export class MovieEventResolver {
    * @param locationSearchString The (optional) search string for the location of the movieEvents.
    * @param fromDate The (optional) earliest date the movieEvents can take place.
    * @param toDate The (optional) latest date the movieEvent can take place.
+   * @param sortBy The (optional) sorting parameter.
+   * @param asc The (optional) parameter for sorting ascending
    *
    * @remarks All search strings match with case insensitivity.
    */
@@ -46,9 +66,26 @@ export class MovieEventResolver {
     @Args("location", { nullable: true }) locationSearchString?: string,
     @Args("fromDate", { nullable: true }) fromDate?: Date,
     @Args("toDate", { nullable: true }) toDate?: Date,
+    @Args("sortBy", { type: () => AllowedSortingParams, nullable: true }) sortBy = 0,
+    @Args("asc", { type: () => Boolean, nullable: true }) asc = false,
   ): Promise<MovieEvent[]> {
     const pagination = { take: pageSize, skip: (page - 1) * pageSize };
+    const direction = asc ? "asc" : "desc";
+
+    let sortElement;
+    switch (sortBy) {
+      case 0:
+        sortElement = { date: direction };
+        break;
+      case 1:
+        sortElement = { title: direction };
+        break;
+      case 2:
+        sortElement = { location: direction };
+        break;
+    }
     return await prisma.movieEvent.findMany({
+      orderBy: sortElement,
       where: {
         title: { mode: "insensitive", contains: titleSearchString },
         movieGroupId,
