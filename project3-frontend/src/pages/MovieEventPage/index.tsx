@@ -10,7 +10,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import { useParams, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-export default function MoviePage() {
+export default function MovieEventPage() {
   const [mostrecent, setMostRecent] = useState<number>(0);
   let id: string;
   // eslint-disable-next-line prefer-const
@@ -64,9 +64,7 @@ export default function MoviePage() {
   return (
     <PageContainer>
       <MovieGroupsContainer>
-        <Button variant={"contained"} onClick={useHistory().goBack}>
-          Back
-        </Button>
+        <Button variant={"contained"}>Back</Button>
         <MovieGrid>
           <Card variant="outlined" sx={{ width: "100%", height: "100%" }}>
             <Typography variant="h1" component="h1" sx={{ width: "100%" }}>

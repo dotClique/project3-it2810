@@ -8,18 +8,46 @@ export const ADD_OR_GET_USER = gql`
   }
 `;
 
-export const GET_MOVIE_GROUP_NOT_FAVORITE = gql`
-  query ($alias: String!, $page: Int!, $pageSize: Int!) {
-    movieGroupsNotFavorite(alias: $alias, page: $page, pageSize: $pageSize) {
+export const GET_MOVIE_GROUPS_FAVORITE = gql`
+  query ($alias: String!, $page: Int!, $pageSize: Int!, $searchString: String) {
+    movieGroups(
+      aliasFavoriteUser: $alias
+      page: $page
+      pageSize: $pageSize
+      titleSearchString: $searchString
+    ) {
       movieGroupId
       name
+      movieEvents(take: 3, fromNow: true) {
+        title
+        date
+        movieEventId
+      }
     }
   }
 `;
 
-export const GET_COUNT_MOVIE_GROUPS_NOT_FAVORITE = gql`
+export const GET_MOVIE_GROUPS = gql`
+  query ($page: Int!, $pageSize: Int!, $searchString: String) {
+    movieGroups(page: $page, pageSize: $pageSize, titleSearchString: $searchString) {
+      movieGroupId
+      name
+      userFavorites {
+        alias
+      }
+    }
+  }
+`;
+
+export const GET_COUNT_MOVIE_GROUPS_FAVORITE = gql`
   query ($alias: String!) {
-    countMovieGroupNotFavorite(alias: $alias)
+    movieGroupCount(aliasFavoriteUser: $alias)
+  }
+`;
+
+export const GET_COUNT_MOVIE_GROUPS = gql`
+  query {
+    movieGroupCount
   }
 `;
 
@@ -84,6 +112,18 @@ export const ADD_USER_TO_MOVIE_GROUP = gql`
     }
   }
 `;
+
+export const REMOVE_USER_FROM_MOVIE_GROUP = gql`
+  mutation ($movieGroupId: String!, $useralias: String!) {
+    removeUserFromMovieGroup(movieGroupId: $movieGroupId, useralias: $useralias) {
+      name
+      userFavorites {
+        alias
+      }
+    }
+  }
+`;
+
 
 export const ADD_USER_TO_EVENT = gql`
   mutation ($movieEventId: String!, $useralias: String!) {

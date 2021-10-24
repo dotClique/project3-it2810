@@ -22,7 +22,7 @@ export default function APITest() {
 
   useEffect(() => {
     console.log(loading, error, data);
-  }, [loading]);
+  }, [loading, error, data]);
 
   useEffect(() => {
     getHelloFromAPI()

@@ -34,6 +34,12 @@ To develop in this environment, you have to do `npm install` in three directorie
 - project3-frontend
 - project3-backend
 
+This can be done using the single command from the directory `project3-it2810`:
+```bash
+$ npm run install:all
+```
+This runs npm install in all 3 directories. 
+
 If you do a fundamental change in the databse schema, you might have to delete the database for the project to run. To do so:
 
 ```bash
