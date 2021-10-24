@@ -34,7 +34,7 @@ function App() {
                 <Route exact path={Paths.ADD_MOVIE_GROUP}>
                   <CreateMovieGroupPage />
                 </Route>
-                <Route exact path="/favoritegroups">
+                <Route exact path={Paths.FAVORITE_GROUPS}>
                   <FavoriteMovieGroupsPage />
                 </Route>
                 <Route exact path="/testapi">

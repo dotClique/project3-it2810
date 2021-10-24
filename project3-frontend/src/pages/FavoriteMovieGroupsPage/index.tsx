@@ -15,6 +15,7 @@ import { LogOutButton } from "../../components/LogOutButton";
 import { useFavoriteMovieGroups } from "./utils";
 import { useMutation } from "@apollo/client";
 import { REMOVE_USER_FROM_MOVIE_GROUP } from "../../helpers/graphql-queries";
+import { Paths } from "../../helpers/constants";
 
 export default function FavoriteMovieGroupsPage() {
   const pageSize = 4;
@@ -88,12 +89,12 @@ export default function FavoriteMovieGroupsPage() {
         <MovieGroupFooter>
           <AllGroupsButton
             onClick={() => {
-              history.push("/groups");
+              history.push(Paths.MOVIE_GROUPS);
             }}
           >
             Go to all movie groups
           </AllGroupsButton>
-          <LogOutButton color={"secondary"} onClick={() => history.push("/")}>
+          <LogOutButton color={"secondary"} onClick={() => history.push(Paths.HOME)}>
             Log out
           </LogOutButton>
           <Pagination

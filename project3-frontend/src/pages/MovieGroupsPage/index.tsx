@@ -84,10 +84,10 @@ export default function MovieGroupsPage() {
           })}
         </GroupGrid>
         <MovieGroupFooter>
-          <NewGroupButton onClick={() => history.push("/addGroup")}>
+          <NewGroupButton onClick={() => history.push(Paths.ADD_MOVIE_GROUP)}>
             Add new movie group
           </NewGroupButton>
-          <FavoritesButton onClick={() => history.push("/favoritegroups")}>
+          <FavoritesButton onClick={() => history.push(Paths.FAVORITE_GROUPS)}>
             Go to favorites
           </FavoritesButton>
           <LogOutButton color={"secondary"} onClick={() => history.push(Paths.HOME)}>

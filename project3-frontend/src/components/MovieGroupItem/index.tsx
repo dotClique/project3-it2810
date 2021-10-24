@@ -21,7 +21,7 @@ export default function MovieGroupItem(props: Props) {
   return (
     <MovieGroupContainer sx={props.sx}>
       <MovieGroupLink
-        onClick={() => history.push(`${Paths.MOVIE_GROUPS}/${props.id}`)}
+        onClick={() => history.push(`${Paths.MOVIE_GROUP}/${props.id}`)}
         color={"inherit"}
         underline={"none"}
       >
