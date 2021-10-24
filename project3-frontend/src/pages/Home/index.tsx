@@ -1,10 +1,10 @@
+import { useMutation } from "@apollo/client";
 import { TextField, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import PageContainer from "../../components/PageContainer";
-import { LoginButton, LoginForm, LoginPageContainer } from "./styled";
 import { ADD_OR_GET_USER } from "../../helpers/graphql-queries";
-import { useMutation } from "@apollo/client";
-import { useEffect, useState } from "react";
+import { LoginButton, LoginForm, LoginPageContainer } from "./styled";
 
 export default function Home() {
   const history = useHistory();
@@ -20,7 +20,7 @@ export default function Home() {
       localStorage.setItem("alias", data.createUserOrCheckIfExists.alias);
       history.push("/groups");
     }
-  }, [loading]);
+  }, [loading, history, data, error]);
   return (
     <PageContainer>
       <LoginPageContainer>

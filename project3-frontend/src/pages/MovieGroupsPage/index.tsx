@@ -12,6 +12,7 @@ import {
   NewGroupButton,
 } from "./styled";
 import { useMutation } from "@apollo/client";
+import { Paths } from "../../helpers/constants";
 import {
   ADD_USER_TO_MOVIE_GROUP,
   REMOVE_USER_FROM_MOVIE_GROUP,
@@ -89,7 +90,7 @@ export default function MovieGroupsPage() {
           <FavoritesButton onClick={() => history.push("/favoritegroups")}>
             Go to favorites
           </FavoritesButton>
-          <LogOutButton color={"secondary"} onClick={() => history.push("/")}>
+          <LogOutButton color={"secondary"} onClick={() => history.push(Paths.HOME)}>
             Log out
           </LogOutButton>
           <Pagination

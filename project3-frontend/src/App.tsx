@@ -1,16 +1,19 @@
+import { ApolloProvider } from "@apollo/client";
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
-import theme from "./helpers/themes";
-import APITest from "./pages/APITest/index";
-import Home from "./pages/Home";
-import MovieGroups from "./pages/MovieGroupsPage";
-import GroupPage from "./pages/GroupPage";
+import ToastProvider from "./components/Toast/index";
 import client from "./helpers/apollo";
-import { ApolloProvider } from "@apollo/client";
-import MoviePage from "./pages/MoviePage";
-import AddMoviePage from "./pages/AddMoviePage";
+import { Paths } from "./helpers/constants";
+import theme from "./helpers/themes";
+import CreateMovieEventPage from "./pages/CreateMovieEventPage";
+import CreateMovieGroupPage from "./pages/CreateMovieGroupPage/index";
+import APITest from "./pages/APITest/index";
+import GroupPage from "./pages/GroupPage";
+import Home from "./pages/Home";
+import MovieEventPage from "./pages/MovieEventPage";
+import MovieGroups from "./pages/MovieGroupsPage";
 import FavoriteMovieGroupsPage from "./pages/FavoriteMovieGroupsPage";
 
 function App() {
@@ -19,31 +22,36 @@ function App() {
       <div className="App">
         <CssBaseline />
         <ThemeProvider theme={theme}>
-          <BrowserRouter basename="/project3">
-            <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route exact path="/groups">
-                <MovieGroups />
-              </Route>
-              <Route exact path="/favoritegroups">
-                <FavoriteMovieGroupsPage />
-              </Route>
-              <Route exact path="/testapi">
-                <APITest />
-              </Route>
-              <Route exact path="/group">
-                <GroupPage />
-              </Route>
-              <Route exact path="/movie">
-                <MoviePage />
-              </Route>
-              <Route exact path="/addmovie">
-                <AddMoviePage />
-              </Route>
-            </Switch>
-          </BrowserRouter>
+          <ToastProvider>
+            <BrowserRouter basename="/project3">
+              <Switch>
+                <Route exact path={Paths.HOME}>
+                  <Home />
+                </Route>
+                <Route exact path={Paths.MOVIE_GROUPS}>
+                  <MovieGroups />
+                </Route>
+                <Route exact path={Paths.ADD_MOVIE_GROUP}>
+                  <CreateMovieGroupPage />
+                </Route>
+                <Route exact path="/favoritegroups">
+                  <FavoriteMovieGroupsPage />
+                </Route>
+                <Route exact path="/testapi">
+                  <APITest />
+                </Route>
+                <Route exact path={Paths.MOVIE_GROUP}>
+                  <GroupPage />
+                </Route>
+                <Route exact path={Paths.MOVIE_EVENT}>
+                  <MovieEventPage />
+                </Route>
+                <Route exact path={Paths.ADD_MOVIE_EVENT}>
+                  <CreateMovieEventPage />
+                </Route>
+              </Switch>
+            </BrowserRouter>
+          </ToastProvider>
         </ThemeProvider>
       </div>
     </ApolloProvider>
