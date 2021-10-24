@@ -26,7 +26,20 @@ export default function MovieGroupItem(props: Props) {
         underline={"none"}
       >
         <MovieGroupCardContent>
-          <MovieGroupTitle variant="h5" noWrap>
+          <MovieGroupTitle
+            variant="h5"
+            noWrap
+            sx={{
+              transform: "scale(1.0)",
+              "&:hover": {
+                transform: "scale(1.1)",
+              },
+              "&:active": {
+                transform: "scale(0.8)",
+              },
+              transitionDuration: "0.05s",
+            }}
+          >
             {props.title}
           </MovieGroupTitle>
         </MovieGroupCardContent>

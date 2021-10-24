@@ -2,6 +2,7 @@ import { GroupAndEventContainer, CenteredLink, MovieGroupBox } from "./styled";
 import { List, ListItemButton, ListItemText, Typography } from "@mui/material";
 import { useHistory } from "react-router";
 import { FavoriteIcon } from "../FavoriteIcon";
+import { MovieGroupTitle } from "../MovieGroupItem/styled";
 
 type Props = {
   title: string;
@@ -21,7 +22,21 @@ export default function MovieGroupWithUpcomingEvents(props: Props) {
             history.push(`/group/${props.id}`);
           }}
         >
-          <Typography variant={"h5"}>{props.title}</Typography>
+          <Typography
+            variant={"h5"}
+            sx={{
+              transform: "scale(1.0)",
+              "&:hover": {
+                transform: "scale(1.1)",
+              },
+              "&:active": {
+                transform: "scale(0.8)",
+              },
+              transitionDuration: "0.05s",
+            }}
+          >
+            {props.title}
+          </Typography>
         </CenteredLink>
         <FavoriteIcon
           width={30}
