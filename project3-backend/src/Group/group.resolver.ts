@@ -91,11 +91,20 @@ export class MovieGroupResolver {
   /**
    * Gets the movie events related to a movie group
    * @param movieGroup
+   * @param take How many events to take
+   * @param fromNow If the query only should return future events
    */
   @ResolveField(() => [MovieEvent])
-  async movieEvents(@Parent() movieGroup) {
+  async movieEvents(
+    @Parent() movieGroup,
+    @Args("take", { type: () => Int, nullable: true }) take?: number,
+    @Args("fromNow", { type: () => Boolean, nullable: true }) fromNow?: boolean,
+  ) {
     const { movieGroupId } = movieGroup;
-    return prisma.movieGroup.findUnique({ where: { movieGroupId } }).movieEvents();
+    const filterFromNow = fromNow ? { where: { date: { gte: new Date() } } } : undefined;
+    return prisma.movieGroup
+      .findUnique({ where: { movieGroupId } })
+      .movieEvents({ orderBy: { date: "asc" }, take, ...filterFromNow });
   }
 
   /**

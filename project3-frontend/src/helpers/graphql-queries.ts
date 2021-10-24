@@ -18,7 +18,7 @@ export const GET_MOVIE_GROUPS_FAVORITE = gql`
     ) {
       movieGroupId
       name
-      movieEvents {
+      movieEvents(take: 3, fromNow: true) {
         title
         date
         movieEventId

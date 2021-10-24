@@ -41,7 +41,7 @@ export function useMovieGroups(page: number, pageSize: number, searchString: str
     if (!loadingCount && dataCount) {
       setPageCount(Math.ceil(dataCount.movieGroupCount / pageSize));
     }
-  }, [loadingCount, dataCount]);
+  }, [loadingCount, dataCount, pageSize]);
 
   // Refetches if page or searchstring changes
   useEffect(() => {
