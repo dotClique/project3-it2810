@@ -96,4 +96,17 @@ export class UserResolver {
       data: { participants: { connect: { alias: useralias } } },
     });
   }
+
+  @Mutation(() => MovieEvent)
+  async removeUserFromEvent(
+      @Args("movieEventId") movieEventId: string,
+      @Args("useralias") useralias: string,
+  ) {
+    return prisma.movieEvent.update({
+      where: {
+        movieEventId,
+      },
+      data: { participants: { disconnect: { alias: useralias } } },
+    });
+  }
 }
