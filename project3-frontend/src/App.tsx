@@ -46,9 +46,6 @@ function App() {
                 <Route exact path={Paths.MOVIE_EVENT}>
                   <MovieEventPage />
                 </Route>
-                <Route path="/movie/:id">
-                  <MoviePage />
-                </Route>
                 <Route exact path={Paths.ADD_MOVIE_EVENT}>
                   <CreateMovieEventPage />
                 </Route>
