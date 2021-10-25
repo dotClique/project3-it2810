@@ -50,9 +50,9 @@ export const GroupGrid = styled(Grid)(({ theme }) => ({
 export const EventsHeader = styled(Box)(({ theme }) => ({
   display: "grid",
   width: "100%",
-  gridTemplateColumns: "3fr 4fr 1.5fr 1.5fr",
+  gridTemplateColumns: "3fr 4fr 1.5fr 1.5fr 1fr",
   gridTemplateRows: "1fr",
-  gridTemplateAreas: '"title description location dateTime"',
+  gridTemplateAreas: '"title description location dateTime status"',
   marginTop: theme.spacing(2),
   gap: theme.spacing(1),
   padding: "0 20px",

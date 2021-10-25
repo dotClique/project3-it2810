@@ -1,11 +1,13 @@
 import { MovieEventCard, TextData } from "./styled";
 import { Typography } from "@mui/material";
+import { CheckIcon, XIcon } from "@heroicons/react/solid";
 
 type Props = {
   description: string;
   title: string;
   location: string;
   datetime: string;
+  isParticipant: boolean;
 };
 
 export default function MovieEventComponent(props: Props) {
@@ -41,6 +43,9 @@ export default function MovieEventComponent(props: Props) {
       </Typography>
       <Typography variant={"body2"} sx={{ gridArea: "dateTime" }}>
         {props.datetime.replace("T", "\n").replace("Z", "").slice(0, -4)}
+      </Typography>
+      <Typography noWrap variant={"body2"} sx={{ gridArea: "participation" }}>
+        {props.isParticipant ? <CheckIcon width={"30px"} /> : <XIcon width={"30px"} />}
       </Typography>
     </MovieEventCard>
   );

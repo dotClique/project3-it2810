@@ -7,6 +7,7 @@ import { GET_MOVIE_GROUP, GET_MOVIE_GROUP_EVENTS } from "../../helpers/graphql-q
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { Paths } from "../../helpers/constants";
+import { useAlias } from "../../helpers/alias";
 
 export default function GroupPage() {
   const [sortBy, setSortBy] = useState<string>("DATE");
@@ -15,6 +16,7 @@ export default function GroupPage() {
   const [toDate, setToDate] = useState<string>("9999-12-30T23:59:59.999Z");
   const [pageCount, setPageCount] = useState<number>(1);
   const [pageNum, setPageNum] = useState<number>(1);
+  const { alias } = useAlias();
   let id: string;
   // eslint-disable-next-line prefer-const
   ({ id } = useParams());
@@ -32,6 +34,7 @@ export default function GroupPage() {
       fromDate: fromDate,
       page: pageNum,
       toDate: toDate,
+      alias,
     },
     fetchPolicy: "network-only",
   });
@@ -39,7 +42,6 @@ export default function GroupPage() {
     setPageCount(dataEvents ? Math.ceil(dataEvents.movieEventCount / 8) : pageCount);
   }, [dataEvents]);
 
-  console.log(fromDate, toDate);
   return (
     <PageContainer>
       <MovieGroupsContainer>
@@ -115,7 +117,8 @@ export default function GroupPage() {
           <Typography sx={{ gridArea: "title" }}>Event title</Typography>
           <Typography sx={{ gridArea: "description" }}>Description</Typography>
           <Typography sx={{ gridArea: "location" }}>Location</Typography>
-          <Typography sx={{ gridArea: "dateTime" }}>Date and Time</Typography>
+          <Typography sx={{ gridArea: "dateTime" }}>DateTime</Typography>
+          <Typography sx={{ gridArea: "status" }}>Participant</Typography>
         </EventsHeader>
         <GroupGrid>
           {dataEvents &&
@@ -127,6 +130,7 @@ export default function GroupPage() {
                   location: string;
                   date: string;
                   movieEventId: string;
+                  userIsParticipant: boolean;
                 },
                 i: number,
               ) => {
@@ -142,6 +146,7 @@ export default function GroupPage() {
                       title={movieEvent.title}
                       location={movieEvent.location}
                       datetime={movieEvent.date}
+                      isParticipant={movieEvent.userIsParticipant}
                       key={i}
                     />
                   </Button>

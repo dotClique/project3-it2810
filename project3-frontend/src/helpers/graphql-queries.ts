@@ -165,6 +165,7 @@ export const GET_MOVIE_GROUP_EVENTS = gql`
     $fromDate: DateTime
     $page: Int
     $toDate: DateTime
+    $alias: String!
   ) {
     movieEvents(
       movieGroupId: $movieGroupId
@@ -180,6 +181,7 @@ export const GET_MOVIE_GROUP_EVENTS = gql`
       date
       location
       movieEventId
+      userIsParticipant(alias: $alias)
     }
     movieEventCount(
       movieGroupId: $movieGroupId
