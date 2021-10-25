@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 import ToastProvider from "./components/Toast/index";
 import client from "./helpers/apollo";
-import { Paths } from "./helpers/constants";
+import { PathsWithParams } from "./helpers/constants";
 import theme from "./helpers/themes";
 import CreateMovieEventPage from "./pages/CreateMovieEventPage";
 import CreateMovieGroupPage from "./pages/CreateMovieGroupPage/index";
@@ -26,25 +26,25 @@ function App() {
             <BrowserRouter basename="/project3">
               <LoggedOutRouter />
               <Switch>
-                <Route exact path={Paths.HOME}>
+                <Route exact path={PathsWithParams.HOME}>
                   <Home />
                 </Route>
-                <Route exact path={Paths.MOVIE_GROUPS}>
+                <Route exact path={PathsWithParams.MOVIE_GROUPS}>
                   <MovieGroups />
                 </Route>
-                <Route exact path={Paths.ADD_MOVIE_GROUP}>
+                <Route exact path={PathsWithParams.ADD_MOVIE_GROUP}>
                   <CreateMovieGroupPage />
                 </Route>
-                <Route exact path={Paths.FAVORITE_GROUPS}>
+                <Route exact path={PathsWithParams.FAVORITE_GROUPS}>
                   <FavoriteMovieGroupsPage />
                 </Route>
-                <Route exact path={Paths.MOVIE_GROUP}>
+                <Route exact path={PathsWithParams.MOVIE_GROUP}>
                   <GroupPage />
                 </Route>
-                <Route exact path={Paths.MOVIE_EVENT}>
+                <Route exact path={PathsWithParams.MOVIE_EVENT}>
                   <MovieEventPage />
                 </Route>
-                <Route exact path={Paths.ADD_MOVIE_EVENT}>
+                <Route exact path={PathsWithParams.ADD_MOVIE_EVENT}>
                   <CreateMovieEventPage />
                 </Route>
               </Switch>

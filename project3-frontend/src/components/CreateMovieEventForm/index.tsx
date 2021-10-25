@@ -47,7 +47,7 @@ export default function CreateMovieEventForm(props: CreateMovieEventFormProps) {
   return (
     <CreationForm
       formInitialValues={formInitialValues}
-      onCompleted={() => history.push(Paths.HOME)}
+      onCompleted={() => history.goBack()}
       mutationCall={CREATE_MOVIE_EVENT}
       validationSchema={validationSchema}
       additionalRequestVariables={{ movieGroupId: props.movieGroupId }}
@@ -88,7 +88,7 @@ export default function CreateMovieEventForm(props: CreateMovieEventFormProps) {
             <Field
               name={FormNames.date}
               as={TextField}
-              label="Date"
+              label="Date and Time"
               InputLabelProps={{ shrink: true }}
               error={errors[FormNames.date] !== undefined}
               helperText={errors[FormNames.date]}

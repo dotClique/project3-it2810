@@ -27,6 +27,7 @@ export const TextData = styled("div")(({ theme }) => ({
     gridTemplateColumns: " 1fr",
     gridTemplateRows: " 1fr 1fr 1fr ",
   },
+  gridColumnGap: "4%",
   justifyContent: "center",
   alignItems: "center",
   alignContent: "center",
