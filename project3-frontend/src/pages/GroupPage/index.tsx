@@ -11,14 +11,19 @@ import {
   Button,
 } from "@mui/material";
 import MovieEventComponent from "../../components/MovieEventComponent";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { GET_MOVIE_GROUP, GET_MOVIE_GROUP_EVENTS } from "../../helpers/graphql-queries";
 import { useQuery } from "@apollo/client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Paths } from "../../helpers/constants";
 
 export default function GroupPage() {
   const [sortBy, setSortBy] = useState<string>("DATE");
   const [searchString, setSearchString] = useState<string>("");
+  const [fromDate, setFromDate] = useState<string>(new Date().toISOString());
+  const [toDate, setToDate] = useState<string>("9999-12-30T23:59:59.999Z");
+  const [pageCount, setPageCount] = useState<number>(1);
+  const [pageNum, setPageNum] = useState<number>(1);
   let id: string;
   // eslint-disable-next-line prefer-const
   ({ id } = useParams());
@@ -26,17 +31,29 @@ export default function GroupPage() {
     variables: { movieGroupId: String(id) },
     fetchPolicy: "cache-first",
   });
-
+  const history = useHistory();
   const { data: dataEvents } = useQuery(GET_MOVIE_GROUP_EVENTS, {
-    variables: { movieGroupId: String(id), sortBy: sortBy, searchString: searchString },
+    variables: {
+      movieGroupId: String(id),
+      sortBy: sortBy,
+      searchString: searchString,
+      pageSize: 8,
+      fromDate: fromDate,
+      page: pageNum,
+      toDate: toDate,
+    },
     fetchPolicy: "network-only",
   });
-  console.log(dataEvents);
+  useEffect(() => {
+    setPageCount(dataEvents ? Math.ceil(dataEvents.movieEventCount / 8) : pageCount);
+  }, [dataEvents]);
 
   return (
     <PageContainer>
       <MovieGroupsContainer>
-        <Button variant={"contained"}>Back</Button>
+        <Button variant={"contained"} onClick={history.goBack}>
+          Back
+        </Button>
         <h1>{dataGroup ? dataGroup.movieGroup.name : "error"}</h1>
         <br />
         <FilterGrid>
@@ -49,7 +66,18 @@ export default function GroupPage() {
             }}
           />
           <Card variant={"outlined"} sx={{ gridArea: "checkbox" }}>
-            <FormControlLabel control={<Checkbox />} label={"Viste filmer"} />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  onChange={(e) => {
+                    setFromDate(
+                      e.target.checked ? "0001-01-01T00:00:01.000Z" : new Date().toISOString(),
+                    );
+                  }}
+                />
+              }
+              label={"Viste filmer"}
+            />
           </Card>
           <Select
             defaultValue={"DATE"}
@@ -63,11 +91,38 @@ export default function GroupPage() {
             <MenuItem value={"TITLE"}>title</MenuItem>
             <MenuItem value={"LOCATION"}>location</MenuItem>
           </Select>
-          <Select label={"Tidsrom"} sx={{ gridArea: "filterTime" }}>
-            <MenuItem>innen en uke</MenuItem>
-            <MenuItem>denne måneden</MenuItem>
-            <MenuItem>i år</MenuItem>
-            <MenuItem>Allerede vist</MenuItem>
+          <Select
+            defaultValue={"4"}
+            label={"Tidsrom"}
+            sx={{ gridArea: "filterTime" }}
+            onChange={(e) => {
+              const date = new Date();
+              switch (e.target.value as string) {
+                case "0":
+                  date.setDate(date.getDate() + 7);
+                  setToDate(date.toISOString());
+                  break;
+                case "1":
+                  date.setMonth(date.getMonth() + 1);
+                  setToDate(date.toISOString());
+                  break;
+                case "2":
+                  date.setFullYear(date.getFullYear() + 1);
+                  setToDate(date.toISOString());
+                  break;
+                case "3":
+                  setToDate(date.toISOString());
+                  break;
+                default:
+                  setToDate("9999-12-30T23:59:59.999Z");
+              }
+            }}
+          >
+            <MenuItem value={"0"}>innen en uke</MenuItem>
+            <MenuItem value={"1"}> inn en måned</MenuItem>
+            <MenuItem value={"2"}>innen ett år</MenuItem>
+            <MenuItem value={"3"}>Allerede vist</MenuItem>
+            <MenuItem value={"4"}>Alle</MenuItem>
           </Select>
         </FilterGrid>
         <Card variant={"outlined"} sx={{ minHeight: "100px", width: "100%" }}>
@@ -79,23 +134,50 @@ export default function GroupPage() {
           {dataEvents &&
             dataEvents.movieEvents.map(
               (
-                movieEvent: { description: string; title: string; location: string; date: string },
-                i: any,
+                movieEvent: {
+                  description: string;
+                  title: string;
+                  location: string;
+                  date: string;
+                  movieEventId: string;
+                },
+                i: number,
               ) => {
                 return (
-                  <MovieEventComponent
-                    description={movieEvent.description}
-                    title={movieEvent.title}
-                    location={movieEvent.location}
-                    datetime={movieEvent.date}
+                  <Button
                     key={i}
-                  />
+                    onClick={() => {
+                      history.push("/movie/" + movieEvent.movieEventId);
+                    }}
+                  >
+                    <MovieEventComponent
+                      description={movieEvent.description}
+                      title={movieEvent.title}
+                      location={movieEvent.location}
+                      datetime={movieEvent.date}
+                      key={i}
+                    />
+                  </Button>
                 );
               },
             )}
         </GroupGrid>
-        <Pagination count={100} color="primary" />
-        <Button variant={"contained"}>Add New movieevent</Button>
+        <Pagination
+          count={pageCount}
+          page={pageNum}
+          onChange={(e, p) => {
+            setPageNum(p);
+          }}
+          color="primary"
+        />
+        <Button
+          variant={"contained"}
+          onClick={() => {
+            history.push(history.location.pathname + Paths.ADD_MOVIE_EVENT);
+          }}
+        >
+          Add New movieevent
+        </Button>
       </MovieGroupsContainer>
     </PageContainer>
   );
