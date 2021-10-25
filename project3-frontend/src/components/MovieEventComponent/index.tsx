@@ -17,17 +17,31 @@ export default function MovieEventComponent(props: Props) {
   }
   return (
     <MovieEventCard>
-      <TextData>
-        <Typography variant={"h3"}>{props.title}</Typography>
-        <Typography variant={"body2"} component={"div"} sx={{ textAlign: "left" }}>
-          {description}
-        </Typography>
-      </TextData>
+      <Typography
+        variant={"h5"}
+        color={"primary"}
+        align={"center"}
+        noWrap
+        sx={{ gridArea: "title" }}
+      >
+        {props.title}
+      </Typography>
+      <Typography
+        variant={"body2"}
+        component={"div"}
+        noWrap
+        align={"center"}
+        sx={{ gridArea: "description" }}
+      >
+        {description}
+      </Typography>
 
-      <TextData>
-        <div>{props.location}</div>
-        <div>{props.datetime.replace("T", "\n").replace("Z", "").slice(0, -4)}</div>
-      </TextData>
+      <Typography noWrap variant={"body2"} sx={{ gridArea: "location" }}>
+        {props.location}
+      </Typography>
+      <Typography variant={"body2"} sx={{ gridArea: "dateTime" }}>
+        {props.datetime.replace("T", "\n").replace("Z", "").slice(0, -4)}
+      </Typography>
     </MovieEventCard>
   );
 }
