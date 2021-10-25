@@ -20,6 +20,13 @@ export const MovieEventCard = styled(Card)(({ theme }) => ({
   padding: theme.spacing(1),
   backgroundColor: theme.palette.secondary.main,
   color: theme.palette.secondary.contrastText,
+  "& *": {
+    transform: "scale(1.0)",
+    transitionDuration: "0.05s",
+  },
+  "&:hover *": {
+    transform: "scale(1.1)",
+  },
 }));
 
 export const TextData = styled("div")(({ theme }) => ({
