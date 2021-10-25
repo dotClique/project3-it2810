@@ -135,3 +135,47 @@ export const REMOVE_USER_FROM_EVENT = gql`
     }
   }
 `;
+
+export const GET_MOVIE_GROUP = gql`
+  query ($movieGroupId: String!) {
+    movieGroup(movieGroupId: $movieGroupId) {
+      name
+      description
+      movieGroupId
+    }
+  }
+`;
+
+export const GET_MOVIE_GROUP_EVENTS = gql`
+  query (
+    $movieGroupId: String!
+    $sortBy: AllowedSortingParams
+    $searchString: String
+    $pageSize: Int
+    $fromDate: DateTime
+    $page: Int
+    $toDate: DateTime
+  ) {
+    movieEvents(
+      movieGroupId: $movieGroupId
+      sortBy: $sortBy
+      titleSearchString: $searchString
+      pageSize: $pageSize
+      fromDate: $fromDate
+      page: $page
+      toDate: $toDate
+    ) {
+      title
+      description
+      date
+      location
+      movieEventId
+    }
+    movieEventCount(
+      movieGroupId: $movieGroupId
+      titleSearchString: $searchString
+      fromDate: $fromDate
+      toDate: $toDate
+    )
+  }
+`;

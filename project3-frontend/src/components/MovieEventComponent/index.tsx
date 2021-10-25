@@ -26,7 +26,7 @@ export default function MovieEventComponent(props: Props) {
 
       <TextData>
         <div>{props.location}</div>
-        <div>{props.datetime}</div>
+        <div>{props.datetime.replace("T", "\n").replace("Z", "").slice(0, -4)}</div>
       </TextData>
     </MovieEventCard>
   );
