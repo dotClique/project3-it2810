@@ -173,7 +173,7 @@ export default function GroupPage() {
         <Button
           variant={"contained"}
           onClick={() => {
-            history.push(history.location.pathname + Paths.ADD_MOVIE_EVENT);
+            history.push(Paths.ADD_MOVIE_EVENT + "/" + id);
           }}
         >
           Add New movieevent
