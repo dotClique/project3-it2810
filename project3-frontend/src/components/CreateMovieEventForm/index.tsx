@@ -3,7 +3,6 @@ import { Field } from "formik";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import * as yup from "yup";
-import { Paths } from "../../helpers/constants";
 import { CREATE_MOVIE_EVENT } from "../../helpers/graphql-queries";
 import CreationForm from "../CreationForm";
 import styles from "./styles";

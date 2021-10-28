@@ -1,4 +1,4 @@
-import { MovieEventCard, TextData } from "./styled";
+import { MovieEventCard } from "./styled";
 import { Typography } from "@mui/material";
 import { CheckIcon, XIcon } from "@heroicons/react/solid";
 

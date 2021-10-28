@@ -1,17 +1,60 @@
 import { ReactNode } from "react";
-import StyledContainer from "./styled";
+import styles from "./styles";
+import { Box, Container, Paper, Typography } from "@mui/material";
+import { LogOutButton } from "../LogOutButton";
+import { Paths } from "../../helpers/constants";
+import { useHistory } from "react-router";
+import { useAlias } from "../../helpers/alias";
 
 type PageContainerProps = {
   children: ReactNode;
   title?: string;
+  centeredPage?: boolean;
+  logoutPossible?: boolean;
+  footerElements?: ReactNode;
 };
 
 function PageContainer(props: PageContainerProps) {
+  const history = useHistory();
+  const { logout } = useAlias();
   return (
-    <StyledContainer maxWidth="md">
-      {props.title ? <h3>{props.title}</h3> : false}
-      {props.children}
-    </StyledContainer>
+    <Container maxWidth="md" sx={styles.mainContainer}>
+      <Paper
+        component="main"
+        sx={props.centeredPage ? styles.centeredMainContentContainer : styles.mainContentContainer}
+      >
+        {props.title ? (
+          <Typography
+            color="secondary"
+            variant="h3"
+            component="h3"
+            gutterBottom
+            sx={{ width: "100%" }}
+          >
+            {props.title}
+          </Typography>
+        ) : (
+          false
+        )}
+        {props.children}
+        <Box component={"footer"} sx={styles.footerContainer}>
+          {props.logoutPossible ? (
+            <LogOutButton
+              color={"secondary"}
+              onClick={() => {
+                logout();
+                history.push(Paths.HOME);
+              }}
+            >
+              Log out
+            </LogOutButton>
+          ) : (
+            false
+          )}
+          {props.footerElements}
+        </Box>
+      </Paper>
+    </Container>
   );
 }
 
