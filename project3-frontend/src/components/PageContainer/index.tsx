@@ -12,6 +12,7 @@ type PageContainerProps = {
   centeredPage?: boolean;
   logoutPossible?: boolean;
   footerElements?: ReactNode;
+  backgroundColor?: "primary" | "secondary";
 };
 
 function PageContainer(props: PageContainerProps) {
@@ -21,7 +22,17 @@ function PageContainer(props: PageContainerProps) {
     <Container maxWidth="md" sx={styles.mainContainer}>
       <Paper
         component="main"
-        sx={props.centeredPage ? styles.centeredMainContentContainer : styles.mainContentContainer}
+        sx={{
+          ...(props.centeredPage
+            ? styles.centeredMainContentContainer
+            : styles.mainContentContainer),
+          ...(props.backgroundColor === "primary"
+            ? { backgroundColor: "primary.main" }
+            : undefined),
+          ...(props.backgroundColor === "secondary"
+            ? { backgroundColor: "secondary.main" }
+            : undefined),
+        }}
       >
         {props.title ? (
           <Typography
@@ -29,7 +40,14 @@ function PageContainer(props: PageContainerProps) {
             variant="h3"
             component="h3"
             gutterBottom
-            sx={{ width: "100%" }}
+            sx={{
+              ...(props.backgroundColor === "primary"
+                ? { color: "primary.contrastText" }
+                : undefined),
+              ...(props.backgroundColor === "secondary"
+                ? { color: "secondary.contrastText" }
+                : undefined),
+            }}
           >
             {props.title}
           </Typography>

@@ -3,54 +3,17 @@ import { Typography, Button, Box, Divider } from "@mui/material";
 import { MovieGrid } from "./styled";
 import { useParams, useHistory } from "react-router-dom";
 import { useMovieEvent } from "./utils";
+import MovieEventTextItem from "../../components/MovieEventTextItem";
 
 export default function MovieEventPage() {
   const { id } = useParams() as { id: string };
   const history = useHistory();
   const { isParticipant, movieData, joinEvent, leaveEvent } = useMovieEvent(id);
   return (
-    <PageContainer>
-      <MovieGrid>
-        <Typography color="primary" variant="h3" component="h3" sx={{ width: "100%" }}>
-          {movieData.title}
-        </Typography>
-
-        <Divider flexItem sx={{ width: "100%", margin: 1, borderColor: "primary.main" }} />
-        <Typography variant="h5" color="primary">
-          Description
-        </Typography>
-        <Typography variant="body1" color="secondary.contrastText">
-          {movieData.description}
-        </Typography>
-        <Divider sx={{ width: "100%", margin: 1 }} />
-        <Typography variant="h5" color="primary">
-          Location
-        </Typography>
-        <Box sx={{ display: "flex", flexDirection: "row", gap: 4 }}>
-          <Typography variant="body1" component="h4" color="secondary.contrastText">
-            {movieData.location}
-          </Typography>
-        </Box>
-
-        <Divider sx={{ width: "100%", margin: 1 }} />
-        <Typography variant="h5" color="primary">
-          Date
-        </Typography>
-        <Typography variant="body1" component="h4" color="secondary.contrastText">
-          {movieData.date}
-        </Typography>
-        <Divider sx={{ width: "100%", margin: 1 }} />
-        <Typography variant="h5" color="primary">
-          Status
-        </Typography>
-        <Box sx={{ display: "flex", flexDirection: "row", gap: 4 }}>
-          <Typography variant="body1" component="h4" color="secondary.contrastText">
-            {movieData && isParticipant
-              ? "You are a participant of this event"
-              : "You are not a participant of this event"}
-          </Typography>
-        </Box>
-
+    <PageContainer
+      title={movieData.title}
+      backgroundColor={"secondary"}
+      footerElements={
         <Box
           sx={{
             display: "flex",
@@ -90,7 +53,34 @@ export default function MovieEventPage() {
             </Button>
           )}
         </Box>
-      </MovieGrid>
+      }
+    >
+      <Box
+        sx={{
+          display: "flex",
+          width: "100%",
+          flexDirection: "column",
+          alignItems: "baseline",
+          padding: 3,
+        }}
+      >
+        <Divider flexItem sx={{ width: "100%", margin: 1, borderColor: "primary.main" }} />
+        <MovieEventTextItem title={"Description"} body={movieData.description} />
+        <Divider sx={{ width: "100%", margin: 1 }} />
+        <MovieEventTextItem title={"Location"} body={movieData.location} />
+
+        <Divider sx={{ width: "100%", margin: 1 }} />
+        <MovieEventTextItem title={"Date"} body={movieData.date} />
+        <Divider sx={{ width: "100%", margin: 1 }} />
+        <MovieEventTextItem
+          title={"Status"}
+          body={
+            movieData && isParticipant
+              ? "You are a participant of this event"
+              : "You are not a participant of this event"
+          }
+        />
+      </Box>
     </PageContainer>
   );
 }
