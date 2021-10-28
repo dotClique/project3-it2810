@@ -70,7 +70,10 @@ export default function MovieEventPage() {
         <MovieEventTextItem title={"Location"} body={movieData.location} />
 
         <Divider sx={{ width: "100%", margin: 1 }} />
-        <MovieEventTextItem title={"Date"} body={movieData.date} />
+        <MovieEventTextItem
+          title={"Datetime"}
+          body={movieData.date.replace("T", " ").replace("Z", "").slice(0, -4)}
+        />
         <Divider sx={{ width: "100%", margin: 1 }} />
         <MovieEventTextItem
           title={"Status"}

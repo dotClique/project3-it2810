@@ -69,7 +69,7 @@ export default function MovieGroupWithUpcomingEvents(props: Props) {
             <ListItemText
               inset
               primary={item.title}
-              secondary={item.date}
+              secondary={item.date.replace("T", " ").replace("Z", "").slice(0, -4)}
               secondaryTypographyProps={{ color: "primary.contrastText" }}
             />
           </ListItemButton>
