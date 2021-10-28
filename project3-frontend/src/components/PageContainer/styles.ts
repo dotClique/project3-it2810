@@ -38,6 +38,7 @@ const styles: StylesType = {
   footerContainer: {
     display: "flex",
     flexDirection: "column",
+    alignItems: "center",
     gap: 2,
     marginTop: "auto",
     paddingTop: 2,
