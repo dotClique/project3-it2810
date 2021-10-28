@@ -28,7 +28,9 @@ const styles: StylesType = {
     flexDirection: "column",
     alignItems: "center",
     maxWidth: "100vw",
-    minHeight: (theme) => theme.breakpoints.values.sm,
+    minHeight: (theme) => {
+      return { md: theme.breakpoints.values.sm };
+    },
     width: "md",
     padding: { xs: "20px 5vw 0", md: "20px 4px 0" },
   },

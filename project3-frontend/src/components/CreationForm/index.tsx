@@ -28,7 +28,7 @@ export default function CreationForm<T>(props: CreationFormProps<T>) {
 
   // Using Formik to handle form state management, errors, validation and submit.
   return (
-    <div>
+    <Box sx={{ marginTop: 4 }}>
       <Formik
         initialValues={props.formInitialValues}
         onSubmit={handleSubmit}
@@ -40,21 +40,17 @@ export default function CreationForm<T>(props: CreationFormProps<T>) {
           <Form>
             <FormContainer>
               {props.children(errors)}
-              <Box>
-                {props.submitButton || (
-                  <Button type="submit" color="primary" variant="contained" disabled={loading}>
-                    Submit
-                  </Button>
-                )}
-              </Box>
+              {props.submitButton || (
+                <Button type="submit" color="primary" variant="contained" disabled={loading}>
+                  Submit
+                </Button>
+              )}
               {/* Loading icon if applicable */}
-              <Box sx={{ height: 50 }}>
-                {loading && <CircularProgress variant="indeterminate" color="primary" />}
-              </Box>
+              <Box>{loading && <CircularProgress variant="indeterminate" color="primary" />}</Box>
             </FormContainer>
           </Form>
         )}
       </Formik>
-    </div>
+    </Box>
   );
 }

@@ -37,22 +37,26 @@ function PageContainer(props: PageContainerProps) {
           false
         )}
         {props.children}
-        <Box component={"footer"} sx={styles.footerContainer}>
-          {props.logoutPossible ? (
-            <LogOutButton
-              color={"secondary"}
-              onClick={() => {
-                logout();
-                history.push(Paths.HOME);
-              }}
-            >
-              Log out
-            </LogOutButton>
-          ) : (
-            false
-          )}
-          {props.footerElements}
-        </Box>
+        {props.footerElements ? (
+          <Box component={"footer"} sx={styles.footerContainer}>
+            {props.logoutPossible ? (
+              <LogOutButton
+                color={"secondary"}
+                onClick={() => {
+                  logout();
+                  history.push(Paths.HOME);
+                }}
+              >
+                Log out
+              </LogOutButton>
+            ) : (
+              false
+            )}
+            {props.footerElements}
+          </Box>
+        ) : (
+          false
+        )}
       </Paper>
     </Container>
   );
