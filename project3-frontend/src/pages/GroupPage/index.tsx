@@ -51,7 +51,7 @@ export default function GroupPage() {
             onClick={() => {
               history.push(Paths.ADD_MOVIE_EVENT + "/" + id);
             }}
-            text={"Add New movieevent"}
+            text={"Add New movie event"}
           />
           <FooterButton
             color={"secondary"}
