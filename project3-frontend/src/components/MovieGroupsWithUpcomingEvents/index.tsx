@@ -2,6 +2,7 @@ import { GroupAndEventContainer, CenteredLink, MovieGroupBox } from "./styled";
 import { List, ListItemButton, ListItemText, Typography } from "@mui/material";
 import { useHistory } from "react-router";
 import { FavoriteIcon } from "../FavoriteIcon";
+import { MovieGroupTitle } from "../MovieGroupItem/styled";
 
 type Props = {
   title: string;
@@ -22,6 +23,7 @@ export default function MovieGroupWithUpcomingEvents(props: Props) {
           }}
         >
           <Typography
+            aria-label={`Links to ${props.title} movie group page`}
             variant={"h5"}
             noWrap
             sx={{
@@ -51,6 +53,7 @@ export default function MovieGroupWithUpcomingEvents(props: Props) {
       <List sx={{ gridArea: "events", margin: 0, padding: 0, width: "100%" }}>
         {props.events.map((item) => (
           <ListItemButton
+            aria-label={`Links to ${item.title} event page`}
             key={item.movieEventId}
             divider
             sx={{
