@@ -17,6 +17,7 @@ const styles: StylesType = {
     alignItems: "center",
     maxWidth: "100vw",
     width: "md",
+    justifyContent: "space-evenly",
     padding: { xs: "20px 5vw 0", md: "20px 4px 0" },
     height: (theme) => theme.breakpoints.values.sm,
   },
