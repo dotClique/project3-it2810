@@ -1,12 +1,12 @@
-import { Box, TextField } from "@mui/material";
-import { Field } from "formik";
-import React from "react";
+import { Autocomplete, Box, CircularProgress, TextField } from "@mui/material";
+import { Field, FieldProps } from "formik";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import * as yup from "yup";
-import { Paths } from "../../helpers/constants";
-import { CREATE_MOVIE_EVENT } from "../../helpers/graphql-queries";
+import { CREATE_MOVIE_EVENT, GET_MOVIES } from "../../helpers/graphql-queries";
 import CreationForm from "../CreationForm";
 import styles from "./styles";
+import { useQuery } from "@apollo/client";
 
 // The names of the form fields.
 enum FormNames {
@@ -44,6 +44,26 @@ type CreateMovieEventFormProps = {
  */
 export default function CreateMovieEventForm(props: CreateMovieEventFormProps) {
   const history = useHistory();
+  const pageSize = 20;
+  const [searchString, setSearchString] = useState("");
+  const [options, setOptions] = useState<string[]>([]);
+  const { data, refetch } = useQuery(GET_MOVIES, {
+    variables: { pageSize, searchString },
+  });
+
+  useEffect(() => {
+    if (data) {
+      const mapped = data?.movies.map((item: { primarytitle: string }) => item.primarytitle);
+      setOptions(
+        mapped.filter((mov: string, index: number) => {
+          return mapped.indexOf(mov) === index;
+        }),
+      );
+    }
+  }, [data]);
+  useEffect(() => {
+    refetch({ pageSize, searchString });
+  }, [searchString]);
   return (
     <CreationForm
       formInitialValues={formInitialValues}
@@ -55,14 +75,34 @@ export default function CreateMovieEventForm(props: CreateMovieEventFormProps) {
       {(errors) => (
         <>
           <Box>
-            <Field
-              name={FormNames.title}
-              as={TextField}
-              label="Title"
-              error={errors[FormNames.title] !== undefined}
-              helperText={errors[FormNames.title]}
-              sx={styles.field}
-            />
+            <Field name={FormNames.title} id={FormNames.title} type={"string"} as={TextField}>
+              {({ form }: FieldProps) => {
+                return (
+                  <Autocomplete
+                    freeSolo
+                    filterOptions={(x) => x}
+                    onInputChange={(e, v) => {
+                      {
+                        setSearchString(v || searchString);
+                        form.setFieldValue(FormNames.title, v);
+                      }
+                    }}
+                    value={searchString}
+                    onChange={(e, v) => form.setFieldValue(FormNames.title, v)}
+                    renderInput={(params) => (
+                      <TextField
+                        label="Title"
+                        helperText={errors[FormNames.title]}
+                        sx={styles.field}
+                        error={errors[FormNames.title] !== undefined}
+                        {...params}
+                      />
+                    )}
+                    options={options}
+                  />
+                );
+              }}
+            </Field>
           </Box>
           <Box>
             <Field
