@@ -18,9 +18,7 @@ export default function GroupPage() {
   const [pageCount, setPageCount] = useState<number>(1);
   const [pageNum, setPageNum] = useState<number>(1);
   const { alias } = useAlias();
-  let id: string;
-  // eslint-disable-next-line prefer-const
-  ({ id } = useParams());
+  const { id } = useParams() as { id: string };
   const { data: dataGroup } = useQuery(GET_MOVIE_GROUP, {
     variables: { movieGroupId: String(id) },
     fetchPolicy: "cache-first",

@@ -44,7 +44,11 @@ export default function MovieEventComponent(props: Props) {
       <Typography variant={"body2"} sx={{ gridArea: "dateTime" }}>
         {props.datetime.replace("T", "\n").replace("Z", "").slice(0, -4)}
       </Typography>
-      <Typography noWrap variant={"body2"} sx={{ gridArea: "participation" }}>
+      <Typography
+        noWrap
+        variant={"body2"}
+        sx={{ gridArea: "participation", display: { xs: "none", md: "inherit" } }}
+      >
         {props.isParticipant ? <CheckIcon width={"30px"} /> : <XIcon width={"30px"} />}
       </Typography>
     </MovieEventCard>

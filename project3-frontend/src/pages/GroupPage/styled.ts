@@ -58,8 +58,8 @@ export const EventsHeader = styled(Box)(({ theme }) => ({
   padding: "0 20px",
   [theme.breakpoints.down("md")]: {
     display: "none",
-    gridTemplateColumns: " 1fr 1fr ",
+    gridTemplateColumns: " 1fr 1fr",
     gridTemplateRows: " 1fr 1fr",
-    gridTemplateAreas: '"title location" "description dateTime"',
+    gridTemplateAreas: '"title location status" "description dateTime"',
   },
 }));

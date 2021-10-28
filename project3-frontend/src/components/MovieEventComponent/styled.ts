@@ -9,9 +9,9 @@ export const MovieEventCard = styled(Card)(({ theme }) => ({
   gridTemplateRows: "1fr",
   gridTemplateAreas: '"title description location dateTime participation"',
   [theme.breakpoints.down("md")]: {
-    gridTemplateColumns: " 6fr 6fr 1fr",
-    gridTemplateRows: " 6fr 6fr 1fr",
-    gridTemplateAreas: '"title location participation" "description dateTime participation"',
+    gridTemplateColumns: " 6fr 6fr",
+    gridTemplateRows: " 6fr 6fr",
+    gridTemplateAreas: '"title location" "description dateTime"',
   },
   justifyContent: "center",
   alignContent: "center",
