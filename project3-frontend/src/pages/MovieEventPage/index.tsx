@@ -1,6 +1,5 @@
 import PageContainer from "../../components/PageContainer";
-import { Typography, Button, Box, Divider } from "@mui/material";
-import { MovieGrid } from "./styled";
+import { Button, Box, Divider } from "@mui/material";
 import { useParams, useHistory } from "react-router-dom";
 import { useMovieEvent } from "./utils";
 import MovieEventTextItem from "../../components/MovieEventTextItem";
@@ -13,6 +12,7 @@ export default function MovieEventPage() {
     <PageContainer
       title={movieData.title}
       backgroundColor={"secondary"}
+      centeredPage
       footerElements={
         <Box
           sx={{
