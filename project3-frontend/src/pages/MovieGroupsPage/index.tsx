@@ -9,7 +9,7 @@ import { useAlias } from "../../helpers/alias";
 import { Paths } from "../../helpers/constants";
 import {
   ADD_USER_TO_MOVIE_GROUP,
-  REMOVE_USER_FROM_MOVIE_GROUP
+  REMOVE_USER_FROM_MOVIE_GROUP,
 } from "../../helpers/graphql-queries";
 import { useCreationForm } from "../../helpers/utils";
 import { GroupGrid } from "./styled";
