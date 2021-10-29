@@ -1,5 +1,5 @@
 import { styled } from "@mui/system";
-import { Box, Grid, Paper } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 
 export const FilterGrid = styled(Grid)(({ theme }) => ({
   width: "100%",
