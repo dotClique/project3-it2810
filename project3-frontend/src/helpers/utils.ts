@@ -1,8 +1,8 @@
-import { useMutation } from "@apollo/client";
+import { useMutation, useReactiveVar } from "@apollo/client";
 import { DocumentNode } from "graphql";
-import { useCallback, useContext } from "react";
+import { useCallback } from "react";
 import { ToastOptions, ToastProps } from "../components/Toast/types";
-import { ToastContext } from "./contexts";
+import { toastDataVar } from "./reactive-vars";
 
 /**
  * Gets the environmental variable with envName and throws error if not found.
@@ -21,7 +21,7 @@ export const getEnv = (envName: string): string => {
  * @returns A function to show the toast.
  */
 export const useToast = () => {
-  const { toastData, setToastData } = useContext(ToastContext);
+  const toastData = useReactiveVar(toastDataVar);
 
   return useCallback(
     ({
@@ -38,7 +38,7 @@ export const useToast = () => {
       const newToastData: ToastProps = {
         open: open === undefined ? true : open,
         title,
-        onClose: onClose ?? (() => setToastData({ ...newToastData, open: false })),
+        onClose: onClose ?? (() => toastDataVar({ ...newToastData, open: false })),
         type,
         description,
         onConfirm,
@@ -46,9 +46,9 @@ export const useToast = () => {
         disableClose,
         children,
       };
-      return setToastData(newToastData);
+      return toastDataVar(newToastData);
     },
-    [toastData, setToastData],
+    [toastData, toastDataVar],
   );
 };
 
