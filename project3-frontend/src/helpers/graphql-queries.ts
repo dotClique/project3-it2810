@@ -191,3 +191,11 @@ export const GET_MOVIE_GROUP_EVENTS = gql`
     )
   }
 `;
+
+export const GET_MOVIES = gql`
+  query ($pageSize: Int!, $searchString: String!) {
+    movies(maxCount: $pageSize, searchString: $searchString) {
+      primarytitle
+    }
+  }
+`;
