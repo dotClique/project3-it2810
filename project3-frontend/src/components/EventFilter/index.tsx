@@ -1,12 +1,12 @@
 import { MenuItem, TextField } from "@mui/material";
 
 import { GroupGrid, FilterGrid, EventsHeader } from "./styled";
+import { Dispatch, SetStateAction } from "react";
 
 type Props = {
-  setSearchString: (s: string) => void;
-  setSortBy: (n: number) => void;
-  setToDate: (d: string) => void;
-  setFromDate: (d: string) => void;
+  setSearchString: Dispatch<SetStateAction<string>>;
+  setToDate: Dispatch<SetStateAction<string>>;
+  setFromDate: Dispatch<SetStateAction<string>>;
 };
 
 export default function EventFilter(props: Props) {
@@ -20,20 +20,6 @@ export default function EventFilter(props: Props) {
           props.setSearchString(e.target.value);
         }}
       />
-      <TextField
-        select
-        defaultValue={"DATE"}
-        label={"Sort By"}
-        color={"primary"}
-        sx={{ gridArea: "filterSort" }}
-        onChange={(e) => {
-          props.setSortBy(e.target.value);
-        }}
-      >
-        <MenuItem value={"DATE"}>Date</MenuItem>
-        <MenuItem value={"TITLE"}>Title</MenuItem>
-        <MenuItem value={"LOCATION"}>Location</MenuItem>
-      </TextField>
       <TextField
         select
         defaultValue={"4"}

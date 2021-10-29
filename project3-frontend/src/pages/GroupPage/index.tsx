@@ -17,7 +17,6 @@ export default function GroupPage() {
     variables: { movieGroupId: String(id) },
     fetchPolicy: "cache-first",
   });
-  const [sortBy, setSortBy] = useState<string>("DATE");
   const [searchString, setSearchString] = useState<string>("");
   const [fromDate, setFromDate] = useState<string>("0000-12-30T23:59:59.999Z"); //new Date().toISOString());
   const [toDate, setToDate] = useState<string>("9999-12-30T23:59:59.999Z");
@@ -93,8 +92,17 @@ export default function GroupPage() {
           )}
       </GroupGrid>
       */}
-      <EventFilter setSearchString={setSearchString} setSortBy={setSortBy} setToDate={setToDate} setToFrom={setFromDate}
-      <EventTable id={id}></EventTable>
+      <EventFilter
+        setSearchString={setSearchString}
+        setToDate={setToDate}
+        setFromDate={setFromDate}
+      />
+      <EventTable
+        id={id}
+        searchString={searchString}
+        toDate={toDate}
+        fromDate={fromDate}
+      ></EventTable>
     </PageContainer>
   );
 }
