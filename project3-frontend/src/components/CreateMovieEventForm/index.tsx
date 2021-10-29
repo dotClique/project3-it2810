@@ -1,4 +1,4 @@
-import { Autocomplete, Box, CircularProgress, TextField } from "@mui/material";
+import { Autocomplete, Box, TextField } from "@mui/material";
 import { Field, FieldProps } from "formik";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
