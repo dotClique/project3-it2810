@@ -1,12 +1,10 @@
 import PageContainer from "../../components/PageContainer";
-import { MenuItem, Pagination, TextField, Button, Typography } from "@mui/material";
-import MovieEventComponent from "../../components/MovieEventComponent";
+import { Typography } from "@mui/material";
 import { useParams, useHistory } from "react-router-dom";
-import { GET_MOVIE_GROUP, GET_MOVIE_GROUP_EVENTS } from "../../helpers/graphql-queries";
+import { GET_MOVIE_GROUP } from "../../helpers/graphql-queries";
 import { useQuery } from "@apollo/client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Paths } from "../../helpers/constants";
-import { useAlias } from "../../helpers/alias";
 import FooterButton from "../../components/FooterButton";
 import EventTable from "../../components/EventTable";
 import EventFilter from "../../components/EventFilter";
