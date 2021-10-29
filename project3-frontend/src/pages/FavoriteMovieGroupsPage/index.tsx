@@ -1,6 +1,6 @@
 import { SearchIcon } from "@heroicons/react/solid";
 import { InputAdornment, Pagination, TextField, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router";
 import PageContainer from "../../components/PageContainer";
 import {
@@ -16,10 +16,11 @@ import { useFavoriteMovieGroups } from "./utils";
 import { useMutation } from "@apollo/client";
 import { REMOVE_USER_FROM_MOVIE_GROUP } from "../../helpers/graphql-queries";
 import { Paths } from "../../helpers/constants";
+import { useAlias } from "../../helpers/alias";
 
 export default function FavoriteMovieGroupsPage() {
   const pageSize = 4;
-  const [alias, setAlias] = useState("");
+  const { alias, logout } = useAlias();
   const [page, setPage] = useState(1);
   const [searchString, setSearchString] = useState("");
   const [removeUserFromGroup] = useMutation(REMOVE_USER_FROM_MOVIE_GROUP);
@@ -31,10 +32,6 @@ export default function FavoriteMovieGroupsPage() {
   );
 
   const history = useHistory();
-
-  useEffect(() => {
-    setAlias(localStorage.getItem("alias") || "");
-  }, []);
 
   return (
     <PageContainer>
@@ -94,7 +91,13 @@ export default function FavoriteMovieGroupsPage() {
           >
             Go to all movie groups
           </AllGroupsButton>
-          <LogOutButton color={"secondary"} onClick={() => history.push(Paths.HOME)}>
+          <LogOutButton
+            color={"secondary"}
+            onClick={() => {
+              logout();
+              history.push(Paths.HOME);
+            }}
+          >
             Log out
           </LogOutButton>
           <Pagination

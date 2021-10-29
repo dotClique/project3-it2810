@@ -16,7 +16,7 @@ export const LoginPageContainer = styled(Paper)<PaperProps>(({ theme }) => ({
   padding: "0 10vw 0",
 }));
 
-export const LoginForm = styled("form")(({ theme }) => ({
+export const LoginForm = styled("section")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: 25,

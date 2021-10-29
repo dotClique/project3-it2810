@@ -5,19 +5,21 @@ import {
   REMOVE_USER_FROM_EVENT,
 } from "../../helpers/graphql-queries";
 import { useEffect, useState } from "react";
+import { useAlias } from "../../helpers/alias";
 
 export function useMovieEvent(id: string) {
+  const { alias } = useAlias();
   const { data: dataEvents } = useQuery(GET_MOVIE_EVENT, {
-    variables: { movieEventId: String(id), alias: localStorage.getItem("alias") },
+    variables: { movieEventId: String(id), alias },
     fetchPolicy: "network-only",
   });
 
   const [joinEvent, { data: joinData }] = useMutation(ADD_USER_TO_EVENT, {
-    variables: { movieEventId: String(id), useralias: localStorage.getItem("alias") },
+    variables: { movieEventId: String(id), useralias: alias },
   });
 
   const [leaveEvent, { data: leaveData }] = useMutation(REMOVE_USER_FROM_EVENT, {
-    variables: { movieEventId: String(id), useralias: localStorage.getItem("alias") },
+    variables: { movieEventId: String(id), useralias: alias },
   });
 
   const [isParticipant, setIsParticipant] = useState<boolean>(false);

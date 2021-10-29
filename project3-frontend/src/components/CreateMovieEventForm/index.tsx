@@ -50,7 +50,7 @@ export default function CreateMovieEventForm(props: CreateMovieEventFormProps) {
       onCompleted={() => history.goBack()}
       mutationCall={CREATE_MOVIE_EVENT}
       validationSchema={validationSchema}
-      additionalRequestVaraibles={{ movieGroupId: props.movieGroupId }}
+      additionalRequestVariables={{ movieGroupId: props.movieGroupId }}
     >
       {(errors) => (
         <>

@@ -4,6 +4,16 @@ export const ADD_OR_GET_USER = gql`
   mutation CreateUserOrCheckIfExists($alias: String!) {
     createUserOrCheckIfExists(alias: $alias) {
       alias
+      userHasFavorites
+    }
+  }
+`;
+
+export const GET_USER = gql`
+  query user($alias: String!) {
+    user(alias: $alias) {
+      alias
+      userHasFavorites
     }
   }
 `;

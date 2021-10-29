@@ -30,6 +30,17 @@ export class UserResolver {
     const { alias } = user;
     return prisma.user.findUnique({ where: { alias } }).favorites();
   }
+  /**
+   * Checks if a user has any favorites
+   */
+  @ResolveField(() => Boolean)
+  async userHasFavorites(@Parent() user) {
+    const { alias } = user;
+    return prisma.user
+      .findUnique({ where: { alias } })
+      .favorites()
+      .then((res) => res.length > 0);
+  }
   @ResolveField(() => [MovieEvent])
   async participates(@Parent() user) {
     const { alias } = user;
@@ -99,8 +110,8 @@ export class UserResolver {
 
   @Mutation(() => MovieEvent)
   async removeUserFromEvent(
-      @Args("movieEventId") movieEventId: string,
-      @Args("useralias") useralias: string,
+    @Args("movieEventId") movieEventId: string,
+    @Args("useralias") useralias: string,
   ) {
     return prisma.movieEvent.update({
       where: {
