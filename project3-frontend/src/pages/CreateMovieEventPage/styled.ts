@@ -1,24 +1,6 @@
 import { styled } from "@mui/system";
 import { Paper } from "@mui/material";
 
-export const MovieGrid = styled("div")(() => ({
-  display: "grid",
-  width: "100%",
-  gridTemplateColumns: "1fr",
-  gridTemplateRows: "10fr 5fr 15fr 5fr 5fr 5fr",
-
-  justifyItems: "center",
-}));
-
-export const MovieImage = styled("img")(({ theme }) => ({
-  display: "flex",
-  height: "100%",
-  width: "100%",
-  objectFit: "fill",
-  backgroundColor: theme.palette.secondary,
-  paddingBottom: "2%",
-}));
-
 export const MovieGroupsContainer = styled(Paper)(({ theme }) => ({
   marginTop: theme.spacing(8),
   borderRadius: theme.shape.borderRadius,

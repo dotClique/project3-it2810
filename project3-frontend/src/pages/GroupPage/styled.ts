@@ -1,5 +1,5 @@
 import { styled } from "@mui/system";
-import { Paper } from "@mui/material";
+import { Box, Grid, Paper } from "@mui/material";
 
 export const MovieGroupsContainer = styled(Paper)(({ theme }) => ({
   marginTop: theme.spacing(8),
@@ -19,29 +19,23 @@ export const MovieGroupsContainer = styled(Paper)(({ theme }) => ({
   padding: "20px 5vw 0",
 }));
 
-export const MovieEventGrid = styled("div")(() => ({
+export const FilterGrid = styled(Grid)(({ theme }) => ({
   width: "100%",
   height: "100%",
   display: "grid",
-  gridTemplateColumns: " 1fr ",
-  gridTemplateRows: "",
-}));
-
-export const FilterGrid = styled("div")(({ theme }) => ({
-  width: "100%",
-  height: "100%",
-  display: "grid",
-  gridTemplateColumns: " 2fr 1fr  1fr 1fr  ",
+  marginTop: theme.spacing(2),
+  gap: theme.spacing(1),
+  gridTemplateColumns: " 2fr 1fr 1fr  ",
   gridTemplateRows: " 1fr ",
-  gridTemplateAreas: `"search checkbox filterTime filterSort"`,
+  gridTemplateAreas: `"search filterTime filterSort"`,
   [theme.breakpoints.down("md")]: {
-    gridTemplateColumns: " 1fr 1fr 1fr ",
+    gridTemplateColumns: " 1fr 1fr ",
     gridTemplateRows: " 1fr 1fr",
-    gridTemplateAreas: `"search search search" "checkbox filterTime filterSort"`,
+    gridTemplateAreas: `"search search" "filterTime filterSort"`,
   },
 }));
 
-export const GroupGrid = styled("div")(({ theme }) => ({
+export const GroupGrid = styled(Grid)(({ theme }) => ({
   display: "grid",
   width: "100%",
   gridTemplateColumns: "1fr",
@@ -50,5 +44,22 @@ export const GroupGrid = styled("div")(({ theme }) => ({
   padding: theme.spacing(1),
   "& > *": {
     minHeight: "80px",
+  },
+}));
+
+export const EventsHeader = styled(Box)(({ theme }) => ({
+  display: "grid",
+  width: "100%",
+  gridTemplateColumns: "3fr 4fr 1.5fr 1.5fr 1fr",
+  gridTemplateRows: "1fr",
+  gridTemplateAreas: '"title description location dateTime status"',
+  marginTop: theme.spacing(2),
+  gap: theme.spacing(1),
+  padding: "0 20px",
+  [theme.breakpoints.down("md")]: {
+    display: "none",
+    gridTemplateColumns: " 1fr 1fr",
+    gridTemplateRows: " 1fr 1fr",
+    gridTemplateAreas: '"title location status" "description dateTime"',
   },
 }));

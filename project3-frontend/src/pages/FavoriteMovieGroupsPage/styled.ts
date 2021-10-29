@@ -1,4 +1,4 @@
-import { Button, Paper } from "@mui/material";
+import { Paper } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 export const MovieGroupsContainer = styled(Paper)(({ theme }) => ({
@@ -45,15 +45,4 @@ export const MovieGroupFooter = styled("div")(({ theme }) => ({
   gap: theme.spacing(3),
   marginTop: "auto",
   marginBottom: theme.spacing(2),
-}));
-
-export const AllGroupsButton = styled(Button)(({ theme }) => ({
-  color: theme.palette.primary.contrastText,
-  backgroundColor: theme.palette.primary.main,
-  "&:hover": {
-    backgroundColor: theme.palette.primary.light,
-  },
-  width: "100%",
-  height: 50,
-  marginTop: theme.spacing(2),
 }));
