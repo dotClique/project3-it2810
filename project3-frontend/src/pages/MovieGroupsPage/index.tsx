@@ -1,4 +1,3 @@
-import { useMutation } from "@apollo/client";
 import { SearchIcon } from "@heroicons/react/solid";
 import { InputAdornment, Pagination, TextField } from "@mui/material";
 import { useState } from "react";
@@ -10,9 +9,9 @@ import { useAlias } from "../../helpers/alias";
 import { Paths } from "../../helpers/constants";
 import {
   ADD_USER_TO_MOVIE_GROUP,
-  REMOVE_USER_FROM_MOVIE_GROUP,
+  REMOVE_USER_FROM_MOVIE_GROUP
 } from "../../helpers/graphql-queries";
-import { useErrorToast } from "../../helpers/utils";
+import { useCreationForm } from "../../helpers/utils";
 import { GroupGrid } from "./styled";
 import { useMovieGroups } from "./utils";
 
@@ -21,15 +20,9 @@ export default function MovieGroupsPage() {
   const { alias } = useAlias();
   const [page, setPage] = useState(1);
   const [searchString, setSearchString] = useState("");
-  const errToast = useErrorToast();
-
   const { movieGroups, pageCount, refetch } = useMovieGroups(page, pageSize, searchString);
-  const [addUserToGroup] = useMutation(ADD_USER_TO_MOVIE_GROUP, {
-    onError: (err) => errToast(err.message),
-  });
-  const [removeUserFromGroup] = useMutation(REMOVE_USER_FROM_MOVIE_GROUP, {
-    onError: (err) => errToast(err.message),
-  });
+  const [addUserToGroup] = useCreationForm(ADD_USER_TO_MOVIE_GROUP, refetch);
+  const [removeUserFromGroup] = useCreationForm(REMOVE_USER_FROM_MOVIE_GROUP, refetch);
   const history = useHistory();
 
   return (
@@ -78,17 +71,8 @@ export default function MovieGroupsPage() {
               title={item.name}
               key={item.movieGroupId}
               onToggleFavorite={() => {
-                let action;
-                if (isFavorite) {
-                  action = removeUserFromGroup;
-                } else {
-                  action = addUserToGroup;
-                }
-                action({
-                  variables: { useralias: alias, movieGroupId: item.movieGroupId },
-                }).then(() => {
-                  refetch();
-                });
+                const params = { movieGroupId: item.movieGroupId, useralias: alias };
+                return isFavorite ? removeUserFromGroup(params) : addUserToGroup(params);
               }}
               favorite={isFavorite}
               id={item.movieGroupId}
