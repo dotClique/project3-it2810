@@ -1,14 +1,15 @@
-import PageContainer from "../../components/PageContainer";
-import { GroupGrid, FilterGrid, EventsHeader } from "./styled";
-import { MenuItem, Pagination, TextField, Button, Typography } from "@mui/material";
-import MovieEventComponent from "../../components/MovieEventComponent";
-import { useParams, useHistory } from "react-router-dom";
-import { GET_MOVIE_GROUP, GET_MOVIE_GROUP_EVENTS } from "../../helpers/graphql-queries";
 import { useQuery } from "@apollo/client";
+import { Button, MenuItem, Pagination, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Paths } from "../../helpers/constants";
-import { useAlias } from "../../helpers/alias";
+import { useHistory, useParams } from "react-router-dom";
 import FooterButton from "../../components/FooterButton";
+import MovieEventComponent from "../../components/MovieEventComponent";
+import PageContainer from "../../components/PageContainer";
+import { useAlias } from "../../helpers/alias";
+import { Paths } from "../../helpers/constants";
+import { GET_MOVIE_GROUP, GET_MOVIE_GROUP_EVENTS } from "../../helpers/graphql-queries";
+import { useErrorToast } from "../../helpers/utils";
+import { EventsHeader, FilterGrid, GroupGrid } from "./styled";
 
 export default function GroupPage() {
   const [sortBy, setSortBy] = useState<string>("DATE");
@@ -18,8 +19,10 @@ export default function GroupPage() {
   const [pageCount, setPageCount] = useState<number>(1);
   const [pageNum, setPageNum] = useState<number>(1);
   const { alias } = useAlias();
+  const errToast = useErrorToast();
   const { id } = useParams() as { id: string };
   const { data: dataGroup } = useQuery(GET_MOVIE_GROUP, {
+    onError: (err) => errToast(err.message),
     variables: { movieGroupId: String(id) },
     fetchPolicy: "cache-first",
   });
@@ -35,6 +38,7 @@ export default function GroupPage() {
       toDate: toDate,
       alias,
     },
+    onError: (err) => errToast(err.message),
     fetchPolicy: "network-only",
   });
   useEffect(() => {

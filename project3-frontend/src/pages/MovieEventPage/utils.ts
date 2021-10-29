@@ -1,24 +1,29 @@
 import { useMutation, useQuery } from "@apollo/client";
+import { useEffect, useState } from "react";
+import { useAlias } from "../../helpers/alias";
 import {
   ADD_USER_TO_EVENT,
   GET_MOVIE_EVENT,
   REMOVE_USER_FROM_EVENT,
 } from "../../helpers/graphql-queries";
-import { useEffect, useState } from "react";
-import { useAlias } from "../../helpers/alias";
+import { useErrorToast } from "../../helpers/utils";
 
 export function useMovieEvent(id: string) {
   const { alias } = useAlias();
+  const errToast = useErrorToast();
   const { data: dataEvents } = useQuery(GET_MOVIE_EVENT, {
     variables: { movieEventId: String(id), alias },
+    onError: (err) => errToast(err.message),
     fetchPolicy: "network-only",
   });
 
   const [joinEvent, { data: joinData }] = useMutation(ADD_USER_TO_EVENT, {
+    onError: (err) => errToast(err.message),
     variables: { movieEventId: String(id), useralias: alias },
   });
 
   const [leaveEvent, { data: leaveData }] = useMutation(REMOVE_USER_FROM_EVENT, {
+    onError: (err) => errToast(err.message),
     variables: { movieEventId: String(id), useralias: alias },
   });
 

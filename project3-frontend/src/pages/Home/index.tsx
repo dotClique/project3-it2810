@@ -3,17 +3,21 @@ import { TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import PageContainer from "../../components/PageContainer";
-import { ADD_OR_GET_USER, GET_USER } from "../../helpers/graphql-queries";
-import { LoginButton, LoginForm } from "./styled";
 import { useAlias } from "../../helpers/alias";
 import { Paths } from "../../helpers/constants";
+import { ADD_OR_GET_USER, GET_USER } from "../../helpers/graphql-queries";
+import { useErrorToast } from "../../helpers/utils";
+import { LoginButton, LoginForm } from "./styled";
 
 export default function Home() {
   const history = useHistory();
   const { alias, setAlias } = useAlias();
   const [aliasField, setAliasField] = useState("");
+  const errToast = useErrorToast();
 
-  const [addOrGetUser, { data, loading, error }] = useMutation(ADD_OR_GET_USER);
+  const [addOrGetUser, { data, loading, error }] = useMutation(ADD_OR_GET_USER, {
+    onError: (err) => errToast(err.message),
+  });
   const [getUser, { data: userData }] = useLazyQuery(GET_USER);
 
   function handleClick() {
