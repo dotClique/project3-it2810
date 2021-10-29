@@ -20,6 +20,5 @@
   },
   "prisma": {
     "schema": "./project3-common/src/prisma/schema.prisma"
-  },
-  "homepage": "."
+  }
 }

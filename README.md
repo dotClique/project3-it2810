@@ -35,10 +35,12 @@ To develop in this environment, you have to do `npm install` in three directorie
 - project3-backend
 
 This can be done using the single command from the directory `project3-it2810`:
+
 ```bash
 $ npm run install:all
 ```
-This runs npm install in all 3 directories. 
+
+This runs npm install in all 3 directories.
 
 If you do a fundamental change in the databse schema, you might have to delete the database for the project to run. To do so:
 
@@ -66,12 +68,13 @@ $ DROP TABLE <tablename>;
 
 The content is currently in /usr/local/share/project3-it2810 on the VM.
 
-On the VM we have git, docker, docker-compose and nginx installed. The apache server is stopped. 
+On the VM we have git, docker, docker-compose and nginx installed. The apache server is stopped.
 
 The nginx config file is in "/etc/nginx/sites-enabled/projects".
-The "etc/nginx/sites-enabled/projects" file has a hard link to the "/etc/nginx/sites-available/projects" file via the ln command. 
+The "etc/nginx/sites-enabled/projects" file has a hard link to the "/etc/nginx/sites-available/projects" file via the ln command.
 
-The projects config file is as follows: 
+The projects config file is as follows:
+
 ```nginx
 server {
   listen 80;
@@ -98,28 +101,36 @@ server {
 
 # Deploying a new version
 
-When a new version of the website should be deployed, push the changes to GitLab. Then pull the changes on the VM (the projects is already cloned in "/usr/local/share/project3-it2810/, just cd in here and do `sudo git checkout master && sudo git pull`").
+When a new version of the website should be deployed, push the changes to GitLab. Then pull the changes on the VM (the projects is already cloned in "/var/www/project3-it2810/, just cd in here and do `sudo git checkout master && sudo git pull`").
 
-Then stop the running server with 
+Then stop the running server with
+
 ```bash
 $ sudo docker-compose down
 ```
 
-Build the new server with 
+Build the new server with
+
 ```bash
 $ sudo docker-compose -f docker-compose.prod.yml build
 ```
-If substantial changes are made, the `--no-cache` flag might need to be added. If big changes to the database has been made, then you might have to change the database itself, like explained earlier. 
 
-Run the server with 
+If substantial changes are made, the `--no-cache` flag might need to be added. If big changes to the database has been made, then you might have to change the database itself, like explained earlier.
+
+Run the server with
+
 ```bash
 $ sudo docker-compose -f docker-compose.prod.yml up -d
 ```
 
 If you do changes to the config file in /etc/nginx/sites-enables/projects, you have to restart the nginx server with
+
 ```bash
 $ sudo systemctl restart nginx
 ```
 
+You can check if the nginx config is valid with
 
-
+```bash
+$ sudo nginx -t
+```
