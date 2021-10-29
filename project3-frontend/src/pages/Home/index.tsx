@@ -6,16 +6,18 @@ import PageContainer from "../../components/PageContainer";
 import { useAlias } from "../../helpers/alias";
 import { Paths } from "../../helpers/constants";
 import { ADD_OR_GET_USER, GET_USER } from "../../helpers/graphql-queries";
-import { useToast } from "../../helpers/utils";
+import { useErrorToast } from "../../helpers/utils";
 import { LoginButton, LoginForm } from "./styled";
 
 export default function Home() {
   const history = useHistory();
   const { alias, setAlias } = useAlias();
   const [aliasField, setAliasField] = useState("");
-  const toast = useToast();
+  const errToast = useErrorToast();
 
-  const [addOrGetUser, { data, loading, error }] = useMutation(ADD_OR_GET_USER);
+  const [addOrGetUser, { data, loading, error }] = useMutation(ADD_OR_GET_USER, {
+    onError: (err) => errToast(err.message),
+  });
   const [getUser, { data: userData }] = useLazyQuery(GET_USER);
 
   function handleClick() {
@@ -59,9 +61,6 @@ export default function Home() {
       <Typography component="h1" variant={"h3"}>
         FilmFlokk
       </Typography>
-      <button onClick={() => toast({ title: "Toast", type: "alert", description: "Hello" })}>
-        Toast
-      </button>
       <Typography component="h5" variant={"h5"}>
         Welcome to FilmFlokk, a website for sharing the unique joy of watching movies together.
         Please enter an alias before continuing.

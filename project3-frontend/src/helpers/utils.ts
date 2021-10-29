@@ -52,22 +52,23 @@ export const useToast = () => {
   );
 };
 
+/**
+ * A hook to handle the submission of creation forms, returning the handleSumit function.
+ * It also handles the display of error messages, if an error during the call occurred.
+ * @param mutationCall The graphql call to do when submitting.
+ * @param onCompleted The function to run when the graphql mutation call is completed.
+ * @param additionalRequestVariables Additional request variables to pass when the mutation call is performed.
+ * @returns An array of the handleSubmit function and if the data is loading.
+ */
 export function useCreationForm<FormValues>(
-  MUTATION_CALL: DocumentNode,
-  onCompleted: () => void,
+  mutationCall: DocumentNode,
+  onCompleted?: () => void,
   additionalRequestVariables?: { [key: string]: string | number },
 ): [(values: FormValues) => void, boolean] {
-  const toast = useToast();
-  const [performMutation, { loading }] = useMutation(MUTATION_CALL, {
+  const errToast = useErrorToast();
+  const [performMutation, { loading }] = useMutation(mutationCall, {
     onCompleted,
-    onError: (error) => {
-      toast({
-        title: "An error occured.",
-        type: "alert",
-        color: "error",
-        description: error.message,
-      });
-    },
+    onError: (error) => errToast(error.message),
   });
 
   const handleSubmit = useCallback(
@@ -80,3 +81,18 @@ export function useCreationForm<FormValues>(
   );
   return [handleSubmit, loading];
 }
+
+/**
+ * *A hook to handle the display of error messages with a toast.
+ * @returns A function to show the toast with the provided error message (errorMsg).
+ */
+export const useErrorToast = (): ((errorMsg: string) => void) => {
+  const toast = useToast();
+  return (errorMsg: string) =>
+    toast({
+      title: "An error occured.",
+      type: "alert",
+      color: "error",
+      description: errorMsg,
+    });
+};

@@ -1,29 +1,35 @@
+import { useMutation } from "@apollo/client";
 import { SearchIcon } from "@heroicons/react/solid";
 import { InputAdornment, Pagination, TextField } from "@mui/material";
 import { useState } from "react";
 import { useHistory } from "react-router";
+import FooterButton from "../../components/FooterButton";
 import MovieGroupItem from "../../components/MovieGroupItem";
 import PageContainer from "../../components/PageContainer";
-import { GroupGrid } from "./styled";
-import { useMutation } from "@apollo/client";
+import { useAlias } from "../../helpers/alias";
 import { Paths } from "../../helpers/constants";
 import {
   ADD_USER_TO_MOVIE_GROUP,
   REMOVE_USER_FROM_MOVIE_GROUP,
 } from "../../helpers/graphql-queries";
+import { useErrorToast } from "../../helpers/utils";
+import { GroupGrid } from "./styled";
 import { useMovieGroups } from "./utils";
-import { useAlias } from "../../helpers/alias";
-import FooterButton from "../../components/FooterButton";
 
 export default function MovieGroupsPage() {
   const pageSize = 8;
   const { alias } = useAlias();
   const [page, setPage] = useState(1);
   const [searchString, setSearchString] = useState("");
+  const errToast = useErrorToast();
 
   const { movieGroups, pageCount, refetch } = useMovieGroups(page, pageSize, searchString);
-  const [addUserToGroup] = useMutation(ADD_USER_TO_MOVIE_GROUP);
-  const [removeUserFromGroup] = useMutation(REMOVE_USER_FROM_MOVIE_GROUP);
+  const [addUserToGroup] = useMutation(ADD_USER_TO_MOVIE_GROUP, {
+    onError: (err) => errToast(err.message),
+  });
+  const [removeUserFromGroup] = useMutation(REMOVE_USER_FROM_MOVIE_GROUP, {
+    onError: (err) => errToast(err.message),
+  });
   const history = useHistory();
 
   return (
