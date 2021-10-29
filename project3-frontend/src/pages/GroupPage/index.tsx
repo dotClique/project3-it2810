@@ -48,61 +48,12 @@ export default function GroupPage() {
       <Typography variant={"body1"} id="Description">
         {dataGroup ? dataGroup.movieGroup.description : "Kunne ikke laste inn"}
       </Typography>
-      {/*
-
-      <EventsHeader>
-        <Typography sx={{ gridArea: "title" }}>Event title</Typography>
-        <Typography sx={{ gridArea: "description" }}>Description</Typography>
-        <Typography sx={{ gridArea: "location" }}>Location</Typography>
-        <Typography sx={{ gridArea: "dateTime" }}>DateTime</Typography>
-        <Typography sx={{ gridArea: "status" }}>Participant</Typography>
-      </EventsHeader>
-      <GroupGrid>
-        {dataEvents &&
-          dataEvents.movieEvents.map(
-            (
-              movieEvent: {
-                description: string;
-                title: string;
-                location: string;
-                date: string;
-                movieEventId: string;
-                userIsParticipant: boolean;
-              },
-              i: number,
-            ) => {
-              return (
-                <Button
-                  key={i}
-                  onClick={() => {
-                    history.push("/movie/" + movieEvent.movieEventId);
-                  }}
-                >
-                  <MovieEventComponent
-                    description={movieEvent.description}
-                    title={movieEvent.title}
-                    location={movieEvent.location}
-                    datetime={movieEvent.date}
-                    isParticipant={movieEvent.userIsParticipant}
-                    key={i}
-                  />
-                </Button>
-              );
-            },
-          )}
-      </GroupGrid>
-      */}
       <EventFilter
         setSearchString={setSearchString}
         setToDate={setToDate}
         setFromDate={setFromDate}
       />
-      <EventTable
-        id={id}
-        searchString={searchString}
-        toDate={toDate}
-        fromDate={fromDate}
-      ></EventTable>
+      <EventTable id={id} searchString={searchString} toDate={toDate} fromDate={fromDate} />
     </PageContainer>
   );
 }

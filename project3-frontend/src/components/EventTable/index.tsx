@@ -1,10 +1,20 @@
-import { Table, TableBody, TableHead, TablePagination, TableRow } from "@mui/material";
-import { StyledTableCell, HeaderTableCell } from "./styled";
+import {
+  Table,
+  TableBody,
+  TableHead,
+  TablePagination,
+  TableRow,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+import { StyledTableCell, HeaderTableCell, StyledTableRow } from "./styled";
 import { useEffect, useState } from "react";
 import { useAlias } from "../../helpers/alias";
 import { useQuery } from "@apollo/client";
 import { GET_MOVIE_GROUP_EVENTS } from "../../helpers/graphql-queries";
 import EventTableSortHeader from "../EventTableSortHeader";
+import { Paths } from "../../helpers/constants";
+import { useHistory } from "react-router";
 
 type Props = {
   id: string;
@@ -19,12 +29,16 @@ export default function EventTable(props: Props) {
 
   const [sortBy, setSortBy] = useState<{ id: string; direction: "desc" | "asc" }>({
     id: "DATE",
-    direction: "desc",
+    direction: "asc",
   });
+
+  const history = useHistory();
 
   const { alias } = useAlias();
 
-  const [pageSize, setPageSize] = useState(8);
+  const [pageSize, setPageSize] = useState(10);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const { data: dataEvents } = useQuery(GET_MOVIE_GROUP_EVENTS, {
     variables: {
@@ -46,7 +60,11 @@ export default function EventTable(props: Props) {
   }, [dataEvents]);
   return (
     <Table
-      sx={{ backgroundColor: "secondary.main", color: "secondary.contrastText", borderRadius: 1 }}
+      sx={{
+        backgroundColor: "secondary.main",
+        color: "secondary.contrastText",
+        borderRadius: 1,
+      }}
     >
       <TableHead sx={{ backgroundColor: "secondary" }}>
         <TableRow sx={{ backgroundColor: "secondary" }}>
@@ -56,18 +74,26 @@ export default function EventTable(props: Props) {
             id={"TITLE"}
             title={"Event Title"}
           />
-          <EventTableSortHeader
-            setSortBy={setSortBy}
-            sortBy={sortBy}
-            id={"DESCRIPTION"}
-            title={"Description"}
-          />
-          <EventTableSortHeader
-            setSortBy={setSortBy}
-            sortBy={sortBy}
-            id={"LOCATION"}
-            title={"Location"}
-          />
+          {!isMobile ? (
+            <>
+              {" "}
+              <EventTableSortHeader
+                setSortBy={setSortBy}
+                sortBy={sortBy}
+                id={"DESCRIPTION"}
+                title={"Description"}
+              />
+              <EventTableSortHeader
+                setSortBy={setSortBy}
+                sortBy={sortBy}
+                id={"LOCATION"}
+                title={"Location"}
+              />
+            </>
+          ) : (
+            false
+          )}
+
           <EventTableSortHeader
             setSortBy={setSortBy}
             sortBy={sortBy}
@@ -89,15 +115,26 @@ export default function EventTable(props: Props) {
               userIsParticipant: boolean;
             }) => {
               return (
-                <TableRow key={movieEvent.movieEventId}>
+                <StyledTableRow
+                  key={movieEvent.movieEventId}
+                  sx={{ "&:hover": { filter: "brightness(180%)" } }}
+                  onClick={() => history.push(Paths.MOVIE_EVENT + "/" + movieEvent.movieEventId)}
+                >
                   <StyledTableCell>{movieEvent.title}</StyledTableCell>
-                  <StyledTableCell>{movieEvent.description}</StyledTableCell>
-                  <StyledTableCell>{movieEvent.location}</StyledTableCell>
+                  {!isMobile ? (
+                    <>
+                      <StyledTableCell>{movieEvent.description}</StyledTableCell>
+                      <StyledTableCell>{movieEvent.location}</StyledTableCell>
+                    </>
+                  ) : (
+                    false
+                  )}
+
                   <StyledTableCell>
                     {movieEvent.date.replace("T", " ").replace("Z", "").slice(0, -4)}
                   </StyledTableCell>
                   <StyledTableCell>{movieEvent.userIsParticipant ? "yes" : "no"}</StyledTableCell>
-                </TableRow>
+                </StyledTableRow>
               );
             },
           )}

@@ -1,5 +1,5 @@
 import { styled } from "@mui/system";
-import { TableCell, TablePagination } from "@mui/material";
+import { TableCell, TablePagination, TableRow } from "@mui/material";
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   color: theme.palette.secondary.contrastText,
@@ -7,6 +7,6 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
 export const HeaderTableCell = styled(TableCell)(({ theme }) => ({
   color: theme.palette.primary.main,
 }));
-export const StyledPagination = styled(TablePagination)(({ theme }) => ({
-  color: theme.palette.secondary.contrastText,
+export const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  cursor: "pointer",
 }));

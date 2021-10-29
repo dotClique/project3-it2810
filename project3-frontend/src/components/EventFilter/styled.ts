@@ -5,15 +5,15 @@ export const FilterGrid = styled(Grid)(({ theme }) => ({
   width: "100%",
   height: "100%",
   display: "grid",
-  marginTop: theme.spacing(2),
+  margin: theme.spacing(2),
   gap: theme.spacing(1),
-  gridTemplateColumns: " 2fr 1fr 1fr  ",
+  gridTemplateColumns: " 1fr 1fr  ",
   gridTemplateRows: " 1fr ",
-  gridTemplateAreas: `"search filterTime filterSort"`,
+  gridTemplateAreas: `"search filterTime"`,
   [theme.breakpoints.down("md")]: {
-    gridTemplateColumns: " 1fr 1fr ",
+    gridTemplateColumns: " 1fr ",
     gridTemplateRows: " 1fr 1fr",
-    gridTemplateAreas: `"search search" "filterTime filterSort"`,
+    gridTemplateAreas: `"search" "filterTime"`,
   },
 }));
 

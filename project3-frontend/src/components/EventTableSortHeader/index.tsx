@@ -1,5 +1,4 @@
-import { HeaderTableCell } from "../EventTable/styled";
-import { TableRow, TableSortLabel } from "@mui/material";
+import { TableCell, TableSortLabel } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 
 type Props = {
@@ -11,9 +10,18 @@ type Props = {
 export default function EventTableSortHeader(props: Props) {
   const active = props.sortBy.id === props.id;
   return (
-    <HeaderTableCell sortDirection={false}>
+    <TableCell>
       <TableSortLabel
-        sx={{ color: "primary.main" }}
+        sx={{
+          color: (theme) => {
+            return theme.palette.primary.main + "!important";
+          },
+          "& *": {
+            color: (theme) => {
+              return theme.palette.primary.main + "!important";
+            },
+          },
+        }}
         active={active}
         direction={active ? props.sortBy.direction : undefined}
         onClick={() => {
@@ -27,6 +35,6 @@ export default function EventTableSortHeader(props: Props) {
       >
         {props.title}
       </TableSortLabel>
-    </HeaderTableCell>
+    </TableCell>
   );
 }
