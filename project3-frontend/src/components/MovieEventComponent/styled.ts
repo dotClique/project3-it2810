@@ -5,39 +5,39 @@ export const MovieEventCard = styled(Card)(({ theme }) => ({
   width: "100%",
   height: "100%",
   display: "grid",
-  gridTemplateColumns: " 7fr 3fr ",
-  gridTemplateRows: " 1fr ",
+  gridTemplateColumns: "3fr 4fr 1.5fr 1.5fr 1fr",
+  gridTemplateRows: "1fr",
+  gridTemplateAreas: '"title description location dateTime participation"',
   [theme.breakpoints.down("md")]: {
-    gridTemplateColumns: " 1fr 1fr ",
-    gridTemplateRows: " 1fr",
+    gridTemplateColumns: " 6fr 6fr",
+    gridTemplateRows: " 6fr 6fr",
+    gridTemplateAreas: '"title location" "description dateTime"',
   },
   justifyContent: "center",
-  alignItems: "center",
   alignContent: "center",
-  gridColumnGap: "4%",
+  alignItems: "center",
+  gridColumnGap: theme.spacing(1),
+  padding: theme.spacing(1),
+  backgroundColor: theme.palette.secondary.main,
+  color: theme.palette.secondary.contrastText,
+  "& *": {
+    transform: "scale(1.0)",
+    transitionDuration: "0.05s",
+  },
+  "&:hover *": {
+    transform: "scale(1.1)",
+  },
 }));
 
 export const TextData = styled("div")(({ theme }) => ({
   width: "100%",
   height: "100%",
-  display: "grid",
-  gridTemplateColumns: " 1fr 1fr ",
-  gridTemplateRows: " 1fr ",
+  display: "flex",
+  flexDirection: "row",
   [theme.breakpoints.down("md")]: {
-    gridTemplateColumns: " 1fr",
-    gridTemplateRows: " 1fr 1fr 1fr ",
+    flexDirection: "column",
   },
   gridColumnGap: "4%",
-  justifyContent: "center",
+  justifyContent: "between",
   alignItems: "center",
-  alignContent: "center",
-}));
-
-export const MovieImage = styled("img")(({ theme }) => ({
-  display: "flex",
-  height: "100%",
-  width: "100%",
-  objectFit: "fill",
-  backgroundColor: theme.palette.secondary,
-  paddingBottom: "2%",
 }));

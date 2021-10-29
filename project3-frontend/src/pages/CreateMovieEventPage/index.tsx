@@ -1,7 +1,5 @@
-import { Typography } from "@mui/material";
 import CreateMovieEventForm from "../../components/CreateMovieEventForm/index";
 import PageContainer from "../../components/PageContainer";
-import { MovieGroupsContainer } from "./styled";
 import { useParams } from "react-router-dom";
 
 /**
@@ -10,13 +8,8 @@ import { useParams } from "react-router-dom";
 export default function CreateMovieEventPage() {
   const { id } = useParams() as { id: string };
   return (
-    <PageContainer>
-      <MovieGroupsContainer>
-        <Typography gutterBottom variant={"h3"}>
-          Create Movie Event
-        </Typography>
-        <CreateMovieEventForm movieGroupId={id} />
-      </MovieGroupsContainer>
+    <PageContainer title={"Create Movie Event"}>
+      <CreateMovieEventForm movieGroupId={id} />
     </PageContainer>
   );
 }

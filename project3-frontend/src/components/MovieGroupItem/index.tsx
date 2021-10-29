@@ -27,6 +27,7 @@ export default function MovieGroupItem(props: Props) {
       >
         <MovieGroupCardContent>
           <MovieGroupTitle
+            aria-label={`Links to ${props.title} movie group page`}
             variant="h5"
             noWrap
             sx={{

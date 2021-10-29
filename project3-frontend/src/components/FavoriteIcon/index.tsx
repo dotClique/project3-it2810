@@ -9,9 +9,12 @@ type Props = {
 
 export function FavoriteIcon(props: Props) {
   const icon = props.isFilled ? (
-    <SolidHeart width={props.width} />
+    <SolidHeart
+      aria-label={"Button for removing this group's favorite status"}
+      width={props.width}
+    />
   ) : (
-    <OutlinedHeart width={props.width} />
+    <OutlinedHeart aria-label={"Button for setting this group as a favorite"} width={props.width} />
   );
   return <IconContainer onClick={props.onClick}>{icon}</IconContainer>;
 }

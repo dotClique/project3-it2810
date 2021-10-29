@@ -1,21 +1,14 @@
 import PageContainer from "../../components/PageContainer";
-import { MovieGroupsContainer, GroupGrid, FilterGrid } from "./styled";
-import {
-  MenuItem,
-  Pagination,
-  Select,
-  TextField,
-  Checkbox,
-  FormControlLabel,
-  Card,
-  Button,
-} from "@mui/material";
+import { GroupGrid, FilterGrid, EventsHeader } from "./styled";
+import { MenuItem, Pagination, TextField, Button, Typography } from "@mui/material";
 import MovieEventComponent from "../../components/MovieEventComponent";
 import { useParams, useHistory } from "react-router-dom";
 import { GET_MOVIE_GROUP, GET_MOVIE_GROUP_EVENTS } from "../../helpers/graphql-queries";
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { Paths } from "../../helpers/constants";
+import { useAlias } from "../../helpers/alias";
+import FooterButton from "../../components/FooterButton";
 
 export default function GroupPage() {
   const [sortBy, setSortBy] = useState<string>("DATE");
@@ -24,9 +17,8 @@ export default function GroupPage() {
   const [toDate, setToDate] = useState<string>("9999-12-30T23:59:59.999Z");
   const [pageCount, setPageCount] = useState<number>(1);
   const [pageNum, setPageNum] = useState<number>(1);
-  let id: string;
-  // eslint-disable-next-line prefer-const
-  ({ id } = useParams());
+  const { alias } = useAlias();
+  const { id } = useParams() as { id: string };
   const { data: dataGroup } = useQuery(GET_MOVIE_GROUP, {
     variables: { movieGroupId: String(id) },
     fetchPolicy: "cache-first",
@@ -41,6 +33,7 @@ export default function GroupPage() {
       fromDate: fromDate,
       page: pageNum,
       toDate: toDate,
+      alias,
     },
     fetchPolicy: "network-only",
   });
@@ -49,136 +42,142 @@ export default function GroupPage() {
   }, [dataEvents]);
 
   return (
-    <PageContainer>
-      <MovieGroupsContainer>
-        <Button variant={"contained"} onClick={history.goBack}>
-          Back
-        </Button>
-        <h1>{dataGroup ? dataGroup.movieGroup.name : "error"}</h1>
-        <br />
-        <FilterGrid>
-          <TextField
-            label={"Søk på tittel"}
-            variant={"outlined"}
-            sx={{ gridArea: "search" }}
-            onChange={(e) => {
-              setSearchString(e.target.value);
+    <PageContainer
+      title={dataGroup ? dataGroup.movieGroup.name : "error"}
+      logoutPossible
+      footerElements={
+        <>
+          <FooterButton
+            onClick={() => {
+              history.push(Paths.ADD_MOVIE_EVENT + "/" + id);
             }}
+            text={"Add New movie event"}
           />
-          <Card variant={"outlined"} sx={{ gridArea: "checkbox" }}>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  onChange={(e) => {
-                    setFromDate(
-                      e.target.checked ? "0001-01-01T00:00:01.000Z" : new Date().toISOString(),
-                    );
-                  }}
-                />
-              }
-              label={"Viste filmer"}
-            />
-          </Card>
-          <Select
-            defaultValue={"DATE"}
-            label={"Sorter på"}
-            sx={{ gridArea: "filterSort" }}
-            onChange={(e) => {
-              setSortBy(e.target.value);
+          <FooterButton
+            color={"secondary"}
+            onClick={() => {
+              history.goBack();
             }}
-          >
-            <MenuItem value={"DATE"}>date</MenuItem>
-            <MenuItem value={"TITLE"}>title</MenuItem>
-            <MenuItem value={"LOCATION"}>location</MenuItem>
-          </Select>
-          <Select
-            defaultValue={"4"}
-            label={"Tidsrom"}
-            sx={{ gridArea: "filterTime" }}
-            onChange={(e) => {
-              const date = new Date();
-              switch (e.target.value as string) {
-                case "0":
-                  date.setDate(date.getDate() + 7);
-                  setToDate(date.toISOString());
-                  break;
-                case "1":
-                  date.setMonth(date.getMonth() + 1);
-                  setToDate(date.toISOString());
-                  break;
-                case "2":
-                  date.setFullYear(date.getFullYear() + 1);
-                  setToDate(date.toISOString());
-                  break;
-                case "3":
-                  setToDate(date.toISOString());
-                  break;
-                default:
-                  setToDate("9999-12-30T23:59:59.999Z");
-              }
+            text={"Back"}
+          />
+          <Pagination
+            count={pageCount}
+            page={pageNum}
+            onChange={(e, p) => {
+              setPageNum(p);
             }}
-          >
-            <MenuItem value={"0"}>innen en uke</MenuItem>
-            <MenuItem value={"1"}> inn en måned</MenuItem>
-            <MenuItem value={"2"}>innen ett år</MenuItem>
-            <MenuItem value={"3"}>Allerede vist</MenuItem>
-            <MenuItem value={"4"}>Alle</MenuItem>
-          </Select>
-        </FilterGrid>
-        <Card variant={"outlined"} sx={{ minHeight: "100px", width: "100%" }}>
-          <p id="Description">
-            {dataGroup ? dataGroup.movieGroup.description : "Kunne ikke laste inn"}
-          </p>
-        </Card>
-        <GroupGrid>
-          {dataEvents &&
-            dataEvents.movieEvents.map(
-              (
-                movieEvent: {
-                  description: string;
-                  title: string;
-                  location: string;
-                  date: string;
-                  movieEventId: string;
-                },
-                i: number,
-              ) => {
-                return (
-                  <Button
-                    key={i}
-                    onClick={() => {
-                      history.push("/movie/" + movieEvent.movieEventId);
-                    }}
-                  >
-                    <MovieEventComponent
-                      description={movieEvent.description}
-                      title={movieEvent.title}
-                      location={movieEvent.location}
-                      datetime={movieEvent.date}
-                      key={i}
-                    />
-                  </Button>
-                );
-              },
-            )}
-        </GroupGrid>
-        <Pagination
-          count={pageCount}
-          page={pageNum}
-          onChange={(e, p) => {
-            setPageNum(p);
+            color="primary"
+          />
+        </>
+      }
+    >
+      <Typography variant={"body1"} id="Description">
+        {dataGroup ? dataGroup.movieGroup.description : "Kunne ikke laste inn"}
+      </Typography>
+      <FilterGrid>
+        <TextField
+          label={"Search for event by title"}
+          variant={"outlined"}
+          sx={{ gridArea: "search" }}
+          onChange={(e) => {
+            setSearchString(e.target.value);
           }}
-          color="primary"
         />
-        <Button
-          variant={"contained"}
-          onClick={() => {
-            history.push(Paths.ADD_MOVIE_EVENT + "/" + id);
+        <TextField
+          select
+          defaultValue={"DATE"}
+          label={"Sort By"}
+          color={"primary"}
+          sx={{ gridArea: "filterSort" }}
+          onChange={(e) => {
+            setSortBy(e.target.value);
           }}
         >
-          Add New movieevent
-        </Button>
-      </MovieGroupsContainer>
+          <MenuItem value={"DATE"}>Date</MenuItem>
+          <MenuItem value={"TITLE"}>Title</MenuItem>
+          <MenuItem value={"LOCATION"}>Location</MenuItem>
+        </TextField>
+        <TextField
+          select
+          defaultValue={"4"}
+          label={"Time period"}
+          sx={{ gridArea: "filterTime" }}
+          onChange={(e) => {
+            const date = new Date();
+            switch (e.target.value as string) {
+              case "0":
+                date.setDate(date.getDate() + 7);
+                setToDate(date.toISOString());
+                setFromDate(new Date().toISOString());
+                break;
+              case "1":
+                date.setMonth(date.getMonth() + 1);
+                setToDate(date.toISOString());
+                setFromDate(new Date().toISOString());
+                break;
+              case "2":
+                date.setFullYear(date.getFullYear() + 1);
+                setToDate(date.toISOString());
+                setFromDate(new Date().toISOString());
+                break;
+              case "3":
+                setToDate("9999-12-30T23:59:59.999Z");
+                setFromDate(new Date().toISOString());
+                break;
+              default:
+                setToDate("9999-12-30T23:59:59.999Z");
+                setFromDate("0001-01-01T00:00:01.000Z");
+            }
+          }}
+        >
+          <MenuItem value={"0"}>Upcoming events 1 week</MenuItem>
+          <MenuItem value={"1"}>Upcoming events 1 month</MenuItem>
+          <MenuItem value={"2"}>Upcoming events 1 year</MenuItem>
+          <MenuItem value={"3"}>All upcoming Events</MenuItem>
+          <MenuItem value={"4"}>All</MenuItem>
+        </TextField>
+      </FilterGrid>
+      <EventsHeader>
+        <Typography sx={{ gridArea: "title" }}>Event title</Typography>
+        <Typography sx={{ gridArea: "description" }}>Description</Typography>
+        <Typography sx={{ gridArea: "location" }}>Location</Typography>
+        <Typography sx={{ gridArea: "dateTime" }}>DateTime</Typography>
+        <Typography sx={{ gridArea: "status" }}>Participant</Typography>
+      </EventsHeader>
+      <GroupGrid>
+        {dataEvents &&
+          dataEvents.movieEvents.map(
+            (
+              movieEvent: {
+                description: string;
+                title: string;
+                location: string;
+                date: string;
+                movieEventId: string;
+                userIsParticipant: boolean;
+              },
+              i: number,
+            ) => {
+              return (
+                <Button
+                  key={i}
+                  onClick={() => {
+                    history.push("/movie/" + movieEvent.movieEventId);
+                  }}
+                >
+                  <MovieEventComponent
+                    description={movieEvent.description}
+                    title={movieEvent.title}
+                    location={movieEvent.location}
+                    datetime={movieEvent.date}
+                    isParticipant={movieEvent.userIsParticipant}
+                    key={i}
+                  />
+                </Button>
+              );
+            },
+          )}
+      </GroupGrid>
     </PageContainer>
   );
 }

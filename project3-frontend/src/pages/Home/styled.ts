@@ -1,20 +1,5 @@
-import { Button, Paper, PaperProps } from "@mui/material";
+import { Button } from "@mui/material";
 import { styled } from "@mui/system";
-
-export const LoginPageContainer = styled(Paper)<PaperProps>(({ theme }) => ({
-  marginTop: `max(calc((100vh - ${theme.breakpoints.values.md}px) / 2), 0px)`,
-  paddingTop: theme.spacing(8),
-  borderRadius: theme.shape.borderRadius,
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  height: "100vh",
-  maxHeight: theme.breakpoints.values.md,
-  maxWidth: "100vw",
-  width: theme.breakpoints.values.md,
-  justifyContent: "space-evenly",
-  padding: "0 10vw 0",
-}));
 
 export const LoginForm = styled("section")(({ theme }) => ({
   display: "flex",
