@@ -6,7 +6,7 @@ import "./App.css";
 import LoggedOutRouter from "./components/LoggedOutRouter";
 import ToastProvider from "./components/Toast/index";
 import client from "./helpers/apollo";
-import { PathsWithParams } from "./helpers/constants";
+import { PathsWithParams, PUBLIC_URL } from "./helpers/constants";
 import theme from "./helpers/themes";
 import CreateMovieEventPage from "./pages/CreateMovieEventPage";
 import CreateMovieGroupPage from "./pages/CreateMovieGroupPage/index";
@@ -23,7 +23,7 @@ function App() {
         <CssBaseline />
         <ThemeProvider theme={theme}>
           <ToastProvider />
-          <BrowserRouter basename="/project3">
+          <BrowserRouter basename={PUBLIC_URL}>
             <LoggedOutRouter />
             <Switch>
               <Route exact path={PathsWithParams.HOME}>
