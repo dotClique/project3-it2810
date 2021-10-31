@@ -46,6 +46,7 @@ export default function CreateMovieGroupForm() {
               error={errors[FormNames.name] !== undefined}
               helperText={errors[FormNames.name]}
               sx={styles.field}
+              inputProps={{ "data-testid": "name" }}
             />
           </Box>
           <Box>
@@ -56,6 +57,7 @@ export default function CreateMovieGroupForm() {
               label="Description of group"
               error={errors[FormNames.description] !== undefined}
               helperText={errors[FormNames.description]}
+              inputProps={{ "data-testid": "description" }}
               rows={4}
               sx={styles.field}
             />

@@ -12,9 +12,14 @@ export function FavoriteIcon(props: Props) {
     <SolidHeart
       aria-label={"Button for removing this group's favorite status"}
       width={props.width}
+      data-testid={"solidHeart"}
     />
   ) : (
-    <OutlinedHeart aria-label={"Button for setting this group as a favorite"} width={props.width} />
+    <OutlinedHeart
+      aria-label={"Button for setting this group as a favorite"}
+      width={props.width}
+      data-testid={"outlinedHeart"}
+    />
   );
   return <IconContainer onClick={props.onClick}>{icon}</IconContainer>;
 }
