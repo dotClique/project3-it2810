@@ -1,3 +1,5 @@
+import { getEnv } from "./utils";
+
 export enum PathsWithParams {
   HOME = "/",
   MOVIE_GROUP = "/group/:id",
@@ -17,3 +19,5 @@ export enum Paths {
   MOVIE_EVENT = "/movie",
   ADD_MOVIE_EVENT = "/addmovie",
 }
+
+export const PUBLIC_URL = getEnv("PUBLIC_URL");
