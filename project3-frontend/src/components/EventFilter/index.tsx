@@ -1,6 +1,6 @@
 import { MenuItem, TextField } from "@mui/material";
 
-import { GroupGrid, FilterGrid, EventsHeader } from "./styled";
+import { FilterGrid } from "./styled";
 import { Dispatch, SetStateAction } from "react";
 
 type Props = {
@@ -16,6 +16,7 @@ export default function EventFilter(props: Props) {
         label={"Search for event by title"}
         variant={"outlined"}
         sx={{ gridArea: "search" }}
+        inputProps={{ "data-testid": "textinput" }}
         onChange={(e) => {
           props.setSearchString(e.target.value);
         }}
@@ -25,6 +26,7 @@ export default function EventFilter(props: Props) {
         defaultValue={"4"}
         label={"Time period"}
         sx={{ gridArea: "filterTime" }}
+        inputProps={{ "data-testid": "timeperiod" }}
         onChange={(e) => {
           const date = new Date();
           switch (e.target.value as string) {
