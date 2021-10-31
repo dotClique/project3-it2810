@@ -65,5 +65,6 @@ describe("Check That movieEventPage", () => {
     expect(screen.getByText("2025-09-21 00:00:00")).toBeInTheDocument();
     expect(screen.getByText("testLocation")).toBeInTheDocument();
     expect(screen.getByText("You are a participant of this event")).toBeInTheDocument();
+    expect(screen.getByText("Leave Event")).toBeInTheDocument();
   });
 });
