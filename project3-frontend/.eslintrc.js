@@ -13,6 +13,7 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "plugin:cypress/recommended",
     "plugin:jest/recommended",
+    "plugin:cypress/recommended",
   ],
   env: {
     browser: true,
@@ -66,4 +67,11 @@ module.exports = {
     jsdom: true,
     JSX: true,
   },
+  overrides: [
+    {
+      files: "./cypress/*",
+      extends: ["plugin:cypress/recommended"],
+      plugins: ["cypress"],
+    },
+  ],
 };

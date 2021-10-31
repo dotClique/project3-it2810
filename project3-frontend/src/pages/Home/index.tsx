@@ -74,8 +74,11 @@ export default function Home() {
           value={aliasField}
           onChange={(e) => setAliasField(e.target.value)}
           required
+          inputProps={{ "data-testid": "alias-field" }}
         />
-        <LoginButton onClick={handleClick}>Enter</LoginButton>
+        <LoginButton onClick={handleClick} data-testid="loginbutton">
+          Enter
+        </LoginButton>
       </LoginForm>
     </PageContainer>
   );
