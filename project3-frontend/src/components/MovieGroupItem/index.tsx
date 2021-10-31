@@ -24,6 +24,7 @@ export default function MovieGroupItem(props: Props) {
         onClick={() => history.push(`${Paths.MOVIE_GROUP}/${props.id}`)}
         color={"inherit"}
         underline={"none"}
+        data-testid={"movieGroupLink"}
       >
         <MovieGroupCardContent>
           <MovieGroupTitle
@@ -40,6 +41,7 @@ export default function MovieGroupItem(props: Props) {
               },
               transitionDuration: "0.05s",
             }}
+            data-testid={"movieGroupTitle"}
           >
             {props.title}
           </MovieGroupTitle>

@@ -27,6 +27,7 @@ exports[`Snapshot tests Snapshotting MovieGroupItem 1`] = `
 >
   <a
     className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-a673hg-MuiTypography-root-MuiLink-root"
+    data-testid="movieGroupLink"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -37,6 +38,7 @@ exports[`Snapshot tests Snapshotting MovieGroupItem 1`] = `
       <h5
         aria-label="Links to test movie group page"
         className="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap css-ljzh0m-MuiTypography-root"
+        data-testid="movieGroupTitle"
       >
         test
       </h5>
