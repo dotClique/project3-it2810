@@ -24,5 +24,5 @@ test("Createmoviegroup test", async () => {
   expect(screen.getByTestId("description")).toHaveValue("Terminator2");
 
   expect(screen.getByTestId("name")).not.toHaveErrorMessage("");
-  expect(screen.getByTestId("name")).not.toHaveErrorMessage("");
+  expect(screen.getByTestId("description")).not.toHaveErrorMessage("");
 });
