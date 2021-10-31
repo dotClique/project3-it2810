@@ -1,5 +1,4 @@
 # This docker-compose is only used when developing locally
-# As this website deploys to vercel, there is no docker-compose for production.
 version: "3.4"
 
 services:
