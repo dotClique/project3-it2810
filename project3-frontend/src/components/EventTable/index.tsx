@@ -156,7 +156,6 @@ export default function EventTable(props: Props) {
         rowsPerPageOptions={[5, 10, 15]}
         count={count}
         rowsPerPage={pageSize}
-        {/* Tablepagination is zero indexed, while our pages start at 1*/}
         page={page - 1}
         onPageChange={(e, v) => {
           setPage(v + 1);
