@@ -1,19 +1,7 @@
 image: node
 
 stages:
-  - build
   - test
-
-build site:
-  image: node
-  stage: build
-  script:
-    - npm ci --progress=false
-    - npm run-script build
-  artifacts:
-    expire_in: 1 week
-    paths:
-      - dist
 
 testing:
   stage: test
