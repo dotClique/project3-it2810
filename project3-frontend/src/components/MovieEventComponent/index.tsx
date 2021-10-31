@@ -11,7 +11,7 @@ type Props = {
 };
 
 export default function MovieEventComponent(props: Props) {
-  let description;
+  let description = "";
   if (props.description.length > 100) {
     description = props.description.substr(0, 100) + "...";
   } else {
@@ -41,7 +41,7 @@ export default function MovieEventComponent(props: Props) {
       <Typography noWrap variant={"body2"} sx={{ gridArea: "location" }}>
         {props.location}
       </Typography>
-      <Typography variant={"body2"} sx={{ gridArea: "dateTime" }}>
+      <Typography variant={"body2"} sx={{ gridArea: "dateTime" }} data-testid={"eventdatetime"}>
         {props.datetime.replace("T", "\n").replace("Z", "").slice(0, -4)}
       </Typography>
       <Typography
