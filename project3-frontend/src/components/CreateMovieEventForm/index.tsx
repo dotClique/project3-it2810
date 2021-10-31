@@ -75,7 +75,7 @@ export default function CreateMovieEventForm(props: CreateMovieEventFormProps) {
       {(errors) => (
         <>
           <Box>
-            <Field name={FormNames.title} id={FormNames.title} type={"string"} as={TextField}>
+            <Field name={FormNames.title} id={FormNames.title} type={"string"}>
               {({ form }: FieldProps) => {
                 return (
                   <Autocomplete
@@ -95,6 +95,7 @@ export default function CreateMovieEventForm(props: CreateMovieEventFormProps) {
                         helperText={errors[FormNames.title]}
                         sx={styles.field}
                         error={errors[FormNames.title] !== undefined}
+                        data-testid={"titleInput"}
                         {...params}
                       />
                     )}
@@ -112,6 +113,7 @@ export default function CreateMovieEventForm(props: CreateMovieEventFormProps) {
               error={errors[FormNames.description] !== undefined}
               helperText={errors[FormNames.description]}
               sx={styles.field}
+              inputProps={{ "data-testid": "description" }}
             />
           </Box>
           <Box>
@@ -122,6 +124,7 @@ export default function CreateMovieEventForm(props: CreateMovieEventFormProps) {
               error={errors[FormNames.location] !== undefined}
               helperText={errors[FormNames.location]}
               sx={styles.field}
+              inputProps={{ "data-testid": "location" }}
             />
           </Box>
           <Box>
@@ -134,6 +137,7 @@ export default function CreateMovieEventForm(props: CreateMovieEventFormProps) {
               helperText={errors[FormNames.date]}
               type="datetime-local"
               sx={styles.field}
+              inputProps={{ "data-testid": "date" }}
             />
           </Box>
         </>

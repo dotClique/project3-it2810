@@ -7,11 +7,11 @@ type Props = {
 export default function MovieEventTextItem(props: Props) {
   return (
     <>
-      <Typography variant="h5" color="primary">
+      <Typography data-testid="title" variant="h5" color="primary">
         {props.title}
       </Typography>
 
-      <Typography variant="body1" color="secondary.contrastText">
+      <Typography variant="body1" data-testid="body" color="secondary.contrastText">
         {props.body}
       </Typography>
     </>

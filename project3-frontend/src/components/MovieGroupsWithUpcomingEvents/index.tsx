@@ -3,6 +3,7 @@ import { List, ListItemButton, ListItemText, Typography } from "@mui/material";
 import { useHistory } from "react-router";
 import { FavoriteIcon } from "../FavoriteIcon";
 import styles from "./styles";
+import { Paths } from "../../helpers/constants";
 
 type Props = {
   title: string;
@@ -19,14 +20,16 @@ export default function MovieGroupWithUpcomingEvents(props: Props) {
       <MovieGroupBox>
         <CenteredLink
           onClick={() => {
-            history.push(`/group/${props.id}`);
+            history.push(`${Paths.MOVIE_GROUP}/${props.id}`);
           }}
+          data-testid={"movieGroupWithUpcomingEvents"}
         >
           <Typography
             aria-label={`Links to ${props.title} movie group page`}
             variant={"h5"}
             noWrap
             sx={styles.eventTitle}
+            data-testid={"upcomingEvent"}
           >
             {props.title}
           </Typography>
@@ -48,7 +51,7 @@ export default function MovieGroupWithUpcomingEvents(props: Props) {
             divider
             sx={styles.eventLink}
             onClick={() => {
-              history.push(`/movie/${item.movieEventId}`);
+              history.push(`${Paths.MOVIE_EVENT}/${item.movieEventId}`);
             }}
           >
             <ListItemText
