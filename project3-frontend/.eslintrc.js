@@ -1,10 +1,4 @@
 module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-    amd: true,
-    node: true,
-  },
   settings: {
     react: {
       version: "detect",
@@ -17,7 +11,17 @@ module.exports = {
     "plugin:prettier/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:cypress/recommended",
+    "plugin:jest/recommended",
   ],
+  env: {
+    browser: true,
+    es2021: true,
+    amd: true,
+    node: true,
+    "jest/globals": true,
+    jest: true,
+  },
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -26,7 +30,7 @@ module.exports = {
     sourceType: "module",
   },
   parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint", "react", "prettier", "react", "jsx-a11y", "import"],
+  plugins: ["@typescript-eslint", "react", "prettier", "react", "jsx-a11y", "import", "jest"],
   rules: {
     "no-console": "warn",
     "import/first": "warn",

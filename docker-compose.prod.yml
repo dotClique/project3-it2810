@@ -25,6 +25,7 @@ services:
     image: project3-frontend
     environment:
       NODE_ENV: production
+      CYPRESS_INSTALL_BINARY: 0
     ports:
       - "3500:80"
 

@@ -30,6 +30,7 @@ services:
     environment:
       NODE_ENV: development
       CHOKIDAR_USEPOLLING: "true"
+      CYPRESS_INSTALL_BINARY: 0
     ports:
       - "3000:3000"
       # - "35729:35729" # exposing Websockets port to allow hot reloading
