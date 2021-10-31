@@ -1,6 +1,11 @@
 import { MovieEventCard } from "./styled";
 import { Typography } from "@mui/material";
 import { CheckIcon, XIcon } from "@heroicons/react/solid";
+import { useHistory } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { GET_MOVIE_GROUP_EVENTS } from "../../helpers/graphql-queries";
+import { useEffect, useState } from "react";
+import { useAlias } from "../../helpers/alias";
 
 type Props = {
   description: string;
@@ -17,6 +22,7 @@ export default function MovieEventComponent(props: Props) {
   } else {
     description = props.description;
   }
+
   return (
     <MovieEventCard>
       <Typography
