@@ -5,7 +5,7 @@ import MovieEventComponent from "./index";
 import { ThemeProvider } from "@mui/material";
 import theme from "../../helpers/themes";
 
-test("load and display movieevent", async () => {
+test("test eventdatetime value", async () => {
   render(
     <ThemeProvider theme={theme}>
       <MovieEventComponent
@@ -18,4 +18,25 @@ test("load and display movieevent", async () => {
     </ThemeProvider>,
   );
   expect(screen.getByTestId("eventdatetime")).toHaveTextContent("1345-08-21 03:44:22");
+});
+
+test("test eventdescription sign limit", async () => {
+  render(
+    <ThemeProvider theme={theme}>
+      <MovieEventComponent
+        description={
+          "12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901"
+        }
+        title={"hai"}
+        location={"vladivostok"}
+        datetime={"1345-08-21T03:44:22.123Z"}
+        isParticipant={true}
+      />
+    </ThemeProvider>,
+  );
+  expect(
+    screen.getByText(
+      "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890...",
+    ),
+  ).toBeInTheDocument();
 });
