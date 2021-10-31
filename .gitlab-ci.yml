@@ -1,0 +1,11 @@
+image: node
+
+stages:
+  - test
+
+testing:
+  stage: test
+  script:
+    - cd project3-frontend
+    - npm i
+    - npm run test a
