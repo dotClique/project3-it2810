@@ -15,6 +15,7 @@ import { GET_MOVIE_GROUP_EVENTS } from "../../helpers/graphql-queries";
 import EventTableSortHeader from "../EventTableSortHeader";
 import { Paths } from "../../helpers/constants";
 import { useHistory } from "react-router";
+import { useErrorToast } from "../../helpers/utils";
 
 type Props = {
   id: string;
@@ -31,6 +32,8 @@ export default function EventTable(props: Props) {
     id: "DATE",
     direction: "asc",
   });
+
+  const errToast = useErrorToast();
 
   const history = useHistory();
 
@@ -53,6 +56,7 @@ export default function EventTable(props: Props) {
       asc: sortBy.direction === "asc",
     },
     fetchPolicy: "network-only",
+    onError: (err) => errToast(err.message),
   });
 
   useEffect(() => {
