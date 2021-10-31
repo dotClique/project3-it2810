@@ -1,6 +1,7 @@
 import { useLazyQuery } from "@apollo/client";
-import { GET_COUNT_MOVIE_GROUPS, GET_MOVIE_GROUPS } from "../../helpers/graphql-queries";
 import { useEffect, useState } from "react";
+import { GET_COUNT_MOVIE_GROUPS, GET_MOVIE_GROUPS } from "../../helpers/graphql-queries";
+import { useErrorToast } from "./../../helpers/utils";
 
 /**
  * Custom hook for getting movie groups with pagination and search
@@ -10,9 +11,10 @@ import { useEffect, useState } from "react";
  */
 export function useMovieGroups(page: number, pageSize: number, searchString: string) {
   // Gets the total count of posts
+  const errToast = useErrorToast();
   const [fetchCountQuery, { data: dataCount, loading: loadingCount }] = useLazyQuery(
     GET_COUNT_MOVIE_GROUPS,
-    { fetchPolicy: "network-only" },
+    { onError: (err) => errToast(err.message), fetchPolicy: "network-only" },
   );
 
   // Gets one page of movie groups

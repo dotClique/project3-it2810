@@ -125,7 +125,7 @@ export const REMOVE_USER_FROM_MOVIE_GROUP = gql`
   mutation ($movieGroupId: String!, $useralias: String!) {
     removeUserFromMovieGroup(movieGroupId: $movieGroupId, useralias: $useralias) {
       name
-      userIsParticipant(alias: $alias)
+      movieGroupId
     }
   }
 `;
