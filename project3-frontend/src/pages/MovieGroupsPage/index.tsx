@@ -16,6 +16,7 @@ import { GroupGrid } from "./styled";
 import { useMovieGroups } from "./utils";
 
 export default function MovieGroupsPage() {
+  // Default pagesize
   const pageSize = 8;
   const { alias } = useAlias();
   const [page, setPage] = useState(1);
@@ -65,12 +66,14 @@ export default function MovieGroupsPage() {
       />
       <GroupGrid>
         {movieGroups.map((item) => {
+          // Check is user has group as favorite
           const isFavorite = item.userFavorites.some((e) => e.alias === alias);
           return (
             <MovieGroupItem
               title={item.name}
               key={item.movieGroupId}
               onToggleFavorite={() => {
+                // Send query toggling if the logged in user has the current group as a favorite
                 const params = { movieGroupId: item.movieGroupId, useralias: alias };
                 return isFavorite ? removeUserFromGroup(params) : addUserToGroup(params);
               }}

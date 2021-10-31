@@ -146,6 +146,14 @@ export const REMOVE_USER_FROM_EVENT = gql`
   }
 `;
 
+export const GET_MOVIES = gql`
+  query ($pageSize: Int!, $searchString: String!) {
+    movies(maxCount: $pageSize, searchString: $searchString) {
+      primarytitle
+    }
+  }
+`;
+
 export const GET_MOVIE_GROUP = gql`
   query ($movieGroupId: String!) {
     movieGroup(movieGroupId: $movieGroupId) {
@@ -191,13 +199,5 @@ export const GET_MOVIE_GROUP_EVENTS = gql`
       fromDate: $fromDate
       toDate: $toDate
     )
-  }
-`;
-
-export const GET_MOVIES = gql`
-  query ($pageSize: Int!, $searchString: String!) {
-    movies(maxCount: $pageSize, searchString: $searchString) {
-      primarytitle
-    }
   }
 `;

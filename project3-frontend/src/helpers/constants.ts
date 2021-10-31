@@ -1,5 +1,6 @@
 import { getEnv } from "./utils";
 
+// For use when setting up router
 export enum PathsWithParams {
   HOME = "/",
   MOVIE_GROUP = "/group/:id",
@@ -10,6 +11,7 @@ export enum PathsWithParams {
   ADD_MOVIE_EVENT = "/addmovie/:id",
 }
 
+// For use when routing
 export enum Paths {
   HOME = "/",
   MOVIE_GROUP = "/group",

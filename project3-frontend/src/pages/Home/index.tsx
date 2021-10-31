@@ -20,6 +20,7 @@ export default function Home() {
   });
   const [getUser, { data: userData }] = useLazyQuery(GET_USER);
 
+  // Adds the user if not not already registered, gets them if else
   function handleClick() {
     if (aliasField) {
       addOrGetUser({ variables: { alias: aliasField } });

@@ -24,6 +24,9 @@ type Props = {
   toDate: string;
 };
 
+/**
+ * A table for displaying all the events of a movie group
+ */
 export default function EventTable(props: Props) {
   const [count, setCount] = useState<number>(1);
   const [page, setPage] = useState<number>(1);
@@ -43,6 +46,8 @@ export default function EventTable(props: Props) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
+  // Gets the paginated events of a movie group. This is network-only to
+  // ensure that the user gets updated data
   const { data: dataEvents } = useQuery(GET_MOVIE_GROUP_EVENTS, {
     variables: {
       movieGroupId: String(props.id),
@@ -78,6 +83,7 @@ export default function EventTable(props: Props) {
             id={"TITLE"}
             title={"Event Title"}
           />
+          {/* Only displays the most important columns on mobile to save space*/}
           {!isMobile ? (
             <>
               {" "}
@@ -125,6 +131,7 @@ export default function EventTable(props: Props) {
                   onClick={() => history.push(Paths.MOVIE_EVENT + "/" + movieEvent.movieEventId)}
                 >
                   <StyledTableCell>{movieEvent.title}</StyledTableCell>
+                  {/* Only displays the most important columns on mobile to save space*/}
                   {!isMobile ? (
                     <>
                       <StyledTableCell>{movieEvent.description}</StyledTableCell>
@@ -149,6 +156,7 @@ export default function EventTable(props: Props) {
         rowsPerPageOptions={[5, 10, 15]}
         count={count}
         rowsPerPage={pageSize}
+        {/* Tablepagination is zero indexed, while our pages start at 1*/}
         page={page - 1}
         onPageChange={(e, v) => {
           setPage(v + 1);
