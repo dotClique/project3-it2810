@@ -15,6 +15,13 @@ import { useAlias } from "../../helpers/alias";
 
 jest.mock("react-router");
 jest.mock("../../helpers/alias");
+jest.mock("../../helpers/utils", () => {
+  const originalModule = jest.requireActual("../../helpers/utils");
+  return {
+    ...originalModule,
+    getEnv: () => "",
+  };
+});
 
 // Mock query result
 const mocks: MockedResponse[] = [

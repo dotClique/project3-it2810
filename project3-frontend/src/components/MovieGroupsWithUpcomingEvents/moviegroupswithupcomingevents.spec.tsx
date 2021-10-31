@@ -8,7 +8,11 @@ import { useHistory } from "react-router";
 import { Paths } from "../../helpers/constants";
 
 jest.mock("react-router");
-
+jest.mock("../../helpers/utils", () => {
+  return {
+    getEnv: () => "",
+  };
+});
 describe("Check That MovieGroupWithUpcomingEvents", () => {
   test("renders correctly", async () => {
     let clicked = false;

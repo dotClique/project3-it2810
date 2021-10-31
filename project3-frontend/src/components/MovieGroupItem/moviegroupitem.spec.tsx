@@ -8,7 +8,11 @@ import { useHistory } from "react-router";
 import { Paths } from "../../helpers/constants";
 
 jest.mock("react-router");
-
+jest.mock("../../helpers/utils", () => {
+  return {
+    getEnv: () => "",
+  };
+});
 test("Check That MovieGroupItem renders with the correct params and routes", async () => {
   // Mock useHistory for testing
   (useHistory as jest.Mock).mockReturnValue({ push: jest.fn() });

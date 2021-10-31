@@ -7,6 +7,14 @@ import theme from "../../helpers/themes";
 import { MockedProvider } from "@apollo/client/testing";
 import userEvent from "@testing-library/user-event";
 
+jest.mock("../../helpers/utils", () => {
+  const originalModule = jest.requireActual("../../helpers/utils");
+  return {
+    ...originalModule,
+    getEnv: () => "",
+  };
+});
+
 beforeAll(() => {
   render(
     <MockedProvider>

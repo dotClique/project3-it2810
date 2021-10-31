@@ -4,6 +4,14 @@ import MovieGroupsPage from "../pages/MovieGroupsPage/index";
 import { createSnapshot } from "./utils/index";
 import { MockedProvider } from "@apollo/client/testing";
 
+jest.mock("../helpers/utils", () => {
+  const originalModule = jest.requireActual("../helpers/utils");
+  return {
+    ...originalModule,
+    getEnv: () => "",
+  };
+});
+
 describe("Snapshot tests", () => {
   beforeEach(() => {
     // eslint-disable-next-line no-console

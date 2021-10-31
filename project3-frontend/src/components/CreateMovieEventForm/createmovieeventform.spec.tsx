@@ -8,6 +8,14 @@ import { GET_MOVIES, CREATE_MOVIE_EVENT } from "../../helpers/graphql-queries";
 import { MockedProvider, MockedResponse } from "@apollo/client/testing";
 import userEvent from "@testing-library/user-event";
 
+jest.mock("../../helpers/utils", () => {
+  const originalModule = jest.requireActual("../../helpers/utils");
+  return {
+    ...originalModule,
+    getEnv: () => "",
+  };
+});
+
 const mocks: MockedResponse[] = [
   {
     request: {
