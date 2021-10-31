@@ -1,6 +1,3 @@
-import { getEnv } from "./utils";
-
-// For use when setting up router
 export enum PathsWithParams {
   HOME = "/",
   MOVIE_GROUP = "/group/:id",
@@ -22,4 +19,4 @@ export enum Paths {
   ADD_MOVIE_EVENT = "/addmovie",
 }
 
-export const PUBLIC_URL = getEnv("PUBLIC_URL");
+export const PUBLIC_URL = process.env.PUBLIC_URL;

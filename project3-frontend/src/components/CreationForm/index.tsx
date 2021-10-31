@@ -41,7 +41,13 @@ export default function CreationForm<T>(props: CreationFormProps<T>) {
             <FormContainer>
               {props.children(errors)}
               {props.submitButton || (
-                <Button type="submit" color="primary" variant="contained" disabled={loading}>
+                <Button
+                  type="submit"
+                  color="primary"
+                  variant="contained"
+                  data-testid="submit-button"
+                  disabled={loading}
+                >
                   Submit
                 </Button>
               )}
