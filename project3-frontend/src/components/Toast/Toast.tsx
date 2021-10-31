@@ -30,7 +30,7 @@ const Toast: FC<ToastProps> = (props) => {
     >
       {!props.disableClose && (
         <IconButton aria-label="close" sx={styles.closeButton} onClick={props.onClose}>
-          <XIcon />
+          <XIcon width={20} />
         </IconButton>
       )}
       <DialogTitle id="alert-dialog-title">{props.title}</DialogTitle>
