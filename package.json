@@ -5,7 +5,8 @@
   "scripts": {
     "prepare": "npx prisma generate",
     "prepareuse": "npx prisma generate && node ./index.ts  && npx prisma db push",
-    "install:all": "npm i && cd project3-backend && npm i && cd ../project3-frontend && npm i"
+    "install:all": "npm i && cd project3-backend && npm i && cd ../project3-frontend && npm i",
+    "cypress:open": "cd project3-frontend && npm run cypress:open"
   },
   "author": "",
   "dependencies": {

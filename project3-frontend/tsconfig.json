@@ -16,5 +16,14 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"]
+  "include": [
+    "src",
+    "cypress",
+    "node_modules/cypress/types/index.d.ts",
+    "node_modules/cypress/types/blob-util.d.ts",
+    "node_modules/cypress/types/minimatch.d.ts",
+    "node_modules/cypress/types/bluebird.d.ts",
+    "cypress/**/*.ts"
+, "cypress/integration/.examples/2-advanced-examples", "cypress/integration/.examples/1-getting-started"  ],
+  "types": ["cypress"]
 }
