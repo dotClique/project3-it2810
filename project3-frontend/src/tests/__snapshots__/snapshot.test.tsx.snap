@@ -164,6 +164,7 @@ exports[`Snapshot tests Snapshotting MovieGroupsPage 1`] = `
       </button>
       <button
         className="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root css-fvb09q-MuiButtonBase-root-MuiButton-root"
+        data-testid="footerbutton"
         disabled={false}
         onBlur={[Function]}
         onClick={[Function]}
@@ -185,6 +186,7 @@ exports[`Snapshot tests Snapshotting MovieGroupsPage 1`] = `
       </button>
       <button
         className="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root css-fvb09q-MuiButtonBase-root-MuiButton-root"
+        data-testid="footerbutton"
         disabled={false}
         onBlur={[Function]}
         onClick={[Function]}

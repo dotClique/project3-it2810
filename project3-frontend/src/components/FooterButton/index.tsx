@@ -9,7 +9,7 @@ type Props = {
 export default function FooterButton({ onClick, text, color = "primary" }: Props) {
   const colorStyle = color === "primary" ? styles.primary : styles.secondary;
   return (
-    <Button sx={{ ...styles.button, ...colorStyle }} onClick={onClick}>
+    <Button sx={{ ...styles.button, ...colorStyle }} onClick={onClick} data-testid={"footerbutton"}>
       {text}
     </Button>
   );
