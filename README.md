@@ -64,6 +64,36 @@ $ \dt
 $ DROP TABLE <tablename>;
 ```
 
+### Testing
+
+At the moment there are tests in the unit tests in the frontend with React testing library and end-to-end testing with cypress. The unit tests in the frontend should be created in the folder of the component/function itself. The unit tests have to be run from the `project3-frontend` directory, suing the command:
+
+```bash
+$ npm run test
+```
+
+The end-to-end tests with cypress can be run from the `it2810-project3` directory. To run the tests you first have to start a test instance of the frontend, backend and database with:
+WINDOWS:
+
+```bash
+$ ./scripts/cypress.ps1
+```
+
+Linux:
+
+```bash
+$ ./scripts/cypress.sh
+```
+
+This will run the frontend and backend with an instance of the database that will not persist accross docker instances.
+From then you have to run (from `it2810-project3` directory):
+
+```bash
+$ npm run cypress:open
+```
+
+This will make you able to run the tests once. If you want to run these tests more than once, you have to delete the database instance by restarting the docker containers by using the above `./scripts/cypress` script.
+
 # Production
 
 The content is currently in /usr/local/share/project3-it2810 on the VM.
@@ -100,7 +130,7 @@ server {
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;        
+        proxy_set_header Host $host;
 		proxy_cache_bypass $http_upgrade;
   }
 
