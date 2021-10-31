@@ -17,6 +17,7 @@ enum AllowedSortingParams {
   DATE,
   TITLE,
   LOCATION,
+  DESCRIPTION,
 }
 
 registerEnumType(AllowedSortingParams, {
@@ -83,6 +84,9 @@ export class MovieEventResolver {
       case 2:
         sortElement = { location: direction };
         break;
+      case 3:
+        sortElement = { description: direction };
+        break;
     }
     return await prisma.movieEvent.findMany({
       orderBy: sortElement,
@@ -102,24 +106,33 @@ export class MovieEventResolver {
    */
   @Query(() => Int)
   async movieEventCount(
-        @Args("movieGroupId", { nullable: true }) movieGroupId?: string,
-        @Args("titleSearchString", { nullable: true }) titleSearchString?: string,
-        @Args("descriptionSearchString", { nullable: true }) descriptionSearchString?: string,
-        @Args("location", { nullable: true }) locationSearchString?: string,
-        @Args("fromDate", { nullable: true }) fromDate?: Date,
-        @Args("toDate", { nullable: true }) toDate?: Date,
+    @Args("movieGroupId", { nullable: true }) movieGroupId?: string,
+    @Args("titleSearchString", { nullable: true }) titleSearchString?: string,
+    @Args("descriptionSearchString", { nullable: true }) descriptionSearchString?: string,
+    @Args("location", { nullable: true }) locationSearchString?: string,
+    @Args("fromDate", { nullable: true }) fromDate?: Date,
+    @Args("toDate", { nullable: true }) toDate?: Date,
   ): Promise<number> {
-    if(movieGroupId || titleSearchString || descriptionSearchString || locationSearchString || fromDate || toDate){
-      return await prisma.movieEvent.count({where: {title: { mode: "insensitive", contains: titleSearchString },
+    if (
+      movieGroupId ||
+      titleSearchString ||
+      descriptionSearchString ||
+      locationSearchString ||
+      fromDate ||
+      toDate
+    ) {
+      return await prisma.movieEvent.count({
+        where: {
+          title: { mode: "insensitive", contains: titleSearchString },
           movieGroupId,
           description: { mode: "insensitive", contains: descriptionSearchString },
           location: { mode: "insensitive", contains: locationSearchString },
-          date: { gte: fromDate, lte: toDate },}});
-
+          date: { gte: fromDate, lte: toDate },
+        },
+      });
     }
     return await prisma.movieEvent.count();
   }
-
 
   /**
    * Gets the movie group related to the event
