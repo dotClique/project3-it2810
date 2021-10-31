@@ -11,23 +11,29 @@ import { useErrorToast } from "../../helpers/utils";
 export function useMovieEvent(id: string) {
   const { alias } = useAlias();
   const errToast = useErrorToast();
+
+  // Query for getting info about an event, network only as info is likely to change
   const { data: dataEvents } = useQuery(GET_MOVIE_EVENT, {
     variables: { movieEventId: String(id), alias },
     onError: (err) => errToast(err.message),
     fetchPolicy: "network-only",
   });
 
+  // Add user to event mutation
   const [joinEvent, { data: joinData }] = useMutation(ADD_USER_TO_EVENT, {
     onError: (err) => errToast(err.message),
     variables: { movieEventId: String(id), useralias: alias },
   });
 
+  // Remove user from event mutation
   const [leaveEvent, { data: leaveData }] = useMutation(REMOVE_USER_FROM_EVENT, {
     onError: (err) => errToast(err.message),
     variables: { movieEventId: String(id), useralias: alias },
   });
 
   const [isParticipant, setIsParticipant] = useState<boolean>(false);
+
+  // The useEffects update the isParticipant bool to reflect the current database changes
   useEffect(() => {
     if (dataEvents)
       setIsParticipant(
@@ -51,6 +57,7 @@ export function useMovieEvent(id: string) {
     );
   }, [joinData]);
 
+  // Sets the default values before the query goes through
   const movieData = dataEvents
     ? dataEvents.movieEvent
     : {

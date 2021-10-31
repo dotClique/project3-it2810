@@ -15,6 +15,9 @@ type PageContainerProps = {
   backgroundColor?: "primary" | "secondary";
 };
 
+/**
+ * The general layout for all our pages.
+ */
 function PageContainer(props: PageContainerProps) {
   const history = useHistory();
   const { logout } = useAlias();
